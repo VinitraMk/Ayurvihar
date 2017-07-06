@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:weightSum="3">
+        <ImageButton
+            android:layout_width="250dp"
+            android:padding="20dp"
+            android:layout_height="250dp"
+            android:scaleType="centerInside"
+            android:background="@color/windowBg"
+            android:src="@drawable/under5_child_add_logo"
+            android:id="@+id/AddNew"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:layout_width="250dp"
+            android:padding="20dp"
+            android:layout_height="250dp"
+            android:scaleType="centerInside"
+            android:background="@color/windowBg"
+            android:src="@drawable/under5_child_update_logo"
+            android:id="@+id/Update"/>
+        <ImageButton
+            android:layout_width="250dp"
+            android:padding="20dp"
+            android:layout_height="250dp"
+            android:scaleType="centerInside"
+            android:background="@color/windowBg"
+            android:src="@drawable/under5_child_search_logo"
+            android:id="@+id/Search"/>
+    </LinearLayout>
 
 
 
