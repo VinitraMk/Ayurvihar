@@ -8,9 +8,9 @@ public class AdminUser {
 
     String mUsername,mPassword;
 
-    public AdminUser(String mUsername, String mPassword) {
-        this.mUsername = mUsername;
-        this.mPassword = mPassword;
+    public AdminUser(String Username,String Password) {
+        this.mUsername = Username;
+        this.mPassword = Password;
     }
 
     public String getmUsername() {

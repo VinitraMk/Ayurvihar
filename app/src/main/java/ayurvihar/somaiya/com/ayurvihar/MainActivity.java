@@ -17,6 +17,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import ayurvihar.somaiya.com.ayurvihar.underfive.*;
 import ayurvihar.somaiya.com.ayurvihar.utility.*;
 
@@ -26,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
     Spinner module;
     Button Login;
 
-    String user,password,gpassword;
+    boolean logged=false,found=false;
 
-    boolean flag;
+    String user,guser,password,gpassword;
 
     DatabaseReference databaseRoot;
     DatabaseReference databaseUsers;
@@ -47,57 +53,50 @@ public class MainActivity extends AppCompatActivity {
         Username.setText("admin");
         Password.setText("admin");
 
-        user=Username.getText().toString().trim();
-        password=Password.getText().toString().trim();
 
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                user=Username.getText().toString().trim();
+                password=Password.getText().toString().trim();
                 Log.v("users",""+user+" "+password);
-                if(checkUser()){
-                    Log.v("gchk",""+gpassword);
-                    if(gpassword.equals(password))
-                        loginTask();
-                    else
-                        Toast.makeText(MainActivity.this,"Invalid password",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    addUser();
-                    Toast.makeText(MainActivity.this,"Added new User",Toast.LENGTH_SHORT).show();
-                    loginTask();
-                }
-            }
-        });
-    }
-
-    private boolean checkUser(){
-        flag=false;
-
-        databaseUsers.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds:dataSnapshot.getChildren()){
-                    Log.v("checkuser",""+ds.getValue());
-                    if(ds.getValue().equals(user)) {
-                        flag = true;
-                        gpassword = ds.getValue().toString().trim();
+                logged=false;
+                found=false;
+                databaseUsers.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot ds:dataSnapshot.getChildren()){
+                            Log.v("userobj",""+ds.child("mUsername").getValue());
+                            guser=ds.child("mUsername").getValue().toString();
+                            gpassword=ds.child("mPassword").getValue().toString();
+                            if(guser.equals(user)){
+                                found=true;
+                                if(gpassword.equals(password)) {
+                                    logged = true;
+                                    loginTask();
+                                }
+                            }
+                        }
+                        if(found==true && logged==false)
+                            Toast.makeText(MainActivity.this,"Invalid password",Toast.LENGTH_SHORT).show();
+                        else if(found==false){
+                            addUser();
+                        }
                     }
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
+                    }
+                });
             }
         });
-        Log.v("checkuser","called "+flag);
-        return flag;
-    }
 
+    }
 
     private void addUser(){
         AdminUser newUser=new AdminUser(user,password);
-        databaseUsers.setValue(newUser);
+        databaseUsers.push().setValue(newUser);
     }
 
     private void loginTask(){
