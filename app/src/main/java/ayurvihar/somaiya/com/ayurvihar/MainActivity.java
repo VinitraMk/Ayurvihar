@@ -33,15 +33,14 @@ public class MainActivity extends AppCompatActivity {
 
     String user,guser,password,gpassword;
 
-    DatabaseReference databaseRoot;
+    public static final DatabaseReference DATABASE_ROOT=FirebaseDatabase.getInstance().getReference();
     DatabaseReference databaseUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        databaseRoot=FirebaseDatabase.getInstance().getReference();
-        databaseUsers=databaseRoot.child("Users");
+        databaseUsers=DATABASE_ROOT.child("Users");
         module=(Spinner)findViewById(R.id.department_select);
         Username=(EditText)findViewById(R.id.Username);
         Password=(EditText)findViewById(R.id.Password);
