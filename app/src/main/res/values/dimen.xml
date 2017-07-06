@@ -1,0 +1,10 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="borderRadiusEditText">20dp</dimen>
+    <dimen name="marginEditText">45dp</dimen>
+    <dimen name="textSize">27sp</dimen>
+    <dimen name="inputHeight">70dp</dimen>
+    <dimen name="inputWidth">450dp</dimen>
+</resources>

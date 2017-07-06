@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextTheme" parent="AppTheme">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/textSize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <style name="InputTheme" parent="AppTheme">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/textSize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <style name="LoginTheme" parent="AppTheme" >
+        <item name="colorPrimary">@color/colorPrimaryLogin</item>
+        <item name="android:textColorPrimary">@color/colorTextPrimaryLogin</item>
+        <item name="android:colorBackground">@android:color/background_light</item>
+        <item name="colorAccent">@color/colorAccentLogin</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+</resources>

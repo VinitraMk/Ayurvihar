@@ -1,0 +1,58 @@
+{
+  "project_info": {
+    "project_number": "956650067227",
+    "firebase_url": "https://ayurvihar-21970.firebaseio.com",
+    "project_id": "ayurvihar-21970",
+    "storage_bucket": "ayurvihar-21970.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956650067227:android:372034622e3d2101",
+        "android_client_info": {
+          "package_name": "ayurvihar.somaiya.com.ayurvihar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956650067227-korjumf473lrdqhjv9djqq1kuig4472b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ayurvihar.somaiya.com.ayurvihar",
+            "certificate_hash": "393a990760be8583bec72e3832c71b03d44c1a9b"
+          }
+        },
+        {
+          "client_id": "956650067227-gg719mdmpm0j2k71p7ub14keuijkghdd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ-S2VLJF8QbdyrfL4upk_Asm-CMc1omw"
+        },
+        {
+          "current_key": "AIzaSyDnWpRrkG9POpdQS54hWZuczKNlJLmUT14"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956650067227-gg719mdmpm0j2k71p7ub14keuijkghdd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

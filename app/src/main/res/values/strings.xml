@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Ayurvihar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="somaiya_health_centre">Somaiya Health Centre</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Add User</string>
+    <string-array name="departments">
+        <item>Under Five</item>
+        <item>Family Data</item>
+        <item>NCD</item>
+        <item>Well Woman</item>
+    </string-array>
+</resources>
