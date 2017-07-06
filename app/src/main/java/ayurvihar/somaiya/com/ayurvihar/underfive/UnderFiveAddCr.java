@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 
@@ -20,6 +21,7 @@ import java.util.Locale;
 
 import ayurvihar.somaiya.com.ayurvihar.R;
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
+import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveCr;
 
 /**
  * Created by mikasa on 6/7/17.
@@ -29,6 +31,7 @@ import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickListener {
 
     EditText Addn1 , Addn2 , Addn3 , Addn4 , Addn5 , Addn6 , Addn7 , Addn8 , Addn9;
+    String fname,ln,mn,fn,ci,fi,addr,mob,dob;
     Button AddRecord;
     SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
@@ -40,7 +43,8 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.underfive_addcr);
 
-        databaseChildHr=databaseChildTable.child("Childhr");
+        databaseChildHr=MainActivity.DATABASE_ROOT.child("Underfive").child("Childhr");
+
         Addn1 = (EditText) findViewById(R.id.Addn1);
         Addn2 = (EditText) findViewById(R.id.Addn2);
         Addn3 = (EditText) findViewById(R.id.Addn3);
@@ -66,13 +70,20 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
         AddRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                fname=Addn1.getText().toString().trim();
+                ln=Addn2.getText().toString().trim();
+                mn=Addn3.getText().toString().trim();
+                fn=Addn4.getText().toString().trim();
+                ci=Addn5.getText().toString().trim();
+                fi=Addn6.getText().toString().trim();
+                addr=Addn7.getText().toString().trim();
+                mob=Addn8.getText().toString().trim();
+                dob= Addn9.getText().toString().trim();
+                UnderFiveCr ufc=new UnderFiveCr(fname,ln,mn,fn,ci,fi,addr,mob,dob);
+                databaseChildHr.push().setValue(ufc);
+                Toast.makeText(UnderFiveAddCr.this,"Successfully added child record",Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
     }
 
     private void setDateTimeField() {

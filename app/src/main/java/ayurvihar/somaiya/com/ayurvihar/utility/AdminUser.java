@@ -6,7 +6,7 @@ package ayurvihar.somaiya.com.ayurvihar.utility;
 
 public class AdminUser {
 
-    String mUsername,mPassword;
+    public String mUsername,mPassword;
 
     public AdminUser(String Username,String Password) {
         this.mUsername = Username;
