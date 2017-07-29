@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--
-    <color name="colorPrimary">#3f51b5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorTextPrimary">#ffffff</color>
-    <color name="windowBg2">#3f51b5</color>
-    <color name="windowBg">#ffffff</color>
-    <color name="colorPrimaryMoreDark">#283593</color>
-    <color name="colorStartGradient">#42a5f5</color>
-    <color name="colorPrimaryLogin">#ffc107</color>
-    <color name="colorTextPrimaryLogin">#000000</color>
-    <color name="colorAccentLogin">#000000</color>-->
     <color name="colorPrimary">#FFF59D</color>
     <color name="colorPrimaryDark">#F9A825</color>
     <color name="colorAccent">#FF6F00</color>
