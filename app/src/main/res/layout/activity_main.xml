@@ -7,8 +7,7 @@
     tools:context="ayurvihar.somaiya.com.ayurvihar.MainActivity"
     android:weightSum="5"
     android:orientation="vertical"
-    android:background="@drawable/bg_gradient"
-    android:theme="@style/LoginTheme">
+    android:background="@drawable/bg_gradient">
 
     <TextView
         android:layout_margin="10dp"
@@ -32,20 +31,23 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/Username"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:textSize="22sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/Password"
             android:layout_weight="1"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:textSize="22sp"/>
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/department_select"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:entries="@array/departments"/>
+            android:entries="@array/departments"
+            android:textSize="22sp"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -53,8 +55,8 @@
             android:id="@+id/login"
             android:layout_gravity="center"
             android:text="Login"
-            android:textSize="14sp"
-            style="?android:borderlessButtonStyle"/>
+            style="?android:borderlessButtonStyle"
+            android:textSize="22sp"/>
     </LinearLayout>
 
 

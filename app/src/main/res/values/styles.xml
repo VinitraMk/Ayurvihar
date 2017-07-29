@@ -23,13 +23,13 @@
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
     </style>
-
+    <!--
     <style name="LoginTheme" parent="AppTheme" >
         <item name="colorPrimary">@color/colorPrimaryLogin</item>
         <item name="android:textColorPrimary">@color/colorTextPrimaryLogin</item>
         <item name="android:colorBackground">@android:color/background_light</item>
         <item name="colorAccent">@color/colorAccentLogin</item>
         <item name="windowActionBar">false</item>
-    </style>
+    </style>-->
 
 </resources>
