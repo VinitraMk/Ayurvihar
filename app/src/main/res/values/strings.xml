@@ -18,4 +18,29 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <string-array name="nic">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
+    <string-array name="towns">
+        <item>Bhandup</item>
+        <item>Diva</item>
+        <item>Dombivli</item>
+        <item>Ghatkopar</item>
+        <item>Kalva</item>
+        <item>Kalyan</item>
+        <item>Kanjurmarg</item>
+        <item>Mulund</item>
+        <item>Mumbra</item>
+        <item>Nahur</item>
+        <item>Sion</item>
+        <item>Thane</item>
+        <item>Vidyavihar</item>
+        <item>Vikroli</item>
+    </string-array>
+    <string-array name="areacode">
+        <item>area1</item>
+        <item>area2</item>
+        <item>area3</item>
+    </string-array>
 </resources>
