@@ -6,13 +6,12 @@ package ayurvihar.somaiya.com.ayurvihar.utility;
 
 public class UnderFiveHc {
     public int hCheckNo;
-    public String fname,lname,dob,cdate,height,weight,wfar,rem;
+    public String childid,cdate,height,weight,wfar,rem;
 
-    public UnderFiveHc(int hCheckNo, String fname, String lname, String dob, String cdate, String height, String weight, String wfar, String rem) {
+
+    public UnderFiveHc(int hCheckNo, String childid, String cdate, String height, String weight, String wfar, String rem) {
         this.hCheckNo = hCheckNo;
-        this.fname = fname;
-        this.lname = lname;
-        this.dob = dob;
+        this.childid = childid;
         this.cdate = cdate;
         this.height = height;
         this.weight = weight;

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import ayurvihar.somaiya.com.ayurvihar.R;
@@ -34,13 +36,13 @@ import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
 
 public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickListener{
 
-    EditText Addn1 , Addn2 , Addn3 , Addn4 , Addn5 , Addn6 , Addn7 , Addn8 , Addn9, Addn10, Addn11;
+    EditText Addn1 , Addn2 , Addn3 , Addn4 , Addn5 , Addn6 , Addn7 , Addn8 , Addn9;
     DatePicker DOB;
     String fname,ln,mn,fn,ci,fi,room,bldg,town,area,ac,mob,dob,nic,gen;
     int month,day,year;
     Spinner sGen,sNic,sTown,sAc;
     Button AddRecord,Refresh;
-    SimpleDateFormat dateFormatter;
+    SimpleDateFormat dateFormatter,ts;
     private DatePickerDialog datePickerDialog;
     DatabaseReference CHILD_DB=MainActivity.DATABASE_ROOT.child("Underfive");
     DatabaseReference databaseChildHr,databaseChildHcr,databaseChildImm;
@@ -50,9 +52,9 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.underfive_addcr);
 
-        databaseChildHr=CHILD_DB.child("Childhr");
-        databaseChildHcr=CHILD_DB.child("Childhcr");
-        databaseChildImm=CHILD_DB.child("Childimm");
+        databaseChildHr=CHILD_DB.child("GenRec");
+        databaseChildHcr=CHILD_DB.child("ChkRec");
+        databaseChildImm=CHILD_DB.child("ImmRec");
 
         Addn1 = (EditText) findViewById(R.id.Addn1);
         Addn2 = (EditText) findViewById(R.id.Addn2);
@@ -63,12 +65,11 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
         Addn7 = (EditText) findViewById(R.id.Addn7);
         Addn8 = (EditText) findViewById(R.id.Addn8);
         Addn9 = (EditText) findViewById(R.id.Addn9);
-        Addn10 = (EditText) findViewById(R.id.Addn10);
-        Addn11 = (EditText) findViewById(R.id.Addn11);
+
         //DOB = (DatePicker) findViewById(R.id.DOB);
 
-        Addn11.setInputType(InputType.TYPE_NULL);
-        Addn11.requestFocus();
+        Addn9.setInputType(InputType.TYPE_NULL);
+        Addn9.requestFocus();
 
 
         AddRecord = (Button) findViewById(R.id.AddRecord);
@@ -80,6 +81,11 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
 
         //Execurting spinner list for selecting date
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        ts = new SimpleDateFormat("dd-MM-yyyy'|'HH:mm:ss",Locale.US);
+        String timeStamp = ts.format(new Date());
+        timeStamp=(timeStamp.substring(0,2)+timeStamp.substring(3,5)+timeStamp.substring(6,10)+timeStamp.substring(11,13)+timeStamp.substring(14,16)+timeStamp.substring(17,19));
+        ci=timeStamp;
+        Log.v("ufu",""+timeStamp);
         setDateTimeField();
 
 
@@ -92,21 +98,19 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                 ln=Addn2.getText().toString().trim();
                 mn=Addn3.getText().toString().trim();
                 fn=Addn4.getText().toString().trim();
-                ci=Addn5.getText().toString().trim();
-                fi=Addn6.getText().toString().trim();
-                room=Addn7.getText().toString().trim();
-                bldg=Addn8.getText().toString().trim();
+                room=Addn5.getText().toString().trim();
+                bldg=Addn6.getText().toString().trim();
                 town=sTown.getSelectedItem().toString();
-                area=Addn9.getText().toString().trim();
+                area=Addn7.getText().toString().trim();
                 ac=sAc.getSelectedItem().toString();
-                mob=Addn10.getText().toString().trim();
-                dob=Addn11.getText().toString().trim();
+                mob=Addn8.getText().toString().trim();
+                dob=Addn9.getText().toString().trim();
                 gen=sGen.getSelectedItem().toString();
                 nic=sNic.getSelectedItem().toString();
                 if(!fname.equals("") && !ln.equals("") && !dob.equals("") && !mob.equals("")){
-                    UnderFiveCr ufc=new UnderFiveCr(fname,ln,mn,fn,ci,fi,room,bldg,town,area,ac,mob,dob,nic,gen);
-                    UnderFiveHc uhc=new UnderFiveHc(0,fname,ln,dob,"","","","","");
-                    UnderFiveImm uim=new UnderFiveImm(fname,ln,dob,mob,"","","","","","","","","","","",
+                    UnderFiveCr ufc=new UnderFiveCr(fname,ln,mn,fn,ci,room,bldg,town,area,ac,mob,dob,nic,gen);
+                    UnderFiveHc uhc=new UnderFiveHc(0,ci,"","","","","");
+                    UnderFiveImm uim=new UnderFiveImm(ci,"","","","","","","","","","","",
                             "","","","","","","","","","","","","","","","","","","","","","","","","","","");
                     databaseChildHr.push().setValue(ufc);
                     databaseChildHcr.push().setValue(uhc);
@@ -132,8 +136,7 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                 Addn7.setText("");
                 Addn8.setText("");
                 Addn9.setText("");
-                Addn10.setText("");
-                Addn11.setText("");
+
 
                 sGen.setSelection(0);
                 sNic.setSelection(0);
@@ -147,7 +150,7 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
     }
 
     private void setDateTimeField() {
-        Addn11.setOnClickListener(this);
+        Addn9.setOnClickListener(this);
 
         Calendar newCalendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -155,7 +158,7 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                Addn11.setText(dateFormatter.format(newDate.getTime()));
+                Addn9.setText(dateFormatter.format(newDate.getTime()));
             }
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -164,7 +167,7 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        if(view == Addn11) {
+        if(view == Addn9) {
             datePickerDialog.show();
         }
     }

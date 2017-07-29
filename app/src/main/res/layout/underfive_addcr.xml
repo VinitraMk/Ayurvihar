@@ -74,6 +74,7 @@
                 android:hint="Father's Name"
                 android:inputType="textCapWords"/>
         </LinearLayout>
+        <!--
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,7 +90,7 @@
             android:layout_gravity="center"
             android:textSize="27sp"
             android:hint="Family Identifier"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"/>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,14 +101,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/Addn7"
+                android:id="@+id/Addn5"
                 android:hint="Room No"
                 android:textSize="27sp"/>
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/Addn8"
+                android:id="@+id/Addn6"
                 android:hint="Bldg No/Line No"
                 android:textSize="27sp"
                 android:inputType="number"/>
@@ -129,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:textSize="27sp"
-                android:id="@+id/Addn9"
+                android:id="@+id/Addn7"
                 android:hint="Area"
                 android:textAlignment="center"/>
             <Spinner
@@ -146,7 +147,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:textSize="27sp"
-            android:id="@+id/Addn10"
+            android:id="@+id/Addn8"
             android:hint="Mobile No"
             android:textAlignment="center"
             android:inputType="phone"
@@ -157,7 +158,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:textSize="27sp"
-            android:id="@+id/Addn11"
+            android:id="@+id/Addn9"
             android:hint="Date of Birth"
             android:textAlignment="center"
             android:focusable="false"

@@ -1,6 +1,7 @@
 package ayurvihar.somaiya.com.ayurvihar.underfive;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -44,13 +46,16 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
     ListView childlist;
     SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
+    ProgressDialog dialog;
 
     ArrayList<String> poss;
 
     String fname, lname, dob, addr = "";
 
-    DatabaseReference CHILD_DB = MainActivity.DATABASE_ROOT.child("Underfive");
-    DatabaseReference databaseChildHr;
+    public static final DatabaseReference CHILD_DB = MainActivity.DATABASE_ROOT.child("Underfive");
+    public static final DatabaseReference databaseChildHr=CHILD_DB.child("GenRec");
+    public static final DatabaseReference databaseChildHcr=CHILD_DB.child("ChkRec");
+    public static final DatabaseReference databaseChildImm=CHILD_DB.child("ImmRec");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,17 +67,25 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
         set2 = (EditText) findViewById(R.id.set2);
         set3 = (EditText) findViewById(R.id.set3);
         childlist = (ListView) findViewById(R.id.childlist);
+        dialog = new ProgressDialog(UnderFiveUpdateCr.this);
 
         set3.setInputType(InputType.TYPE_NULL);
         set3.requestFocus();
 
-        databaseChildHr = CHILD_DB.child("Childhr");
 
         poss= new ArrayList<>();
 
         //Execurting spinner list for selecting date
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         setDateTimeField();
+
+
+        childlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.v("ufu",""+poss.get(position));
+            }
+        });
 
 
         search.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +112,6 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
                                             "Date of Birth: " + dob + "\n" +
                                             "Address: " + addr + "\n";
                                     poss.add(str);
-                                    Log.v("ufu",""+str+"\n"+poss.size());
                                 }
                             }
                             childlist.setAdapter(new ArrayAdapter<>(UnderFiveUpdateCr.this,R.layout.child_textview,poss));
