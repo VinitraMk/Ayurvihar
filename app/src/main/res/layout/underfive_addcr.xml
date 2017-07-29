@@ -40,14 +40,16 @@
                 android:id="@+id/Addn1"
                 android:textSize="27sp"
                 android:hint="First Name"
-                android:focusable="true"/>
+                android:focusable="true"
+                android:inputType="textCapWords"/>
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/Addn2"
                 android:textSize="27sp"
-                android:hint="Last Name"/>
+                android:hint="Last Name"
+                android:inputType="textCapWords"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,14 +63,16 @@
                 android:layout_weight="1"
                 android:id="@+id/Addn3"
                 android:textSize="27sp"
-                android:hint="Mother's Name"/>
+                android:hint="Mother's Name"
+                android:inputType="textCapWords"/>
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/Addn4"
                 android:textSize="27sp"
-                android:hint="Father's Name"/>
+                android:hint="Father's Name"
+                android:inputType="textCapWords"/>
         </LinearLayout>
         <EditText
             android:layout_width="wrap_content"
@@ -105,7 +109,8 @@
                 android:layout_weight="1"
                 android:id="@+id/Addn8"
                 android:hint="Bldg No/Line No"
-                android:textSize="27sp"/>
+                android:textSize="27sp"
+                android:inputType="number"/>
             <Spinner
                 android:id="@+id/towns"
                 android:layout_height="wrap_content"
@@ -138,7 +143,7 @@
                 />
         </LinearLayout>
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:textSize="27sp"
             android:id="@+id/Addn10"
@@ -147,8 +152,9 @@
             android:inputType="phone"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"/>
+
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:textSize="27sp"
             android:id="@+id/Addn11"
@@ -157,6 +163,7 @@
             android:focusable="false"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,6 +1,7 @@
 package ayurvihar.somaiya.com.ayurvihar.underfive;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +21,20 @@ public class UnderFiveHome extends AppCompatActivity {
         setContentView(R.layout.underfive_home);
 
         ImageButton add=(ImageButton)findViewById(R.id.AddNew);
+        ImageButton update=(ImageButton) findViewById(R.id.Update);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), UnderFiveAddCr.class);
+                startActivity(i);
+            }
+        });
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(getApplicationContext(), UnderFiveUpdateCr.class);
                 startActivity(i);
             }
         });

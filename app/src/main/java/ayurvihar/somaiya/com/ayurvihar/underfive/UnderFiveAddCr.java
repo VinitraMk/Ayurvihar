@@ -32,15 +32,17 @@ import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
  */
 
 
-public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickListener {
+public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickListener{
 
     EditText Addn1 , Addn2 , Addn3 , Addn4 , Addn5 , Addn6 , Addn7 , Addn8 , Addn9, Addn10, Addn11;
+    DatePicker DOB;
     String fname,ln,mn,fn,ci,fi,room,bldg,town,area,ac,mob,dob,nic,gen;
+    int month,day,year;
     Spinner sGen,sNic,sTown,sAc;
     Button AddRecord,Refresh;
     SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
-    public static final DatabaseReference CHILD_DB=MainActivity.DATABASE_ROOT.child("Underfive");
+    DatabaseReference CHILD_DB=MainActivity.DATABASE_ROOT.child("Underfive");
     DatabaseReference databaseChildHr,databaseChildHcr,databaseChildImm;
 
     @Override
@@ -63,6 +65,8 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
         Addn9 = (EditText) findViewById(R.id.Addn9);
         Addn10 = (EditText) findViewById(R.id.Addn10);
         Addn11 = (EditText) findViewById(R.id.Addn11);
+        //DOB = (DatePicker) findViewById(R.id.DOB);
+
         Addn11.setInputType(InputType.TYPE_NULL);
         Addn11.requestFocus();
 
@@ -96,7 +100,7 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                 area=Addn9.getText().toString().trim();
                 ac=sAc.getSelectedItem().toString();
                 mob=Addn10.getText().toString().trim();
-                dob= Addn11.getText().toString().trim();
+                dob=Addn11.getText().toString().trim();
                 gen=sGen.getSelectedItem().toString();
                 nic=sNic.getSelectedItem().toString();
                 if(!fname.equals("") && !ln.equals("") && !dob.equals("") && !mob.equals("")){
