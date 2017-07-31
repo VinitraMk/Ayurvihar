@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,7 +61,6 @@ public class CTab2 extends Fragment implements View.OnClickListener {
     SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
     ArrayList<UnderFiveImm> ufilist;
-    public final static String CLASS_NAME="ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm";
 
 
     @Override
@@ -97,8 +97,24 @@ public class CTab2 extends Fragment implements View.OnClickListener {
                 sdate = date.getText().toString().trim();
                 fvacname=stype+svacname;
 
-                String str = UnderfiveScrollview.cid;
-                updateEntry(str,sdate,fvacname);
+                databaseChildImm.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot ds:dataSnapshot.getChildren())
+                        {
+                            ufi=ds.getValue(UnderFiveImm.class);
+                            if(ufi.getChildid().trim().equals(UnderfiveScrollview.cid.trim()))
+                            {
+                                ds.child(fvacname).getRef().setValue(sdate.trim());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
@@ -106,41 +122,38 @@ public class CTab2 extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         databaseChildImm.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(vaclist.size()!=0)
+                if (vaclist.size() != 0)
                     vaclist.clear();
-                for(DataSnapshot ds:dataSnapshot.getChildren())
-                {
-                    UnderFiveImm tufi=ds.getValue(UnderFiveImm.class);
-                    if(tufi.getChildid().trim().equals(UnderfiveScrollview.cid.trim()))
-                    {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    UnderFiveImm tufi = ds.getValue(UnderFiveImm.class);
+                    if (tufi.getChildid().trim().equals(UnderfiveScrollview.cid.trim())) {
                         childidn.setText(tufi.getChildid().trim());
-                        vaclist.add(new UnderFiveImm("bcg",tufi.getGbcg(),tufi.getDbcg()));
-                        vaclist.add(new UnderFiveImm("dpv0",tufi.getGdpv0(),tufi.getDdpv0()));
-                        vaclist.add(new UnderFiveImm("hbv0",tufi.getGhbv0(),tufi.getDhbv0()));
-                        vaclist.add(new UnderFiveImm("dptopv1",tufi.getGdptopv1(),tufi.getDdptopv1()));
-                        vaclist.add(new UnderFiveImm("dptopv2",tufi.getGdptopv2(),tufi.getDdptopv2()));
-                        vaclist.add(new UnderFiveImm("dptopv3",tufi.getGdptopv3(),tufi.getDdptopv3()));
-                        vaclist.add(new UnderFiveImm("hbv1",tufi.getGhbv1(),tufi.getDhbv1()));
-                        vaclist.add(new UnderFiveImm("hbv2",tufi.getGhbv2(),tufi.getDhbv2()));
-                        vaclist.add(new UnderFiveImm("hbv3",tufi.getGhbv3(),tufi.getDhbv3()));
-                        vaclist.add(new UnderFiveImm("mv1",tufi.getGmv1(),tufi.getDmv1()));
-                        vaclist.add(new UnderFiveImm("mmr",tufi.getGmmr(),tufi.getDmmr()));
-                        vaclist.add(new UnderFiveImm("dobv2",tufi.getGdobv2(),tufi.getDdobv2()));
-                        vaclist.add(new UnderFiveImm("v3",tufi.getGv3(),tufi.getDv3()));
-                        vaclist.add(new UnderFiveImm("v4",tufi.getGv4(),tufi.getDv4()));
-                        vaclist.add(new UnderFiveImm("v5",tufi.getGv5(),tufi.getDv5()));
-                        vaclist.add(new UnderFiveImm("v6",tufi.getGv6(),tufi.getDv6()));
-                        vaclist.add(new UnderFiveImm("v7",tufi.getGv7(),tufi.getDv7()));
-                        vaclist.add(new UnderFiveImm("v8",tufi.getGv8(),tufi.getDv8()));
-                        vaclist.add(new UnderFiveImm("dv9",tufi.getGdv9(),tufi.getDdv9()));
-                        //mapToList((Map)dataSnapshot.getValue());
-                        if(getActivity()!=null){
-                            vaccineAdapter = new VaccineAdapter(getContext(),R.layout.imm_item,vaclist);
+                        vaclist.add(new UnderFiveImm("bcg", tufi.getGbcg(), tufi.getDbcg()));
+                        vaclist.add(new UnderFiveImm("dpv0", tufi.getGdpv0(), tufi.getDdpv0()));
+                        vaclist.add(new UnderFiveImm("hbv0", tufi.getGhbv0(), tufi.getDhbv0()));
+                        vaclist.add(new UnderFiveImm("dptopv1", tufi.getGdptopv1(), tufi.getDdptopv1()));
+                        vaclist.add(new UnderFiveImm("dptopv2", tufi.getGdptopv2(), tufi.getDdptopv2()));
+                        vaclist.add(new UnderFiveImm("dptopv3", tufi.getGdptopv3(), tufi.getDdptopv3()));
+                        vaclist.add(new UnderFiveImm("hbv1", tufi.getGhbv1(), tufi.getDhbv1()));
+                        vaclist.add(new UnderFiveImm("hbv2", tufi.getGhbv2(), tufi.getDhbv2()));
+                        vaclist.add(new UnderFiveImm("hbv3", tufi.getGhbv3(), tufi.getDhbv3()));
+                        vaclist.add(new UnderFiveImm("mv1", tufi.getGmv1(), tufi.getDmv1()));
+                        vaclist.add(new UnderFiveImm("mmr", tufi.getGmmr(), tufi.getDmmr()));
+                        vaclist.add(new UnderFiveImm("dobv2", tufi.getGdobv2(), tufi.getDdobv2()));
+                        vaclist.add(new UnderFiveImm("v3", tufi.getGv3(), tufi.getDv3()));
+                        vaclist.add(new UnderFiveImm("v4", tufi.getGv4(), tufi.getDv4()));
+                        vaclist.add(new UnderFiveImm("v5", tufi.getGv5(), tufi.getDv5()));
+                        vaclist.add(new UnderFiveImm("v6", tufi.getGv6(), tufi.getDv6()));
+                        vaclist.add(new UnderFiveImm("v7", tufi.getGv7(), tufi.getDv7()));
+                        vaclist.add(new UnderFiveImm("v8", tufi.getGv8(), tufi.getDv8()));
+                        vaclist.add(new UnderFiveImm("dv9", tufi.getGdv9(), tufi.getDdv9()));
+                        if (getActivity() != null) {
+                            vaccineAdapter = new VaccineAdapter(getContext(), R.layout.imm_item, vaclist);
                             simpleList.setAdapter(vaccineAdapter);
                         }
                     }
@@ -152,6 +165,8 @@ public class CTab2 extends Fragment implements View.OnClickListener {
                 //UnderfiveScrollview.dialog.dismiss();
             }
         });
+
+
     }
 
     private void setDateTimeField() {
@@ -175,46 +190,4 @@ public class CTab2 extends Fragment implements View.OnClickListener {
             datePickerDialog.show();
         }
     }
-
-    private void updateEntry(String str, final String val, final String fiename)
-    {
-        UnderfiveScrollview.dialog.setMessage("Saving changes to database...");
-        UnderfiveScrollview.dialog.show();
-        final String tempstr=str;
-        final String tempval=val;
-        final String tempfie=fiename;
-        databaseChildImm.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds:dataSnapshot.getChildren())
-                {
-                    ufi=ds.getValue(UnderFiveImm.class);
-                    Log.v("immh",ufi.getChildid()+" "+tempstr);
-                    if(ufi.getChildid().trim().equals(tempstr.trim()))
-                    {
-                        ds.getRef().child(tempfie).setValue(tempval);
-                        UnderfiveScrollview.dialog.dismiss();
-                        //break;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //UnderfiveScrollview.dialog.dismiss();
-            }
-        });
-
-    }
-
-    private UnderFiveImm updateClassEntry(String str){
-        for(UnderFiveImm obj:ufilist){
-            if(obj.getChildid().trim().equals(str.trim())){
-                return obj;
-            }
-        }
-        return null;
-    }
-
-
 }
