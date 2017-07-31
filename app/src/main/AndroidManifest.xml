@@ -20,6 +20,7 @@
         <activity android:name=".underfive.UnderFiveHome"/>
         <activity android:name=".underfive.UnderFiveAddCr"/>
         <activity android:name=".underfive.UnderFiveUpdateCr"/>
+        <activity android:name=".underfive.UnderfiveScrollview"/>
     </application>
 
 </manifest>

@@ -2,17 +2,13 @@ package ayurvihar.somaiya.com.ayurvihar.underfive;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.text.Layout;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,9 +44,11 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
     private DatePickerDialog datePickerDialog;
     ProgressDialog dialog;
 
+
     ArrayList<String> poss;
 
-    String fname, lname, dob, addr = "";
+    String fname, lname, dob, addr = "",cid;
+    int c;
 
     public static final DatabaseReference CHILD_DB = MainActivity.DATABASE_ROOT.child("Underfive");
     public static final DatabaseReference databaseChildHr=CHILD_DB.child("GenRec");
@@ -62,10 +60,14 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.underfive_updatecr);
 
+
         search = (Button) findViewById(R.id.searchchild);
         set1 = (EditText) findViewById(R.id.set1);
         set2 = (EditText) findViewById(R.id.set2);
         set3 = (EditText) findViewById(R.id.set3);
+        set1.setText("Raj");
+        set2.setText("Nandu");
+        set3.setText("30-07-2017");
         childlist = (ListView) findViewById(R.id.childlist);
         dialog = new ProgressDialog(UnderFiveUpdateCr.this);
 
@@ -84,6 +86,18 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.v("ufu",""+poss.get(position));
+                cid=poss.get(position);
+                int in=cid.indexOf("Child Identifier");
+                if(in!=-1)
+                {
+                    c=0;
+                    in+=17;
+                    Log.v("ufup",""+cid.indexOf("Child Identifier")+" "+cid.substring(in,in+15));
+                    cid=cid.substring(in,in+15);
+                    Intent i = new Intent(UnderFiveUpdateCr.this,UnderfiveScrollview.class);
+                    i.putExtra("childid",cid);
+                    startActivity(i);
+                }
             }
         });
 
@@ -91,6 +105,8 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.setMessage("Searching the database...");
+                dialog.show();
                 fname = set1.getText().toString().trim();
                 lname = set2.getText().toString().trim();
                 dob = set3.getText().toString().trim();
@@ -99,33 +115,39 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
                 if (fname.equals("") || lname.equals("") || dob.equals(""))
                     Toast.makeText(UnderFiveUpdateCr.this, "No fields can be empty", Toast.LENGTH_SHORT).show();
                 else {
+                    dialog.setMessage("Searching the database");
                     databaseChildHr.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot ds : dataSnapshot.getChildren()) {
                                 UnderFiveCr ufc = ds.getValue(UnderFiveCr.class);
+                                //Log.v("upcr",""+ds.getKey()+"/"+ds.child("fname"));
+                                Log.v("upcr",""+ufc.getFname());
                                 if (fname.equals(ufc.getFname()) && lname.equals(ufc.getLname()) && dob.equals(ufc.getDob())) {
                                     Log.v("ufu", ufc.getFname());
                                     addr = "";
                                     addr += (ufc.getRoom() + ", " + ufc.getBldg() + ", " + ufc.getArea() + ", " + ufc.getAc() + ", " + ufc.getTown());
-                                    String str= "Name: " + fname + " " + lname + "\n" +
+                                    String str1= "Name: " + fname + " " + lname + "\n" +
                                             "Date of Birth: " + dob + "\n" +
-                                            "Address: " + addr + "\n";
-                                    poss.add(str);
+                                            "Address: " + addr + "\n"+
+                                            "Child Identifier: "+ ufc.getChildid() + "\n";
+                                    poss.add(str1);
                                 }
                             }
+                            dialog.dismiss();
                             childlist.setAdapter(new ArrayAdapter<>(UnderFiveUpdateCr.this,R.layout.child_textview,poss));
                         }
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
+                            dialog.dismiss();
                         }
                     });
                 }
             }
         });
     }
+
 
     private void setDateTimeField() {
         set3.setOnClickListener(this);
@@ -149,4 +171,5 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
             datePickerDialog.show();
         }
     }
+
 }

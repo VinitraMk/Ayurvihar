@@ -38,8 +38,16 @@ public class UnderFiveCr {
         return lname;
     }
 
-    public String getDob() {
-        return dob;
+    public String getMoname() {
+        return moname;
+    }
+
+    public String getFatname() {
+        return fatname;
+    }
+
+    public String getChildid() {
+        return childid;
     }
 
     public String getRoom() {
@@ -60,5 +68,21 @@ public class UnderFiveCr {
 
     public String getAc() {
         return ac;
+    }
+
+    public String getMob() {
+        return mob;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public String getNic() {
+        return nic;
+    }
+
+    public String getGen() {
+        return gen;
     }
 }

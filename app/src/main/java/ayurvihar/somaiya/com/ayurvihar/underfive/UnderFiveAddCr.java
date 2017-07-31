@@ -66,7 +66,6 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
         Addn8 = (EditText) findViewById(R.id.Addn8);
         Addn9 = (EditText) findViewById(R.id.Addn9);
 
-        //DOB = (DatePicker) findViewById(R.id.DOB);
 
         Addn9.setInputType(InputType.TYPE_NULL);
         Addn9.requestFocus();
@@ -81,11 +80,6 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
 
         //Execurting spinner list for selecting date
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-        ts = new SimpleDateFormat("dd-MM-yyyy'|'HH:mm:ss",Locale.US);
-        String timeStamp = ts.format(new Date());
-        timeStamp=(timeStamp.substring(0,2)+timeStamp.substring(3,5)+timeStamp.substring(6,10)+timeStamp.substring(11,13)+timeStamp.substring(14,16)+timeStamp.substring(17,19));
-        ci=timeStamp;
-        Log.v("ufu",""+timeStamp);
         setDateTimeField();
 
 
@@ -98,6 +92,10 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                 ln=Addn2.getText().toString().trim();
                 mn=Addn3.getText().toString().trim();
                 fn=Addn4.getText().toString().trim();
+                ts = new SimpleDateFormat("dd-MM-yyyy'|'HH:mm:ss",Locale.US);
+                String timeStamp = ts.format(new Date());
+                timeStamp=(timeStamp.substring(0,2)+timeStamp.substring(3,5)+timeStamp.substring(6,10)+timeStamp.substring(11,13)+timeStamp.substring(14,16)+timeStamp.substring(17,19));
+                ci=timeStamp;
                 room=Addn5.getText().toString().trim();
                 bldg=Addn6.getText().toString().trim();
                 town=sTown.getSelectedItem().toString();
@@ -115,6 +113,9 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                     databaseChildHr.push().setValue(ufc);
                     databaseChildHcr.push().setValue(uhc);
                     databaseChildImm.push().setValue(uim);
+                    /*databaseChildHr.child(ci).push().setValue(ufc);
+                    databaseChildHcr.child(ci).push().setValue(uhc);
+                    databaseChildImm.child(ci).push().setValue(uim);*/
                     Toast.makeText(UnderFiveAddCr.this,"Successfully added child record",Toast.LENGTH_SHORT).show();
                     AddRecord.setVisibility(View.INVISIBLE);
                 }
