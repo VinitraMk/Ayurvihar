@@ -96,6 +96,7 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
                     cid=cid.substring(in,in+15);
                     Intent i = new Intent(UnderFiveUpdateCr.this,UnderfiveScrollview.class);
                     i.putExtra("childid",cid);
+                    i.putExtra("Dob",set3.getText().toString().trim());
                     startActivity(i);
                 }
             }

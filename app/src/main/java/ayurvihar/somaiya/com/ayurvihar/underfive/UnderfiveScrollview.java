@@ -41,7 +41,7 @@ public class UnderfiveScrollview extends FragmentActivity {
     public static UnderFiveHc uhc;
     public static UnderFiveImm uim;
 
-    public static String cid;
+    public static String cid,dob;
 
 
     @Override
@@ -57,6 +57,7 @@ public class UnderfiveScrollview extends FragmentActivity {
         tabLayout = (TabLayout)findViewById(R.id.ctabs);
         tabLayout.setupWithViewPager(viewPager);
         cid=getIntent().getExtras().getString("childid");
+        dob=getIntent().getExtras().getString("Dob");
         Log.v("scroll",cid);
     }
 

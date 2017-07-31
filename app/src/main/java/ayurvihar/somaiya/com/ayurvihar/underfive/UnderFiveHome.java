@@ -22,6 +22,7 @@ public class UnderFiveHome extends AppCompatActivity {
 
         ImageButton add=(ImageButton)findViewById(R.id.AddNew);
         ImageButton update=(ImageButton) findViewById(R.id.Update);
+        ImageButton hlthrep=(ImageButton) findViewById(R.id.hlthrep);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +36,14 @@ public class UnderFiveHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i= new Intent(getApplicationContext(), UnderFiveUpdateCr.class);
+                startActivity(i);
+            }
+        });
+
+        hlthrep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),UnderFiveHealthRep.class);
                 startActivity(i);
             }
         });

@@ -18,10 +18,12 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import ayurvihar.somaiya.com.ayurvihar.R;
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
@@ -36,10 +38,10 @@ import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
 
 public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickListener{
 
-    EditText Addn1 , Addn2 , Addn3 , Addn4 , Addn5 , Addn6 , Addn7 , Addn8 , Addn9;
+    EditText Addn1 , Addn2 , Addn3 , Addn4 , Addn5 , Addn6 , Addn7 , Addn8 , Addn9, Addn10, Addn11, Addn12;
     DatePicker DOB;
-    String fname,ln,mn,fn,ci,fi,room,bldg,town,area,ac,mob,dob,nic,gen;
-    int month,day,year;
+    String fname,ln,mn,fn,ci,fi,room,bldg,town,area,ac,mob,dob,nic,gen,height,weight,rem,tdob,cur;
+    int month,day,year,age;
     Spinner sGen,sNic,sTown,sAc;
     Button AddRecord,Refresh;
     SimpleDateFormat dateFormatter,ts;
@@ -65,7 +67,9 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
         Addn7 = (EditText) findViewById(R.id.Addn7);
         Addn8 = (EditText) findViewById(R.id.Addn8);
         Addn9 = (EditText) findViewById(R.id.Addn9);
-
+        Addn10 = (EditText) findViewById(R.id.Addn10);
+        Addn11 = (EditText) findViewById(R.id.Addn11);
+        Addn12 = (EditText) findViewById(R.id.Addn12);
 
         Addn9.setInputType(InputType.TYPE_NULL);
         Addn9.requestFocus();
@@ -105,22 +109,33 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                 dob=Addn9.getText().toString().trim();
                 gen=sGen.getSelectedItem().toString();
                 nic=sNic.getSelectedItem().toString();
-                if(!fname.equals("") && !ln.equals("") && !dob.equals("") && !mob.equals("")){
+                height=Addn10.getText().toString().trim();
+                weight=Addn11.getText().toString().trim();
+                rem = Addn12.getText().toString().trim();
+
+                tdob = (dob.substring(6,10)+dob.substring(3,5)+dob.substring(0,2));
+                Date date = Calendar.getInstance().getTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+                cur = sdf.format(date);
+                Log.v("hello",cur);
+                age = (Integer.parseInt(cur)-Integer.parseInt(tdob)/10000);
+                Double dt = ((Double.parseDouble(weight)/(double)age));
+                String ratio = (new DecimalFormat("#0.000000000").format(dt));
+
+                if(!fname.equals("") && !ln.equals("") && !dob.equals("") && !mob.equals("") && !height.equals("") && !weight.equals("")){
                     UnderFiveCr ufc=new UnderFiveCr(fname,ln,mn,fn,ci,room,bldg,town,area,ac,mob,dob,nic,gen);
-                    UnderFiveHc uhc=new UnderFiveHc(0,ci,"","","","","");
+                    UnderFiveHc uhc=new UnderFiveHc(0,ci,dob,height,weight,ratio,rem);
                     UnderFiveImm uim=new UnderFiveImm(ci,"","","","","","","","","","","",
                             "","","","","","","","","","","","","","","","","","","","","","","","","","","");
                     databaseChildHr.push().setValue(ufc);
                     databaseChildHcr.push().setValue(uhc);
                     databaseChildImm.push().setValue(uim);
-                    /*databaseChildHr.child(ci).push().setValue(ufc);
-                    databaseChildHcr.child(ci).push().setValue(uhc);
-                    databaseChildImm.child(ci).push().setValue(uim);*/
                     Toast.makeText(UnderFiveAddCr.this,"Successfully added child record",Toast.LENGTH_SHORT).show();
                     AddRecord.setVisibility(View.INVISIBLE);
                 }
                 else{
-                    Toast.makeText(UnderFiveAddCr.this,"Fill First name,last name,phone and DOB",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UnderFiveAddCr.this,"Fill all mandatory fields",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -137,7 +152,9 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                 Addn7.setText("");
                 Addn8.setText("");
                 Addn9.setText("");
-
+                Addn10.setText("");
+                Addn11.setText("");
+                Addn12.setText("");
 
                 sGen.setSelection(0);
                 sNic.setSelection(0);

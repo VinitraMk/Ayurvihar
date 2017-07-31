@@ -21,6 +21,8 @@
         <activity android:name=".underfive.UnderFiveAddCr"/>
         <activity android:name=".underfive.UnderFiveUpdateCr"/>
         <activity android:name=".underfive.UnderfiveScrollview"/>
+        <activity android:name=".underfive.UnderFiveHealthRep"
+            android:parentActivityName=".underfive.UnderfiveScrollview"/>
     </application>
 
 </manifest>

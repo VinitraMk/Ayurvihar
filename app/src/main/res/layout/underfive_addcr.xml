@@ -27,6 +27,14 @@
             android:textColor="@android:color/darker_gray"
             android:textAlignment="center"
             android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="15sp"
+            android:text="* means mandatory"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +47,7 @@
                 android:layout_weight="1"
                 android:id="@+id/Addn1"
                 android:textSize="27sp"
-                android:hint="First Name"
+                android:hint="First Name*"
                 android:focusable="true"
                 android:inputType="textCapWords"/>
             <EditText
@@ -48,7 +56,7 @@
                 android:layout_weight="1"
                 android:id="@+id/Addn2"
                 android:textSize="27sp"
-                android:hint="Last Name"
+                android:hint="Last Name*"
                 android:inputType="textCapWords"/>
         </LinearLayout>
         <LinearLayout
@@ -132,7 +140,7 @@
             android:layout_height="wrap_content"
             android:textSize="27sp"
             android:id="@+id/Addn8"
-            android:hint="Mobile No"
+            android:hint="Mobile No*"
             android:textAlignment="center"
             android:inputType="phone"
             android:layout_gravity="center"
@@ -143,11 +151,44 @@
             android:layout_height="wrap_content"
             android:textSize="27sp"
             android:id="@+id/Addn9"
-            android:hint="Date of Birth"
+            android:hint="Date of Birth*"
             android:textAlignment="center"
             android:focusable="false"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/Addn10"
+                android:textSize="27sp"
+                android:hint="Height*"
+                android:focusable="true"
+                android:inputType="number"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/Addn11"
+                android:textSize="27sp"
+                android:hint="Weight*"
+                android:inputType="number"/>
+        </LinearLayout>
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Addn12"
+            android:textSize="27sp"
+            android:hint="Remarks"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"/>
 
         <TextView
             android:layout_width="wrap_content"
