@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".utility.PersitentDatabase">
+        android:name=".utility.PersitentDatabase"
+        android:largeHeap="true">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +24,9 @@
         <activity android:name=".underfive.UnderfiveScrollview"/>
         <activity android:name=".underfive.UnderFiveHealthRep"
             android:parentActivityName=".underfive.UnderfiveScrollview"/>
+        <activity android:name=".underfive.ProgressGraph"/>
+        <activity android:name=".underfive.DailyUpdates"/>
+        <activity android:name=".underfive.UnderFiveSearchCr"/>
     </application>
 
 </manifest>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/underfive_searchcr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="25dp"
+                android:text="Search Child Records"
+                android:textColor="@android:color/black"
+                android:textSize="40sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/set1"
+                        android:layout_width="188dp"
+                        android:layout_height="wrap_content"
+                        android:hint="First Name"
+                        android:inputType="textCapWords"
+                        android:textSize="22sp" />
+
+                    <EditText
+                        android:id="@+id/set2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Last Name"
+                        android:inputType="textCapWords"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/set3"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Date Of Birth"
+                        android:textSize="22sp" />
+
+                    <EditText
+                        android:id="@+id/set4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Comtact Number"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/set5"
+                    android:layout_width="232dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Area"
+                    android:textSize="22sp" />
+
+                <Button
+                    android:id="@+id/searchchild"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:focusable="false"
+                    android:text="Search"
+                    android:textSize="27sp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_margin="25dp"
+                android:background="@android:color/black"></View>
+
+            <ListView
+                android:id="@+id/childlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+            </ListView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -25,20 +25,26 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
+import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveIntervals;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveUpdateCr;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderfiveScrollview;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
 import ayurvihar.somaiya.com.ayurvihar.utility.VaccineAdapter;
 
 import static ayurvihar.somaiya.com.ayurvihar.R.id.childidn;
+import static ayurvihar.somaiya.com.ayurvihar.R.id.due;
 
 /**
  * Created by mikasa on 30/7/17.
@@ -46,7 +52,7 @@ import static ayurvihar.somaiya.com.ayurvihar.R.id.childidn;
 
 public class CTab2 extends Fragment implements View.OnClickListener {
 
-    DatabaseReference CHILD_DB= MainActivity.DATABASE_ROOT.child("Underfive");
+    DatabaseReference CHILD_DB = MainActivity.DATABASE_ROOT.child("Underfive");
     DatabaseReference databaseChildImm;
 
     ListView simpleList;
@@ -56,11 +62,12 @@ public class CTab2 extends Fragment implements View.OnClickListener {
     TextView childidn;
     Button setdate;
     Spinner type,vacname;
-    String stype,svacname,fvacname="",sdate;
+    String stype,svacname,fvacname="",dfvacname="",sdate,newsdate;
     EditText date;
     SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
     ArrayList<UnderFiveImm> ufilist;
+    DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
 
     @Override
@@ -93,9 +100,19 @@ public class CTab2 extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 stype=((type.getSelectedItem().toString().trim().toLowerCase()).substring(0,1));
+                UnderFiveIntervals ufit = new UnderFiveIntervals();
+                dfvacname="";
+                Log.v("ufit",""+ufit.bcg);
+
                 svacname=(vacname.getSelectedItem().toString().trim().toLowerCase());
                 sdate = date.getText().toString().trim();
+                if(stype.equals("g")) {
+                    Log.v("vacname",""+stype);
+                    newsdate=getDueDate(sdate,svacname);
+                    dfvacname="d"+svacname;
+                }
                 fvacname=stype+svacname;
+
 
                 databaseChildImm.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -106,6 +123,9 @@ public class CTab2 extends Fragment implements View.OnClickListener {
                             if(ufi.getChildid().trim().equals(UnderfiveScrollview.cid.trim()))
                             {
                                 ds.child(fvacname).getRef().setValue(sdate.trim());
+                                if(stype.equals("g") && (!dfvacname.equals(""))) {
+                                    ds.child(dfvacname).getRef().setValue(newsdate.trim());
+                                }
                             }
                         }
                     }
@@ -119,6 +139,25 @@ public class CTab2 extends Fragment implements View.OnClickListener {
         });
 
         return view;
+    }
+
+    public String getDueDate(String startDate,String key) {
+        Date dueDate = new Date();
+        UnderFiveIntervals ufit = new UnderFiveIntervals();
+        HashMap<String, String> intlist = ufit.getList();
+        String newDateString = "";
+        try {
+            dueDate = df.parse(startDate);
+            Calendar ct = Calendar.getInstance();
+            ct.setTime(dueDate);
+            int amt = Integer.parseInt(intlist.get(key));
+            ct.add(Calendar.DATE, amt);
+            dueDate = ct.getTime();
+            newDateString = df.format(dueDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return newDateString;
     }
 
     @Override

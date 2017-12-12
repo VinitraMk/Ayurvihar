@@ -1,15 +1,22 @@
 package ayurvihar.somaiya.com.ayurvihar.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +27,7 @@ import java.util.ArrayList;
 
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
+import ayurvihar.somaiya.com.ayurvihar.underfive.ProgressGraph;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveHealthRep;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderfiveScrollview;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveHc;
@@ -30,10 +38,15 @@ import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveHc;
 
 public class CTab3 extends Fragment {
 
-    FloatingActionButton addhcr;
+    FloatingActionButton addhcr,graph;
     DatabaseReference databaseChildHcr = MainActivity.DATABASE_ROOT.child("Underfive").child("ChkRec");
     ArrayList<String> reclist = new ArrayList<>();
     ListView recList;
+    PopupWindow pw;
+    ArrayList<String> graphList = new ArrayList<>();
+    public static SharedPreferences weightForAge;
+    public SharedPreferences.Editor editor;
+    String listString="";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,9 +59,14 @@ public class CTab3 extends Fragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
 
         View view=inflater.inflate(R.layout.ctab3,container,false);
+        //editor.clear();
 
         addhcr = (FloatingActionButton) view.findViewById(R.id.addhcr);
         recList = (ListView) view.findViewById(R.id.reclist);
+        graph = (FloatingActionButton)view.findViewById(R.id.graph);
+
+        weightForAge = getContext().getSharedPreferences("Weightforage",Context.MODE_PRIVATE);
+        editor = weightForAge.edit();
 
         addhcr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +78,22 @@ public class CTab3 extends Fragment {
                 startActivity(i);
             }
         });
+
+        graph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CTab3.this.getContext(), ProgressGraph.class);
+                Log.v("call","graph");
+                i.putExtra("childid",UnderfiveScrollview.cid);
+
+
+
+                startActivity(i);
+            }
+        });
         return view;
     }
+
 
     @Override
     public void onStart() {
@@ -70,11 +102,14 @@ public class CTab3 extends Fragment {
         databaseChildHcr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(reclist.size()!=0)
+                if(reclist.size()!=0) {
                     reclist.clear();
+                    graphList.clear();
+                }
                 for(DataSnapshot ds:dataSnapshot.getChildren())
                 {
                     UnderFiveHc uhc=ds.getValue(UnderFiveHc.class);
+                    listString="";
                     if(uhc.getChildid().trim().equals(UnderfiveScrollview.cid.trim()))
                     {
                         String item = "Health Checkup No:"+uhc.gethCheckNo()+"\n"+
@@ -83,7 +118,14 @@ public class CTab3 extends Fragment {
                             "Weight for Age Status: "+uhc.getWfar()+"\n"+
                             "Remarks: "+uhc.getRem()+"\n";
                         reclist.add(item);
+                        graphList.add(uhc.getWfar());
                     }
+                    for(String s: graphList) {
+                        listString += s;
+                        listString += ",";
+                    }
+                    editor.putString("Weightforagelist",listString);
+                    editor.commit();
                 }
                 recList.setAdapter(new ArrayAdapter<String>(CTab3.this.getContext(),R.layout.child_textview,reclist));
 

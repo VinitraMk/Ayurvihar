@@ -22,5 +22,15 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:clickable="true"
+        android:id="@+id/graph"
+        android:src="@mipmap/graph"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        />
 
 </RelativeLayout>

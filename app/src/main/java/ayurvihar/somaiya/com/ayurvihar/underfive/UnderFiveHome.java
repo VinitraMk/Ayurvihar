@@ -22,6 +22,7 @@ public class UnderFiveHome extends AppCompatActivity {
 
         ImageButton add=(ImageButton)findViewById(R.id.AddNew);
         ImageButton update=(ImageButton) findViewById(R.id.Update);
+        ImageButton search=(ImageButton) findViewById(R.id.Search);
         ImageButton hlthrep=(ImageButton) findViewById(R.id.hlthrep);
 
         add.setOnClickListener(new View.OnClickListener() {
@@ -40,12 +41,20 @@ public class UnderFiveHome extends AppCompatActivity {
             }
         });
 
-        hlthrep.setOnClickListener(new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(getApplicationContext(), UnderFiveSearchCr.class);
+                startActivity(i);
+            }
+        });
+
+        /*hlthrep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(),UnderFiveHealthRep.class);
                 startActivity(i);
             }
-        });
+        });*/
     }
 }

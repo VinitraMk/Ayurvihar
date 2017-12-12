@@ -1,6 +1,8 @@
 package ayurvihar.somaiya.com.ayurvihar.utility;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by mikasa on 8/7/17.
@@ -17,6 +19,50 @@ public class UnderFiveImm {
 
     public UnderFiveImm(){
 
+    }
+
+    public HashMap<String,String> getList(UnderFiveImm ufi) {
+        HashMap<String,String> hp = new HashMap<>();
+        hp.put("childid",ufi.getChildid());
+        hp.put("gbcg",ufi.getGbcg());
+        hp.put("dbcg",ufi.getDbcg());
+        hp.put("gdpv0",ufi.getGdpv0());
+        hp.put("ddpv0",ufi.getDdpv0());
+        hp.put("ghbv0",ufi.getGhbv0());
+        hp.put("dhbv0",ufi.getDhbv0());
+        hp.put("ghbv1",ufi.getGhbv0());
+        hp.put("dhbv1",ufi.getDhbv1());
+        hp.put("ghbv2",ufi.getGhbv2());
+        hp.put("dhbv2",ufi.getDhbv2());
+        hp.put("ghbv3",ufi.getGhbv3());
+        hp.put("dhbv3",ufi.getDhbv3());
+        hp.put("gdptopv1",ufi.getGdptopv1());
+        hp.put("ddptopv1",ufi.getDdptopv1());
+        hp.put("gdptopv2",ufi.getGdptopv2());
+        hp.put("ddptopv2",ufi.getDdptopv2());
+        hp.put("gdptopv3",ufi.getGdptopv3());
+        hp.put("ddptopv3",ufi.getDdptopv3());
+        hp.put("gmv1",ufi.getGmv1());
+        hp.put("dmv1",ufi.getDmv1());
+        hp.put("gmmr",ufi.getGmmr());
+        hp.put("dmmr",ufi.getDmmr());
+        hp.put("gdodbv2",ufi.getGdobv2());
+        hp.put("ddobv2",ufi.getDdobv2());
+        hp.put("gv3",ufi.getGv3());
+        hp.put("dv3",ufi.getDv3());
+        hp.put("gv4",ufi.getGv4());
+        hp.put("dv4",ufi.getDv4());
+        hp.put("gv5",ufi.getGv5());
+        hp.put("dv5",ufi.getDv5());
+        hp.put("gv6",ufi.getGv6());
+        hp.put("dv6",ufi.getGv6());
+        hp.put("gv7",ufi.getGv7());
+        hp.put("dv7",ufi.getDv7());
+        hp.put("gv8",ufi.getGv8());
+        hp.put("dv8",ufi.getDv8());
+        hp.put("gdv9",ufi.getGdv9());
+        hp.put("ddv9",ufi.getDdv9());
+        return hp;
     }
 
 
