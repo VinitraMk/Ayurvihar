@@ -13,28 +13,60 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
+//const rootRef=admin.database().ref();
+const nodemailer=require('nodemailer');
+const contacts = [];
+const children = [];
+const mailTransport = nodemailer.createTransport({
+    host:'smtp.gmail.com',
+    port:465,
+    secure:true,
+    auth:{
+        user: 'vinitramk@gmail.com',
+        pass: 'vinitramk3097'
+    }
+})
+
+
 // Take the text parameter passed to this HTTP endpoint and insert it into the
 // Realtime Database under the path /messages/:pushId/original
 exports.addMessage = functions.https.onRequest((req, res) => {
   // Grab the text parameter.
   const original = req.query.text;
   // Push the new message into the Realtime Database using the Firebase Admin SDK.
-  admin.database().ref('/messages').push({original: original}).then(snapshot => {
-    // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
-    res.redirect(303, snapshot.ref);
-  });
-});
+  admin.database().ref('/Underfive/ImmRec/messages').push({today: false}).then(snapshot => {
+      admin.database().ref('/Underfive/GenRec/messages').push({today:false});
+      res.redirect(303,snapshot.ref);
+  })
+})
 
-// Listens for new messages added to /messages/:pushId/original and creates an
-// uppercase version of the message to /messages/:pushId/uppercase
-exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
-    .onWrite(event => {
-      // Grab the current value of what was written to the Realtime Database.
-      const original = event.data.val();
-      console.log('Uppercasing', event.params.pushId, original);
-      const uppercase = original.toUpperCase();
-      // You must return a Promise when performing asynchronous tasks inside a Functions such as
-      // writing to the Firebase Realtime Database.
-      // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
-      return event.data.ref.parent.child('uppercase').set(uppercase);
-    });
+exports.collectChildren= functions.database.ref('/Underfive/ImmRec').onWrite(event => {
+  admin.database().ref().child('/Underfive/ImmRec').once('value')
+    .then(snap => {
+        console.log('ImmRec','Hello');
+        snap.forEach(childSnap => {
+            const childid = childSnap.val().childid;
+            children.push(childid);
+        })
+        return children 
+    }).then(children => {
+        console.log('Child ids: '+children.join());
+        admin.database().ref().child('/Underfive/GenRec').once('value')
+        .then(snap => {
+            snap.forEach(childSnap => {
+                const childid=childSnap.val().childid;
+                const phoneno=childSnap.val().mob;
+                if(children.indexOf(childid)!=-1) {
+                    contacts.push(phoneno);
+                }
+            })
+            return contacts
+        }).then(contacts => {
+            console.log('Contacts: '+contacts.join());
+            /*admin.database().ref().child('/Underfive/ImmRec/messages').remove();
+            admin.database().ref().child('/Underfive/GenRec/messages').remove();*/
+        })
+    })
+})
+
+

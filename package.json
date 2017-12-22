@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/VinitraMk/Ayurvihar#readme",
   "dependencies": {
-    "firebase-admin": "^5.6.0"
+    "firebase-admin": "^5.6.0",
+    "nodemailer": "^4.4.1"
   }
 }
