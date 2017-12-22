@@ -3,14 +3,14 @@
     package="ayurvihar.somaiya.com.ayurvihar">
 
     <application
+        android:name=".utility.PersitentDatabase"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".utility.PersitentDatabase"
-        android:largeHeap="true">
+        android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,15 +18,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".underfive.UnderFiveHome"/>
-        <activity android:name=".underfive.UnderFiveAddCr"/>
-        <activity android:name=".underfive.UnderFiveUpdateCr"/>
-        <activity android:name=".underfive.UnderfiveScrollview"/>
-        <activity android:name=".underfive.UnderFiveHealthRep"
-            android:parentActivityName=".underfive.UnderfiveScrollview"/>
-        <activity android:name=".underfive.ProgressGraph"/>
-        <activity android:name=".underfive.DailyUpdates"/>
-        <activity android:name=".underfive.UnderFiveSearchCr"/>
+        <activity android:name=".underfive.UnderFiveHome" />
+        <activity android:name=".underfive.UnderFiveAddCr" />
+        <activity android:name=".underfive.UnderFiveUpdateCr" />
+        <activity android:name=".underfive.UnderfiveScrollview" />
+        <activity
+            android:name=".underfive.UnderFiveHealthRep"
+            android:parentActivityName=".underfive.UnderfiveScrollview" />
+        <activity android:name=".underfive.ProgressGraph" />
+        <activity android:name=".underfive.DailyUpdates" />
+        <activity android:name=".underfive.UnderFiveSearchCr" />
+        <activity android:name=".underfive.UnderFiveImmSearch" />
+        <activity android:name=".underfive.UnderFiveImmOutput"></activity>
     </application>
 
 </manifest>

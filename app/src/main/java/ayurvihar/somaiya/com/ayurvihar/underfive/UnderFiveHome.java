@@ -49,12 +49,12 @@ public class UnderFiveHome extends AppCompatActivity {
             }
         });
 
-        /*hlthrep.setOnClickListener(new View.OnClickListener() {
+        hlthrep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),UnderFiveHealthRep.class);
+                Intent i = new Intent(getApplicationContext(),UnderFiveImmSearch.class);
                 startActivity(i);
             }
-        });*/
+        });
     }
 }

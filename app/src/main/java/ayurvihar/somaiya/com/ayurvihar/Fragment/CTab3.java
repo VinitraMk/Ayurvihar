@@ -6,17 +6,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,7 +32,7 @@ import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveHc;
  * Created by mikasa on 30/7/17.
  */
 
-public class CTab3 extends Fragment {
+public class CTab3 extends android.support.v4.app.Fragment {
 
     FloatingActionButton addhcr,graph;
     DatabaseReference databaseChildHcr = MainActivity.DATABASE_ROOT.child("Underfive").child("ChkRec");
@@ -114,9 +110,9 @@ public class CTab3 extends Fragment {
                     {
                         String item = "Health Checkup No:"+uhc.gethCheckNo()+"\n"+
                                 "Checkup Date: "+uhc.getCdate()+"\n"+
-                            "Height: "+uhc.getHeight()+" Weight: "+uhc.getWeight()+"\n"+
-                            "Weight for Age Status: "+uhc.getWfar()+"\n"+
-                            "Remarks: "+uhc.getRem()+"\n";
+                                "Height: "+uhc.getHeight()+" Weight: "+uhc.getWeight()+"\n"+
+                                "Weight for Age Status: "+uhc.getWfar()+"\n"+
+                                "Remarks: "+uhc.getRem()+"\n";
                         reclist.add(item);
                         graphList.add(uhc.getWfar());
                     }

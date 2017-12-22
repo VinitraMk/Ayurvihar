@@ -16,15 +16,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,18 +29,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
-import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveIntervals;
-import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveUpdateCr;
+import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveIntervals;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderfiveScrollview;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
 import ayurvihar.somaiya.com.ayurvihar.utility.VaccineAdapter;
-
-import static ayurvihar.somaiya.com.ayurvihar.R.id.childidn;
-import static ayurvihar.somaiya.com.ayurvihar.R.id.due;
 
 /**
  * Created by mikasa on 30/7/17.

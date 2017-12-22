@@ -2,10 +2,7 @@ package ayurvihar.somaiya.com.ayurvihar.underfive;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.icu.util.RangeValueIterator;
-import android.icu.util.ValueIterator;
 import android.os.Bundle;
-import android.sax.Element;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,23 +10,21 @@ import android.util.Log;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
+import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveIntervals;
 
 /**
  * Created by mikasa on 27/11/17.
