@@ -26,7 +26,6 @@
             android:name=".underfive.UnderFiveHealthRep"
             android:parentActivityName=".underfive.UnderfiveScrollview" />
         <activity android:name=".underfive.ProgressGraph" />
-        <activity android:name=".underfive.DailyUpdates" />
         <activity android:name=".underfive.UnderFiveSearchCr" />
         <activity android:name=".underfive.UnderFiveImmSearch" />
         <activity android:name=".underfive.UnderFiveImmOutput"></activity>

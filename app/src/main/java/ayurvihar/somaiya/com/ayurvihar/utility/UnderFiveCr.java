@@ -9,7 +9,7 @@ public class UnderFiveCr {
     public String fname="",lname="",moname="",fatname="",childid="",room="",bldg="",town="",area="",ac=""
             ,mob="",dob="",nic="",gen="";
 
-    public UnderFiveCr(){
+    public UnderFiveCr() {
 
     }
 
@@ -84,5 +84,61 @@ public class UnderFiveCr {
 
     public String getGen() {
         return gen;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public void setMoname(String moname) {
+        this.moname = moname;
+    }
+
+    public void setFatname(String fatname) {
+        this.fatname = fatname;
+    }
+
+    public void setChildid(String childid) {
+        this.childid = childid;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public void setBldg(String bldg) {
+        this.bldg = bldg;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public void setAc(String ac) {
+        this.ac = ac;
+    }
+
+    public void setMob(String mob) {
+        this.mob = mob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public void setNic(String nic) {
+        this.nic = nic;
+    }
+
+    public void setGen(String gen) {
+        this.gen = gen;
     }
 }

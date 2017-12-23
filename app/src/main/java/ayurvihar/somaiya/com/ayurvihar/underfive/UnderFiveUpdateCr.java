@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +40,7 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
 
     Button search;
     EditText set1, set2, set3;
+    TextView empty;
     ListView childlist;
     SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
@@ -60,7 +62,7 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.underfive_updatecr);
 
-
+        empty = (TextView) findViewById(R.id.empty);
         search = (Button) findViewById(R.id.searchchild);
         set1 = (EditText) findViewById(R.id.set1);
         set2 = (EditText) findViewById(R.id.set2);
@@ -73,6 +75,7 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
 
         set3.setInputType(InputType.TYPE_NULL);
         set3.requestFocus();
+        empty.setText("");
 
 
         poss= new ArrayList<>();
@@ -104,7 +107,7 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
 
 
         search.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View v) {
                 dialog.setMessage("Searching the database...");
                 dialog.show();
@@ -135,6 +138,8 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
                                     poss.add(str1);
                                 }
                             }
+                            if(poss.size()==0)
+                                empty.setText("No Records Found");
                             dialog.dismiss();
                             childlist.setAdapter(new ArrayAdapter<>(UnderFiveUpdateCr.this,R.layout.child_textview,poss));
                         }
@@ -147,6 +152,8 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
                 }
             }
         });
+
+        childlist.setEmptyView(findViewById(R.id.empty));
     }
 
 

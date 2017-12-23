@@ -37,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     String user,guser,password,gpassword;
 
-    public static SharedPreferences latestUpdate;
-    public static SharedPreferences.Editor editor;
-    private static final String PREF_NAME="latestUpgDate";
-    public static final String KEY_TODAY_DATE_ANDTIME = "TimeToday";
     public static String Val,curDate;
 
     public static final DatabaseReference DATABASE_ROOT=FirebaseDatabase.getInstance().getReference();
@@ -63,11 +59,7 @@ public class MainActivity extends AppCompatActivity {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             Date date = new Date();
             curDate = dateFormat.format(date);
-            latestUpdate = getSharedPreferences(PREF_NAME, 0);
-            editor = latestUpdate.edit();
 
-            Val=latestUpdate.getString(KEY_TODAY_DATE_ANDTIME,"");
-            //Val="10-12-2017";
             Log.i("Stored Val", Val);
             Log.i("Today date", curDate);
 
@@ -131,17 +123,6 @@ public class MainActivity extends AppCompatActivity {
         switch(dept){
             case "Under Five":
                 Log.v("curdate",Val+","+curDate);
-                /*if(!Val.equals(curDate)) {
-                    Log.v("Starting first time","Yes");
-                    Intent i = new Intent(MainActivity.this,DailyUpdates.class);
-                    startActivity(i);
-
-                }
-                else {
-                    Intent i = new Intent(MainActivity.this, UnderFiveHome.class);
-                    startActivity(i);
-                }
-                break;*/
                 Intent i = new Intent(MainActivity.this, UnderFiveHome.class);
                 startActivity(i);
 

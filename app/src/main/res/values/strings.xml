@@ -68,4 +68,11 @@
         <item>v8</item>
         <item>dv9</item>
     </string-array>
+    <string-array name="filters">
+        <item>None</item>
+        <item>Name</item>
+        <item>DOB</item>
+        <item>Contact No</item>
+        <item>Area</item>
+    </string-array>
 </resources>
