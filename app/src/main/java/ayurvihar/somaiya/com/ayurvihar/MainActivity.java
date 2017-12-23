@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         switch(dept){
             case "Under Five":
                 Log.v("curdate",Val+","+curDate);
-                if(!Val.equals(curDate)) {
+                /*if(!Val.equals(curDate)) {
                     Log.v("Starting first time","Yes");
                     Intent i = new Intent(MainActivity.this,DailyUpdates.class);
                     startActivity(i);
@@ -141,7 +141,10 @@ public class MainActivity extends AppCompatActivity {
                     Intent i = new Intent(MainActivity.this, UnderFiveHome.class);
                     startActivity(i);
                 }
-                break;
+                break;*/
+                Intent i = new Intent(MainActivity.this, UnderFiveHome.class);
+                startActivity(i);
+
         }
     }
 }

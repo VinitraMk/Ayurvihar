@@ -161,7 +161,8 @@ public class CTab2 extends Fragment implements View.OnClickListener {
                     vaclist.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     UnderFiveImm tufi = ds.getValue(UnderFiveImm.class);
-                    if (tufi.getChildid().trim().equals(UnderfiveScrollview.cid.trim())) {
+                    String tcid = UnderfiveScrollview.cid;
+                    if (tufi.getChildid().trim().equals(tcid.trim())) {
                         childidn.setText(tufi.getChildid().trim());
                         vaclist.add(new UnderFiveImm("bcg", tufi.getGbcg(), tufi.getDbcg()));
                         vaclist.add(new UnderFiveImm("dpv0", tufi.getGdpv0(), tufi.getDdpv0()));
