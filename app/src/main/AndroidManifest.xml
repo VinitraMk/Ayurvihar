@@ -28,7 +28,9 @@
         <activity android:name=".underfive.ProgressGraph" />
         <activity android:name=".underfive.UnderFiveSearchCr" />
         <activity android:name=".underfive.UnderFiveImmSearch" />
-        <activity android:name=".underfive.UnderFiveImmOutput"></activity>
+        <activity android:name=".underfive.UnderFiveImmOutput" />
+        <activity android:name=".underfive.UnderFiveVacDet" />
+        <activity android:name=".underfive.UnderFiveDeleteRec"></activity>
     </application>
 
 </manifest>

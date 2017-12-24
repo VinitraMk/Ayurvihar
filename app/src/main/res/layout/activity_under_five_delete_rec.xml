@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveDeleteRec">
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:id="@+id/underfive_updatecr"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40sp"
+                android:text="Update Child Records"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="25dp"
+                android:textColor="@android:color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:weightSum="3">
+                <EditText
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:hint="First Name"
+                    android:layout_weight="1"
+                    android:id="@+id/set1"
+                    android:inputType="textCapWords"/>
+                <EditText
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:hint="Last Name"
+                    android:layout_weight="1"
+                    android:id="@+id/set2"
+                    android:inputType="textCapWords"/>
+                <EditText
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:hint="Date Of Birth"
+                    android:layout_weight="1"
+                    android:id="@+id/set3"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/searchchild"
+                    android:text="Search"
+                    android:textSize="27sp"
+                    android:focusable="false"/>
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black"
+                android:layout_margin="25dp">
+            </View>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/childlist"
+                android:layout_margin="10dp">
+
+            </ListView>
+
+            <TextView
+                android:id="@+id/empty"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                style="@android:style/TextAppearance.Large"
+                android:gravity="center">
+            </TextView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

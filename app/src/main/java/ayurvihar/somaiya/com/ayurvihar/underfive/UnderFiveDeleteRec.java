@@ -3,9 +3,8 @@ package ayurvihar.somaiya.com.ayurvihar.underfive;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -18,9 +17,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -31,12 +33,10 @@ import java.util.Locale;
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveCr;
+import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveHc;
+import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
 
-/**
- * Created by mikasa on 29/7/17.
- */
-
-public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClickListener {
+public class UnderFiveDeleteRec extends AppCompatActivity implements View.OnClickListener {
 
     Button search;
     EditText set1, set2, set3;
@@ -58,9 +58,9 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
     public static final DatabaseReference databaseChildImm=CHILD_DB.child("ImmRec");
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.underfive_updatecr);
+        setContentView(R.layout.activity_under_five_delete_rec);
 
         empty = (TextView) findViewById(R.id.empty);
         search = (Button) findViewById(R.id.searchchild);
@@ -71,7 +71,7 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
         set2.setText("Nandu");
         set3.setText("24-12-2017");
         childlist = (ListView) findViewById(R.id.childlist);
-        dialog = new ProgressDialog(UnderFiveUpdateCr.this);
+        dialog = new ProgressDialog(UnderFiveDeleteRec.this);
 
         set3.setInputType(InputType.TYPE_NULL);
         set3.requestFocus();
@@ -97,10 +97,11 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
                     in+=17;
                     Log.v("ufup",""+cid.indexOf("Child Identifier")+" "+cid.substring(in,in+15));
                     cid=cid.substring(in,in+15);
-                    Intent i = new Intent(UnderFiveUpdateCr.this,UnderfiveScrollview.class);
-                    i.putExtra("childid",cid);
-                    i.putExtra("Dob",set3.getText().toString().trim());
-                    startActivity(i);
+                    cid = cid.trim();
+                    deleteRecord(cid);
+                    if(dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
                 }
             }
         });
@@ -117,7 +118,7 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
                 if(poss.size()!=0)
                     poss.clear();
                 if (fname.equals("") || lname.equals("") || dob.equals(""))
-                    Toast.makeText(UnderFiveUpdateCr.this, "No fields can be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UnderFiveDeleteRec.this, "No fields can be empty", Toast.LENGTH_SHORT).show();
                 else {
                     dialog.setMessage("Searching the database");
                     databaseChildHr.addValueEventListener(new ValueEventListener() {
@@ -141,7 +142,7 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
                             if(poss.size()==0)
                                 empty.setText("No Records Found");
                             dialog.dismiss();
-                            childlist.setAdapter(new ArrayAdapter<>(UnderFiveUpdateCr.this,R.layout.child_textview,poss));
+                            childlist.setAdapter(new ArrayAdapter<>(UnderFiveDeleteRec.this,R.layout.child_textview,poss));
                         }
 
                         @Override
@@ -156,6 +157,68 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
         childlist.setEmptyView(findViewById(R.id.empty));
     }
 
+    public void deleteRecord(final String childid) {
+
+        dialog.setMessage("Deleting Record from Database...");
+        dialog.show();
+        //Remove record from GenRec
+        Query query ;
+        query = databaseChildHr.orderByChild("childid").equalTo(childid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds:dataSnapshot.getChildren()) {
+                    Log.v("val",ds.getKey());
+                    ds.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+        //Remove record from ImmRec
+        query = databaseChildImm.orderByChild("childid").equalTo(childid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds:dataSnapshot.getChildren()) {
+                    Log.v("ref", "" + ds.getRef());
+                    ds.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //Remove record from ChkRec
+        query = databaseChildHcr.orderByChild("childid").equalTo(childid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds:dataSnapshot.getChildren()) {
+                    Log.v("ref", "" + ds.getRef());
+                    ds.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
 
     private void setDateTimeField() {
         set3.setOnClickListener(this);
@@ -179,5 +242,4 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
             datePickerDialog.show();
         }
     }
-
 }

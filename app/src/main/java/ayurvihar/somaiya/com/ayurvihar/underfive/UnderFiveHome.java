@@ -24,6 +24,8 @@ public class UnderFiveHome extends AppCompatActivity {
         ImageButton update=(ImageButton) findViewById(R.id.Update);
         ImageButton search=(ImageButton) findViewById(R.id.Search);
         ImageButton hlthrep=(ImageButton) findViewById(R.id.hlthrep);
+        ImageButton vacdet = (ImageButton) findViewById(R.id.vacdet);
+        ImageButton delete = (ImageButton) findViewById(R.id.delete);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +55,22 @@ public class UnderFiveHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(),UnderFiveImmSearch.class);
+                startActivity(i);
+            }
+        });
+
+        vacdet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),UnderFiveVacDet.class);
+                startActivity(i);
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),UnderFiveDeleteRec.class);
                 startActivity(i);
             }
         });

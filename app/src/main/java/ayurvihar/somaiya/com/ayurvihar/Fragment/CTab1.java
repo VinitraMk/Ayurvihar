@@ -44,12 +44,11 @@ public class CTab1 extends Fragment implements View.OnClickListener{
     TextView childidn;
     Button update;
     DatabaseReference CHILD_DB= MainActivity.DATABASE_ROOT.child("Underfive");
-    DatabaseReference databaseChildHr,tempRef;
-    UnderFiveCr tempufc;
+    DatabaseReference databaseChildHr;
     String townarr[],acarr[];
-    String[] genarr={"Male","Female"};
-    String[] nicarr={"Yes","No"};
-    int townin,acin;
+    String genarr[];
+    String nicarr[];
+    int townin,acin,genin,nicin;
     SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
 
@@ -69,6 +68,8 @@ public class CTab1 extends Fragment implements View.OnClickListener{
         databaseChildHr=CHILD_DB.child("GenRec");
         townarr=CTab1.this.getResources().getStringArray(R.array.towns);
         acarr=CTab1.this.getResources().getStringArray(R.array.areacode);
+        genarr=CTab1.this.getResources().getStringArray(R.array.gender);
+        nicarr=CTab1.this.getResources().getStringArray(R.array.nic);
 
         Addn1 = (EditText) view.findViewById(R.id.Addn1);
         Addn2 = (EditText) view.findViewById(R.id.Addn2);
@@ -96,6 +97,7 @@ public class CTab1 extends Fragment implements View.OnClickListener{
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.v("upd",""+sNic.getSelectedItem());
                 databaseChildHr.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -104,7 +106,6 @@ public class CTab1 extends Fragment implements View.OnClickListener{
                             UnderFiveCr tufc=ds.getValue(UnderFiveCr.class);
                             if(tufc.getChildid().trim().equals(UnderfiveScrollview.cid.trim()))
                             {
-                                Log.v("hello",""+ds.child("fname"));
                                 ds.child("fname").getRef().setValue(Addn1.getText().toString().trim());
                                 ds.child("lname").getRef().setValue(Addn2.getText().toString().trim());
                                 ds.child("moname").getRef().setValue(Addn3.getText().toString().trim());
@@ -163,33 +164,32 @@ public class CTab1 extends Fragment implements View.OnClickListener{
                     UnderFiveCr tempufc=ds.getValue(UnderFiveCr.class);
                     if(tempufc.getChildid().trim().equals(UnderfiveScrollview.cid.trim()))
                     {
+                        childidn.setText(tempufc.getChildid());
                         Addn1.setText(tempufc.getFname());
                         Addn2.setText(tempufc.getLname());
                         Addn3.setText(tempufc.getMoname());
                         Addn4.setText(tempufc.getFatname());
                         Addn5.setText(tempufc.getRoom());
                         Addn6.setText(tempufc.getBldg());
+                        Addn7.setText(tempufc.getArea());
+                        Addn8.setText(tempufc.getMob());
+                        Addn9.setText(tempufc.getDob());
+                        Addn8.setText(tempufc.getMob());
+                        Addn9.setText(tempufc.getDob());
 
                         townin=indexOf(tempufc.getTown(),townarr);
                         sTown.setSelection(townin);
 
-                        Addn7.setText(tempufc.getArea());
+                        genin = indexOf(tempufc.getGen(),genarr);
+                        Log.v("gen",""+tempufc.getGen()+","+genin+",");
+                        sGen.setSelection(genin);
+
+                        nicin = indexOf(tempufc.getNic(),nicarr);
+                        sNic.setSelection(nicin);
 
                         acin=indexOf(tempufc.getAc(),acarr);
                         sAc.setSelection(acin);
 
-                        Addn8.setText(tempufc.getMob());
-                        Addn9.setText(tempufc.getDob());
-
-                        if(tempufc.getGen().equals("Male"))
-                            sGen.setSelection(0);
-                        else
-                            sGen.setSelection(1);
-
-                        if(tempufc.getNic().equals("Yes"))
-                            sGen.setSelection(1);
-                        else
-                            sGen.setSelection(0);
                     }
 
                 }
