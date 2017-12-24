@@ -70,6 +70,7 @@ public class UnderFiveHealthRep extends AppCompatActivity implements View.OnClic
 
 
         childid = getIntent().getExtras().getString("Childid");
+        childid=childid.trim();
         childidn.setText(childid);
         chkno.setText(""+chkn);
 

@@ -67,8 +67,8 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
         set1 = (EditText) findViewById(R.id.set1);
         set2 = (EditText) findViewById(R.id.set2);
         set3 = (EditText) findViewById(R.id.set3);
-        set1.setText("Raj");
-        set2.setText("Nandu");
+        set1.setText("Kira");
+        set2.setText("Light");
         set3.setText("24-12-2017");
         childlist = (ListView) findViewById(R.id.childlist);
         dialog = new ProgressDialog(UnderFiveUpdateCr.this);
@@ -95,8 +95,10 @@ public class UnderFiveUpdateCr extends AppCompatActivity implements View.OnClick
                 {
                     c=0;
                     in+=17;
-                    Log.v("ufup",""+cid.indexOf("Child Identifier")+" "+cid.substring(in,in+15));
+                    //Log.v("ufup",""+cid.indexOf("Child Identifier")+" "+cid.substring(in,in+15));
                     cid=cid.substring(in,in+15);
+                    cid=cid.trim();
+                    Log.v("cid",cid);
                     Intent i = new Intent(UnderFiveUpdateCr.this,UnderfiveScrollview.class);
                     i.putExtra("childid",cid);
                     i.putExtra("Dob",set3.getText().toString().trim());

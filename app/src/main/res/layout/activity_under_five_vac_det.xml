@@ -6,4 +6,100 @@
     android:layout_height="match_parent"
     tools:context="ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveVacDet">
 
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context="ayurvihar.somaiya.com.ayurvihar.MainActivity"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="45sp"
+                android:text="Vaccine Details"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:weightSum="4">
+
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/vaccines"
+                    android:id="@+id/vaccine"
+                    android:layout_weight="1"></Spinner>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:id="@+id/eval"
+                    android:hint="Value in days"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:layout_weight="2"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Set"
+                    android:textSize="18sp"
+                    android:id="@+id/setval"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black"
+                android:layout_marginTop="25dp">
+            </View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="22sp"
+                    android:textColor="@android:color/black"
+                    android:text="Vaccine Name"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="22sp"
+                    android:textColor="@android:color/black"
+                    android:text="Interval in Days"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/vaclist"
+                android:layout_margin="10dp">
+            </ListView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
 </android.support.constraint.ConstraintLayout>

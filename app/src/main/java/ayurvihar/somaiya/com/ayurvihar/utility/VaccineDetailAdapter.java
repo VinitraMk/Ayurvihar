@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,18 +12,17 @@ import java.util.ArrayList;
 import ayurvihar.somaiya.com.ayurvihar.R;
 
 /**
- * Created by mikasa on 30/7/17.
+ * Created by mikasa on 24/12/17.
  */
 
-public class VaccineAdapter extends ArrayAdapter<UnderFiveImm> {
+public class VaccineDetailAdapter extends ArrayAdapter<UnderFiveIntervals> {
 
-    ArrayList<UnderFiveImm> vaclist = new ArrayList<>();
+    ArrayList<UnderFiveIntervals> vacs = new ArrayList<>();
 
-    public VaccineAdapter(Context ctx, int resourceId, ArrayList<UnderFiveImm> vacs){
+    public VaccineDetailAdapter(Context ctx, int resourceId, ArrayList<UnderFiveIntervals> vacs){
         super(ctx,resourceId,vacs);
-        vaclist=vacs;
+        this.vacs=vacs;
     }
-
 
     @Override
     public int getCount() {
@@ -35,16 +33,14 @@ public class VaccineAdapter extends ArrayAdapter<UnderFiveImm> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflater.inflate(R.layout.imm_item, null);
+        convertView = inflater.inflate(R.layout.immint_item, null);
 
         TextView vaccine = (TextView) convertView.findViewById(R.id.vaccine);
-        vaccine.setText(vaclist.get(position).getName());
+        vaccine.setText(vacs.get(position).getVacname());
 
-        TextView given = (TextView) convertView.findViewById(R.id.given);
-        given.setText(vaclist.get(position).getGiven());
-
-        TextView due = (TextView) convertView.findViewById(R.id.due);
-        due.setText(vaclist.get(position).getDue());
+        TextView given = (TextView) convertView.findViewById(R.id.value);
+        String tval = ""+(vacs.get(position).getVal());
+        given.setText(tval);
 
         return convertView;
 

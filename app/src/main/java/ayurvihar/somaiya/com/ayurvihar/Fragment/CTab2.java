@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,7 +45,7 @@ import ayurvihar.somaiya.com.ayurvihar.utility.VaccineAdapter;
 public class CTab2 extends Fragment implements View.OnClickListener {
 
     DatabaseReference CHILD_DB = MainActivity.DATABASE_ROOT.child("Underfive");
-    DatabaseReference databaseChildImm;
+    DatabaseReference databaseChildImm,databaseChildInt;
 
     ListView simpleList;
     ArrayList<UnderFiveImm> vaclist = new ArrayList<>();
@@ -54,6 +55,7 @@ public class CTab2 extends Fragment implements View.OnClickListener {
     Button setdate;
     Spinner type,vacname;
     String stype,svacname,fvacname="",dfvacname="",sdate,newsdate;
+    String childid;
     EditText date;
     SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
@@ -72,6 +74,7 @@ public class CTab2 extends Fragment implements View.OnClickListener {
         //return super.onCreateView(inflater, container, savedInstanceState);
 
         databaseChildImm = CHILD_DB.child("ImmRec");
+        databaseChildInt = CHILD_DB.child("Intervals");
         View view=inflater.inflate(R.layout.ctab2,container,false);
         simpleList = (ListView) view.findViewById(R.id.vaclist);
         childidn = (TextView) view.findViewById(R.id.childidn);
@@ -82,6 +85,8 @@ public class CTab2 extends Fragment implements View.OnClickListener {
         date.setInputType(InputType.TYPE_NULL);
         date.requestFocus();
         ufilist=UnderFiveImm.list;
+
+        childid=UnderfiveScrollview.cid.trim();
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         setDateTimeField();
@@ -97,58 +102,101 @@ public class CTab2 extends Fragment implements View.OnClickListener {
 
                 svacname=(vacname.getSelectedItem().toString().trim().toLowerCase());
                 sdate = date.getText().toString().trim();
+
                 if(stype.equals("g")) {
                     Log.v("vacname",""+stype);
-                    newsdate=getDueDate(sdate,svacname);
                     dfvacname="d"+svacname;
                 }
                 fvacname=stype+svacname;
 
+                if(sdate.equals("")) {
+                    Toast.makeText(getActivity(),"Date filled cannot be empty",Toast.LENGTH_SHORT);
+                }
+                else {
 
-                databaseChildImm.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot ds:dataSnapshot.getChildren())
-                        {
-                            ufi=ds.getValue(UnderFiveImm.class);
-                            if(ufi.getChildid().trim().equals(UnderfiveScrollview.cid.trim()))
-                            {
-                                ds.child(fvacname).getRef().setValue(sdate.trim());
-                                if(stype.equals("g") && (!dfvacname.equals(""))) {
-                                    ds.child(dfvacname).getRef().setValue(newsdate.trim());
+                    databaseChildImm.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                ufi = ds.getValue(UnderFiveImm.class);
+                                if (ufi.getChildid().trim().equals(UnderfiveScrollview.cid.trim())) {
+                                    ds.child(fvacname).getRef().setValue(sdate.trim());
+                                    if (stype.equals("g") && (!dfvacname.equals(""))) {
+                                        //ds.child(dfvacname).getRef().setValue(newsdate.trim());
+                                        //updateDueDate(sdate.trim(),dfvacname);
+                                        getIntervals(sdate.trim(), dfvacname, svacname);
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
+                        }
+                    });
+                }
             }
         });
 
         return view;
     }
 
-    public String getDueDate(String startDate,String key) {
-        Date dueDate = new Date();
-        UnderFiveIntervals ufit = new UnderFiveIntervals();
-        HashMap<String, String> intlist = ufit.getList();
-        String newDateString = "";
-        try {
-            dueDate = df.parse(startDate);
-            Calendar ct = Calendar.getInstance();
-            ct.setTime(dueDate);
-            int amt = Integer.parseInt(intlist.get(key));
-            ct.add(Calendar.DATE, amt);
-            dueDate = ct.getTime();
-            newDateString = df.format(dueDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return newDateString;
+    public void getIntervals(final String startDate,final String immKey,final String key) {
+        databaseChildInt.orderByKey().equalTo(key).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.v("int",dataSnapshot.getKey()+","+dataSnapshot.getValue()+","+dataSnapshot.child(key).getValue());
+                //String amt = ""+dataSnapshot.child(key).getValue();
+                Long tamt = dataSnapshot.child(key).getValue(Long.class);
+                int amt = tamt.intValue();
+                Log.v("int",""+amt);
+                updateDueDate(startDate,immKey,amt);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    public void updateDueDate(final String startDate,final String key,final int amt) {
+
+        databaseChildImm.orderByChild("childid").endAt(childid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds:dataSnapshot.getChildren()) {
+                    Log.v("arg",key);
+                    Log.v("intref",""+ds.getKey()+","+ds.getValue());
+
+                    //Calculate new date
+                    Date dueDate = new Date();
+                    String newDateString = "";
+                    try {
+                        dueDate = df.parse(startDate);
+                        Calendar ct = Calendar.getInstance();
+                        ct.setTime(dueDate);
+                        Log.v("amt",""+amt);
+                        ct.add(Calendar.DATE, amt);
+                        dueDate = ct.getTime();
+                        newDateString = df.format(dueDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    Log.v("intref",newDateString);
+
+                    //set New Date
+                    ds.child(key).getRef().setValue(newDateString);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

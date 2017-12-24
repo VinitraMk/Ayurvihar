@@ -61,7 +61,6 @@ public class CTab1 extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        //return super.onCreateView(inflater, container, savedInstanceState);
 
         View view=inflater.inflate(R.layout.ctab1,container,false);
 
@@ -153,13 +152,9 @@ public class CTab1 extends Fragment implements View.OnClickListener{
     public void onStart()
     {
         super.onStart();
-        //UnderfiveScrollview.dialog.setMessage("Loading from database...");
         databaseChildHr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //Log.v("hello",""+dataSnapshot.getValue());
-                //UnderFiveCr tempufc=dataSnapshot.getValue(UnderFiveCr.class);
-                //Log.v("hello",""+tempufc.getFname());
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     UnderFiveCr tempufc=ds.getValue(UnderFiveCr.class);
                     if(tempufc.getChildid().trim().equals(UnderfiveScrollview.cid.trim()))
@@ -181,7 +176,6 @@ public class CTab1 extends Fragment implements View.OnClickListener{
                         sTown.setSelection(townin);
 
                         genin = indexOf(tempufc.getGen(),genarr);
-                        Log.v("gen",""+tempufc.getGen()+","+genin+",");
                         sGen.setSelection(genin);
 
                         nicin = indexOf(tempufc.getNic(),nicarr);
