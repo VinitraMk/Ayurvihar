@@ -27,10 +27,10 @@
             android:parentActivityName=".underfive.UnderfiveScrollview" />
         <activity android:name=".underfive.ProgressGraph" />
         <activity android:name=".underfive.UnderFiveSearchCr" />
-        <activity android:name=".underfive.UnderFiveImmSearch" />
-        <activity android:name=".underfive.UnderFiveImmOutput" />
         <activity android:name=".underfive.UnderFiveVacDet" />
         <activity android:name=".underfive.UnderFiveDeleteRec"></activity>
+        <activity android:name=".underfive.UnderFiveSearch1Cr"/>
+        <activity android:name=".underfive.UnderFiveSearch1CrOutput"/>
     </application>
 
 </manifest>

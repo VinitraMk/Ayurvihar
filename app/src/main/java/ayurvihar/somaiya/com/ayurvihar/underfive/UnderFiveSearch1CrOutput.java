@@ -3,67 +3,64 @@ package ayurvihar.somaiya.com.ayurvihar.underfive;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ayurvihar.somaiya.com.ayurvihar.Fragment.ITab1;
+import ayurvihar.somaiya.com.ayurvihar.Fragment.CTab1S;
+import ayurvihar.somaiya.com.ayurvihar.Fragment.CTab2S;
 import ayurvihar.somaiya.com.ayurvihar.R;
-import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveCr;
-import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveHc;
-import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
 
-public class UnderFiveImmOutput extends FragmentActivity {
 
+/**
+ * Created by heretic on 10/8/17.
+ */
+
+public class UnderFiveSearch1CrOutput extends FragmentActivity {
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private  ViewPager viewPager;
+    public UnderFiveSearch1CrOutput SV = UnderFiveSearch1CrOutput.this;
     public static ProgressDialog dialog;
-    public static Context ctx;
+    public  Context ctx;
 
-    public static UnderFiveCr ufc;
-    public static UnderFiveHc uhc;
-    public static UnderFiveImm uim;
 
-    public static String cid;
-    String date = "";
-
+    public static String date ="";
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_under_five_imm_output);
+        setContentView(R.layout.underfive_search1cr_output);
 
         ctx = getApplicationContext();
-        dialog = new ProgressDialog(getApplicationContext());
+        dialog = new ProgressDialog(UnderFiveSearch1CrOutput.this);
         viewPager = (ViewPager)findViewById(R.id.cviewpager);
         setupViewPager(viewPager);
         tabLayout = (TabLayout)findViewById(R.id.ctabs);
         tabLayout.setupWithViewPager(viewPager);
-        date=getIntent().getExtras().getString("Dob");
-        cid=getIntent().getExtras().getString("childid");
+        date=getIntent().getExtras().getString("date");
         Log.v("scroll",date);
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter( getSupportFragmentManager());
-        adapter.addFrag(new ITab1(), "          Child Records          ");
-        adapter.addFrag(new ITab1(), "       Vaccine Requirement       ");
+        UnderfiveScrollview.ViewPagerAdapter adapter = new UnderfiveScrollview.ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new CTab1S(), "          Child Records          ");
+        adapter.addFrag(new CTab2S(), "       Vaccine Requirement       ");
 
         viewPager.setAdapter(adapter);
 
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    static class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
         public ViewPagerAdapter(FragmentManager manager) {
@@ -98,9 +95,9 @@ public class UnderFiveImmOutput extends FragmentActivity {
             getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.ctabs)).commit();
         }
         finish();
-
-        Intent i=new Intent(UnderFiveImmOutput.this,UnderFiveImmSearch.class);
+        Intent i=new Intent(UnderFiveSearch1CrOutput.this,UnderFiveSearch1Cr.class);
         i.putExtra("date",date);
         startActivity(i);
     }
+
 }

@@ -1,8 +1,11 @@
 package ayurvihar.somaiya.com.ayurvihar.utility;
 
+import android.util.Pair;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by mikasa on 8/7/17.
@@ -19,50 +22,6 @@ public class UnderFiveImm {
 
     public UnderFiveImm(){
 
-    }
-
-    public HashMap<String,String> getList(UnderFiveImm ufi) {
-        HashMap<String,String> hp = new HashMap<>();
-        hp.put("childid",ufi.getChildid());
-        hp.put("gbcg",ufi.getGbcg());
-        hp.put("dbcg",ufi.getDbcg());
-        hp.put("gdpv0",ufi.getGdpv0());
-        hp.put("ddpv0",ufi.getDdpv0());
-        hp.put("ghbv0",ufi.getGhbv0());
-        hp.put("dhbv0",ufi.getDhbv0());
-        hp.put("ghbv1",ufi.getGhbv0());
-        hp.put("dhbv1",ufi.getDhbv1());
-        hp.put("ghbv2",ufi.getGhbv2());
-        hp.put("dhbv2",ufi.getDhbv2());
-        hp.put("ghbv3",ufi.getGhbv3());
-        hp.put("dhbv3",ufi.getDhbv3());
-        hp.put("gdptopv1",ufi.getGdptopv1());
-        hp.put("ddptopv1",ufi.getDdptopv1());
-        hp.put("gdptopv2",ufi.getGdptopv2());
-        hp.put("ddptopv2",ufi.getDdptopv2());
-        hp.put("gdptopv3",ufi.getGdptopv3());
-        hp.put("ddptopv3",ufi.getDdptopv3());
-        hp.put("gmv1",ufi.getGmv1());
-        hp.put("dmv1",ufi.getDmv1());
-        hp.put("gmmr",ufi.getGmmr());
-        hp.put("dmmr",ufi.getDmmr());
-        hp.put("gdodbv2",ufi.getGdobv2());
-        hp.put("ddobv2",ufi.getDdobv2());
-        hp.put("gv3",ufi.getGv3());
-        hp.put("dv3",ufi.getDv3());
-        hp.put("gv4",ufi.getGv4());
-        hp.put("dv4",ufi.getDv4());
-        hp.put("gv5",ufi.getGv5());
-        hp.put("dv5",ufi.getDv5());
-        hp.put("gv6",ufi.getGv6());
-        hp.put("dv6",ufi.getGv6());
-        hp.put("gv7",ufi.getGv7());
-        hp.put("dv7",ufi.getDv7());
-        hp.put("gv8",ufi.getGv8());
-        hp.put("dv8",ufi.getDv8());
-        hp.put("gdv9",ufi.getGdv9());
-        hp.put("ddv9",ufi.getDdv9());
-        return hp;
     }
 
 
@@ -280,5 +239,132 @@ public class UnderFiveImm {
 
     public String getDdv9() {
         return ddv9;
+    }
+
+    public ArrayList<String> getVal(UnderFiveImm ufi,String date)
+    {
+        ArrayList<String> list = new ArrayList<>();
+        if(ufi.dbcg.equals(date))
+            list.add("BCG");
+
+        if(ufi.ddpv0.equals(date))
+            list.add("DPV0");
+
+        if(ufi.ddptopv1.equals(date))
+            list.add("DPT/OPV1");
+
+        if(ufi.ddptopv2.equals(date))
+            list.add("DPT/OPV2");
+
+        if(ufi.ddptopv3.equals(date))
+            list.add("DPT/OPV3");
+
+        if(ufi.dhbv0.equals(date))
+            list.add("HBV0");
+
+        if(ufi.dhbv1.equals(date))
+            list.add("HBV1");
+
+        if(ufi.dhbv2.equals(date))
+            list.add("HBV2");
+
+        if(ufi.dhbv3.equals(date))
+            list.add("HBV3");
+
+        if(ufi.dmmr.equals(date))
+            list.add("MMR");
+
+        if(ufi.dmv1.equals(date))
+            list.add("MV1");
+
+        if(ufi.ddv9.equals(date))
+            list.add("DV9");
+
+        if(ufi.dv3.equals(date))
+            list.add("V3");
+
+        if(ufi.dv4.equals(date))
+            list.add("V4");
+
+        if(ufi.dv5.equals(date))
+            list.add("V5");
+
+        if(ufi.dv6.equals(date))
+            list.add("V6");
+
+        if(ufi.dv7.equals(date))
+            list.add("V7");
+
+        if(ufi.dv8.equals(date))
+            list.add("V8");
+
+        if(ufi.ddv9.equals(date))
+            list.add("DV9");
+
+        return list;
+
+    }
+
+    public Map<String,Integer> getVacc(UnderFiveImm ufi, String date, Map<String,Integer> list)
+    {
+        if(ufi.dbcg.equals(date))
+            list.put("BCG",list.get("BCG")+1);
+
+        if(ufi.ddpv0.equals(date))
+            list.put("DPV0",list.get("DPV0")+1);
+
+        if(ufi.ddptopv1.equals(date))
+            list.put("DTP/OPV1",list.get("DPTOPV1")+1);
+
+        if(ufi.ddptopv2.equals(date))
+            list.put("DTP/OPV2",list.get("DPTOPV2")+1);
+
+        if(ufi.ddptopv3.equals(date))
+            list.put("DTP/OPV3",list.get("DPTOPV3")+1);
+
+        if(ufi.dhbv0.equals(date))
+            list.put("HBV0",list.get("HBV0")+1);
+
+        if(ufi.dhbv1.equals(date))
+            list.put("HBV1",list.get("HBV1")+1);
+
+        if(ufi.dhbv2.equals(date))
+            list.put("HBV2",list.get("HBV2")+1);
+
+        if(ufi.dhbv3.equals(date))
+            list.put("HBV3",list.get("HBV3")+1);
+
+        if(ufi.dmmr.equals(date))
+            list.put("MMR",list.get("MMR")+1);
+
+        if(ufi.dmv1.equals(date))
+            list.put("MV1",list.get("MV1")+1);
+
+        if(ufi.ddv9.equals(date))
+            list.put("DV9",list.get("DV9")+1);
+
+        if(ufi.dv3.equals(date))
+            list.put("V3",list.get("V3")+1);
+
+        if(ufi.dv4.equals(date))
+            list.put("V4",list.get("V4")+1);
+
+        if(ufi.dv5.equals(date))
+            list.put("V5",list.get("V5")+1);
+
+        if(ufi.dv6.equals(date))
+            list.put("V6",list.get("V6")+1);
+
+        if(ufi.dv7.equals(date))
+            list.put("V7",list.get("V7")+1);
+
+        if(ufi.dv8.equals(date))
+            list.put("V8",list.get("V8")+1);
+
+        if(ufi.ddv9.equals(date))
+            list.put("DV9",list.get("DV9")+1);
+
+        return list;
+
     }
 }

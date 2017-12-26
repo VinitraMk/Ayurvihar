@@ -54,7 +54,7 @@ public class UnderFiveHome extends AppCompatActivity {
         hlthrep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),UnderFiveImmSearch.class);
+                Intent i = new Intent(getApplicationContext(),UnderFiveSearch1Cr.class);
                 startActivity(i);
             }
         });
