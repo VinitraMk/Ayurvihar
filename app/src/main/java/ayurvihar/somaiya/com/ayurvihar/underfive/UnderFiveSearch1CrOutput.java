@@ -16,6 +16,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import ayurvihar.somaiya.com.ayurvihar.Fragment.BackHandledFragment;
 import ayurvihar.somaiya.com.ayurvihar.Fragment.CTab1S;
 import ayurvihar.somaiya.com.ayurvihar.Fragment.CTab2S;
 import ayurvihar.somaiya.com.ayurvihar.R;
@@ -25,7 +26,8 @@ import ayurvihar.somaiya.com.ayurvihar.R;
  * Created by heretic on 10/8/17.
  */
 
-public class UnderFiveSearch1CrOutput extends FragmentActivity {
+public class UnderFiveSearch1CrOutput extends FragmentActivity implements BackHandledFragment.BackHandlerInterface {
+    private BackHandledFragment selectedFragment;
     private TabLayout tabLayout;
     private  ViewPager viewPager;
     public UnderFiveSearch1CrOutput SV = UnderFiveSearch1CrOutput.this;
@@ -88,7 +90,7 @@ public class UnderFiveSearch1CrOutput extends FragmentActivity {
         }
     }
 
-    public void onBackPressed(){
+    /*public void onBackPressed(){
         //Under5_Health_Record_Core.hr.clear();
         if(getFragmentManager().findFragmentById(R.id.ctabs)!=null)
         {
@@ -98,6 +100,21 @@ public class UnderFiveSearch1CrOutput extends FragmentActivity {
         Intent i=new Intent(UnderFiveSearch1CrOutput.this,UnderFiveSearch1Cr.class);
         i.putExtra("date",date);
         startActivity(i);
+    }*/
+
+    @Override
+    public void onBackPressed() {
+        if(selectedFragment == null || !selectedFragment.onBackPressed()) {
+            // Selected fragment did not consume the back press event.
+            super.onBackPressed();
+            Intent i = new Intent(UnderFiveSearch1CrOutput.this,UnderFiveHome.class);
+            startActivity(i);
+        }
+    }
+
+    @Override
+    public void setSelectedFragment(BackHandledFragment selectedFragment) {
+        this.selectedFragment = selectedFragment;
     }
 
 }

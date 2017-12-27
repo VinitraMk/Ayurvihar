@@ -2,6 +2,7 @@ package ayurvihar.somaiya.com.ayurvihar.underfive;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -56,6 +57,7 @@ public class ProgressGraph extends AppCompatActivity {
     DatabaseReference databaseChildHc= MainActivity.DATABASE_ROOT.child("Underfive").child("ChkRec");
     String childid;
     SharedPreferences weightForAge = CTab3.weightForAge;
+    SharedPreferences.Editor editor;
     String graphList="";
     ArrayList<LineDataSet> lineDataSets = new ArrayList<>();
     ArrayList<String> xaxis = new ArrayList<>();
@@ -67,7 +69,7 @@ public class ProgressGraph extends AppCompatActivity {
         setContentView(R.layout.progress_graph);
 
 
-        childid=getIntent().getExtras().getString("childid");
+        childid=getIntent().getExtras().getString("Childid");
 
         LineChart lineChart = (LineChart)findViewById(R.id.chart);
 
@@ -117,6 +119,4 @@ public class ProgressGraph extends AppCompatActivity {
         dataset.add(lineDataSet);
         return dataset;
     }
-
-
 }

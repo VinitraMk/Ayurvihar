@@ -1,5 +1,6 @@
 package ayurvihar.somaiya.com.ayurvihar.Fragment;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +26,7 @@ import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
 import ayurvihar.somaiya.com.ayurvihar.underfive.ProgressGraph;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveHealthRep;
+import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveUpdateCr;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderfiveScrollview;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveHc;
 
@@ -80,7 +82,7 @@ public class CTab3 extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(CTab3.this.getContext(), ProgressGraph.class);
                 Log.v("call","graph");
-                i.putExtra("childid",UnderfiveScrollview.cid);
+                i.putExtra("Childid",UnderfiveScrollview.cid);
 
 
 
@@ -100,8 +102,9 @@ public class CTab3 extends android.support.v4.app.Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(reclist.size()!=0) {
                     reclist.clear();
-                    graphList.clear();
                 }
+                if(graphList.size()!=0)
+                    graphList.clear();
                 for(DataSnapshot ds:dataSnapshot.getChildren())
                 {
                     UnderFiveHc uhc=ds.getValue(UnderFiveHc.class);
@@ -123,7 +126,8 @@ public class CTab3 extends android.support.v4.app.Fragment {
                     editor.putString("Weightforagelist",listString);
                     editor.commit();
                 }
-                recList.setAdapter(new ArrayAdapter<String>(CTab3.this.getContext(),R.layout.child_textview,reclist));
+                if(getActivity()!=null)
+                    recList.setAdapter(new ArrayAdapter<>(CTab3.this.getContext(),R.layout.child_textview,reclist));
 
             }
 

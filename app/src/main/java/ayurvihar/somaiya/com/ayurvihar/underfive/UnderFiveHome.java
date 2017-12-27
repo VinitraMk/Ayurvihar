@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
+import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
 
 /**
@@ -74,5 +75,11 @@ public class UnderFiveHome extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(UnderFiveHome.this,MainActivity.class);
+        startActivity(i);
     }
 }

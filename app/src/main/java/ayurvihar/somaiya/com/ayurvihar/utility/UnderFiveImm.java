@@ -314,13 +314,13 @@ public class UnderFiveImm {
             list.put("DPV0",list.get("DPV0")+1);
 
         if(ufi.ddptopv1.equals(date))
-            list.put("DTP/OPV1",list.get("DPTOPV1")+1);
+            list.put("DPT/OPV1",list.get("DPT/OPV1")+1);
 
         if(ufi.ddptopv2.equals(date))
-            list.put("DTP/OPV2",list.get("DPTOPV2")+1);
+            list.put("DPT/OPV2",list.get("DPT/OPV2")+1);
 
         if(ufi.ddptopv3.equals(date))
-            list.put("DTP/OPV3",list.get("DPTOPV3")+1);
+            list.put("DPT/OPV3",list.get("DPT/OPV3")+1);
 
         if(ufi.dhbv0.equals(date))
             list.put("HBV0",list.get("HBV0")+1);

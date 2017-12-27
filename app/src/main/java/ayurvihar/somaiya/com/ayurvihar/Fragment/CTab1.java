@@ -1,6 +1,7 @@
 package ayurvihar.somaiya.com.ayurvihar.Fragment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,12 +23,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Map;
 
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
+import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveHome;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveUpdateCr;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderfiveScrollview;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveCr;
@@ -172,16 +176,17 @@ public class CTab1 extends Fragment implements View.OnClickListener{
                         Addn8.setText(tempufc.getMob());
                         Addn9.setText(tempufc.getDob());
 
-                        townin=indexOf(tempufc.getTown(),townarr);
+                        townin=Arrays.binarySearch(townarr,tempufc.getTown());
+                        Log.v("townin",""+townin);
                         sTown.setSelection(townin);
 
-                        genin = indexOf(tempufc.getGen(),genarr);
+                        genin=Arrays.binarySearch(genarr,tempufc.getGen());
                         sGen.setSelection(genin);
 
-                        nicin = indexOf(tempufc.getNic(),nicarr);
+                        nicin = Arrays.binarySearch(nicarr,tempufc.getNic());
                         sNic.setSelection(nicin);
 
-                        acin=indexOf(tempufc.getAc(),acarr);
+                        acin= Arrays.binarySearch(acarr,tempufc.getAc());
                         sAc.setSelection(acin);
 
                     }
@@ -194,6 +199,12 @@ public class CTab1 extends Fragment implements View.OnClickListener{
 
             }
         });
+
+    }
+
+    public int indexOf(String[] arr,String key) {
+        return Arrays.binarySearch(arr,key);
+
     }
 
     private void setDateTimeField() {
@@ -218,6 +229,4 @@ public class CTab1 extends Fragment implements View.OnClickListener{
             datePickerDialog.show();
         }
     }
-
-
 }

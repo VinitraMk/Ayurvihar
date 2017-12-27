@@ -1,5 +1,6 @@
 package ayurvihar.somaiya.com.ayurvihar.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,14 +21,16 @@ import java.util.Map;
 
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
+import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveSearch1Cr;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveSearch1CrOutput;
+import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveUpdateCr;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
 
 /**
  * Created by heretic on 10/8/17.
  */
 
-public class CTab2S extends Fragment {
+public class CTab2S extends BackHandledFragment {
 
     DatabaseReference CHILD_DB= MainActivity.DATABASE_ROOT.child("Underfive");
     DatabaseReference databaseChildImm;
@@ -48,12 +51,18 @@ public class CTab2S extends Fragment {
         vaccList = (ListView) view.findViewById(R.id.vacclist);
         vacclist = new ArrayList<String>();
         vacCount = new HashMap<String,Integer>();
+        initVc();
+
+        return view;
+    }
+
+    public void initVc() {
         vacCount.put("BCG",0);
         vacCount.put("DPV0",0);
         vacCount.put("HBV0",0);
-        vacCount.put("DPTOPV1",0);
-        vacCount.put("DPTOPV2",0);
-        vacCount.put("DPTOPV3",0);
+        vacCount.put("DPT/OPV1",0);
+        vacCount.put("DPT/OPV2",0);
+        vacCount.put("DPT/OPV3",0);
         vacCount.put("HBV1",0);
         vacCount.put("HBV2",0);
         vacCount.put("HBV3",0);
@@ -68,7 +77,7 @@ public class CTab2S extends Fragment {
         vacCount.put("V8",0);
         vacCount.put("DV9",0);
 
-        return view;
+
     }
 
     @Override
@@ -79,20 +88,27 @@ public class CTab2S extends Fragment {
         databaseChildImm.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if(vacclist.size()!=0) {
+                    vacclist.clear();
+                    initVc();
+                }
+
 
                 for(DataSnapshot ds: dataSnapshot.getChildren())
                 {
                     ufi=ds.getValue(UnderFiveImm.class);
                     vacCount = ufi.getVacc(ufi,date,vacCount);
                 }
+                int count =0;
                 for (String x: vacCount.keySet())
                 {
                     if(vacCount.get(x)!=0) {
-                        String item = x + ":\t" + vacCount.get(x);
+                        int temp = vacCount.get(x);
+                        String item = x + ":\t" + temp;
                         vacclist.add(item);
+                        count+=temp;
                     }
                 }
-                int count =0;
 
                 String tot = "Total:\t" + count;
                 vacclist.add(tot);
@@ -105,5 +121,18 @@ public class CTab2S extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        Intent i = new Intent(getContext(),UnderFiveSearch1Cr.class);
+        i.removeExtra("date");
+        startActivity(i);
+        return true;
+    }
+
+    @Override
+    public String getTagText() {
+        return null;
     }
 }

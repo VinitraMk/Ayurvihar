@@ -1,6 +1,7 @@
 package ayurvihar.somaiya.com.ayurvihar.underfive;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -125,5 +126,11 @@ public class UnderFiveVacDet extends AppCompatActivity {
         intval = Integer.parseInt(esval);
         databaseChildInt.child(vacname).getRef().setValue(intval);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(UnderFiveVacDet.this,UnderFiveHome.class);
+        startActivity(i);
     }
 }

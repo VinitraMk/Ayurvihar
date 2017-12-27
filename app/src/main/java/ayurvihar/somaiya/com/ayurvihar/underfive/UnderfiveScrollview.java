@@ -17,6 +17,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import ayurvihar.somaiya.com.ayurvihar.Fragment.BackHandledFragment;
 import ayurvihar.somaiya.com.ayurvihar.Fragment.CTab1;
 import ayurvihar.somaiya.com.ayurvihar.Fragment.CTab2;
 import ayurvihar.somaiya.com.ayurvihar.Fragment.CTab3;
@@ -29,7 +30,9 @@ import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
  * Created by mikasa on 30/7/17.
  */
 
-public class UnderfiveScrollview extends FragmentActivity {
+public class UnderfiveScrollview extends FragmentActivity implements BackHandledFragment.BackHandlerInterface {
+    private BackHandledFragment selectedFragment;
+
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -99,16 +102,20 @@ public class UnderfiveScrollview extends FragmentActivity {
         }
     }
 
-
-
-    public void onBackPressed(){
-        //Under5_Health_Record_Core.hr.clear();
-        if(getFragmentManager().findFragmentById(R.id.ctabs)!=null)
-        {
-            getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.ctabs)).commit();
+    @Override
+    public void onBackPressed() {
+        if(selectedFragment == null || !selectedFragment.onBackPressed()) {
+            // Selected fragment did not consume the back press event.
+            super.onBackPressed();
+            Intent i = new Intent(UnderfiveScrollview.this,UnderFiveUpdateCr.class);
+            startActivity(i);
         }
-        finish();
-        Intent i=new Intent(UnderfiveScrollview.this,UnderFiveUpdateCr.class);
-        startActivity(i);
     }
+
+    @Override
+    public void setSelectedFragment(BackHandledFragment selectedFragment) {
+        this.selectedFragment = selectedFragment;
+    }
+
+
 }

@@ -106,4 +106,10 @@ public class UnderFiveSearch1Cr extends AppCompatActivity implements View.OnClic
             datePickerDialog.show();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(UnderFiveSearch1Cr.this,UnderFiveHome.class);
+        startActivity(i);
+    }
 }

@@ -1,6 +1,7 @@
 package ayurvihar.somaiya.com.ayurvihar.underfive;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -94,7 +95,6 @@ public class UnderFiveHealthRep extends AppCompatActivity implements View.OnClic
                     ratio += (new DecimalFormat("#0.000000000").format(dt));
                     UnderFiveHc uhc = new UnderFiveHc(chkn,childid,td,the,twe,ratio,trem);
                     databaseHcr.push().setValue(uhc);
-                    Toast.makeText(UnderFiveHealthRep.this,"Added report to database",Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 else
@@ -127,5 +127,10 @@ public class UnderFiveHealthRep extends AppCompatActivity implements View.OnClic
         if(view == Addn1) {
             datePickerDialog.show();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

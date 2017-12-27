@@ -17,6 +17,7 @@
     <string-array name="gender">
         <item>Female</item>
         <item>Male</item>
+        <item></item>
     </string-array>
     <string-array name="nic">
         <item>No</item>

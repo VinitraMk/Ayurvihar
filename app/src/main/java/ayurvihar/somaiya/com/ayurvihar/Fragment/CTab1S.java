@@ -1,5 +1,6 @@
 package ayurvihar.somaiya.com.ayurvihar.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,14 +21,16 @@ import java.util.ArrayList;
 
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
+import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveSearch1Cr;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveSearch1CrOutput;
+import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveUpdateCr;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
 
 /**
  * Created by heretic on 10/8/17.
  */
 
-public class CTab1S extends Fragment {
+public class CTab1S extends BackHandledFragment {
     DatabaseReference CHILD_DB= MainActivity.DATABASE_ROOT.child("Underfive");
     DatabaseReference databaseChildImm;
     ArrayList<String> vacclist;
@@ -66,10 +69,10 @@ public class CTab1S extends Fragment {
                     Log.v("indate",date);
                     ArrayList<String> list = ufi.getVal(ufi,date);
                     if(list.size()!=0) {
-                        String item = ds.child("childid").getValue(String.class);
-                        item+=": ";
+                        String item = "Child id: "+ds.child("childid").getValue(String.class);
+                        item+="\nVaccines: ";
                         for (String str : list) {
-                            item += str + "\t";
+                            item += "\n"+str;
                         }
                         item += "\n";
                         vacclist.add(item);
@@ -89,6 +92,19 @@ public class CTab1S extends Fragment {
 
 
 
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        Intent i = new Intent(getContext(),UnderFiveSearch1Cr.class);
+        i.removeExtra("date");
+        startActivity(i);
+        return true;
+    }
+
+    @Override
+    public String getTagText() {
+        return null;
     }
 }
 

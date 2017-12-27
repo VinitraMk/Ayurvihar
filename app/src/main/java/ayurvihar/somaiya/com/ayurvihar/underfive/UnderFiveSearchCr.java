@@ -2,6 +2,7 @@ package ayurvihar.somaiya.com.ayurvihar.underfive;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -275,5 +276,12 @@ public class UnderFiveSearchCr extends AppCompatActivity implements View.OnClick
         if(view == set1) {
             datePickerDialog.show();
         }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(UnderFiveSearchCr.this,UnderFiveHome.class);
+        startActivity(i);
     }
 }
