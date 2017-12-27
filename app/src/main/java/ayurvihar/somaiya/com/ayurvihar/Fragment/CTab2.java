@@ -237,6 +237,7 @@ public class CTab2 extends Fragment implements View.OnClickListener {
                             vaccineAdapter = new VaccineAdapter(getContext(), R.layout.imm_item, vaclist);
                             simpleList.setAdapter(vaccineAdapter);
                         }
+                        Toast.makeText(getContext(),"Updated the database",Toast.LENGTH_SHORT);
                     }
                 }
             }

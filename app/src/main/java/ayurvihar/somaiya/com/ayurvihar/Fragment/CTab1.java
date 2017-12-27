@@ -15,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -122,6 +123,7 @@ public class CTab1 extends Fragment implements View.OnClickListener{
                                 ds.child("dob").getRef().setValue(Addn9.getText().toString().trim());
                                 ds.child("gen").getRef().setValue(sGen.getSelectedItem().toString().trim());
                                 ds.child("nic").getRef().setValue(sNic.getSelectedItem().toString().trim());
+                                Toast.makeText(getContext(),"Updated the database",Toast.LENGTH_SHORT);
                             }
                         }
                     }

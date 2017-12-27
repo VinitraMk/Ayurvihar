@@ -125,7 +125,7 @@ public class UnderFiveVacDet extends AppCompatActivity {
 
         intval = Integer.parseInt(esval);
         databaseChildInt.child(vacname).getRef().setValue(intval);
-
+        Toast.makeText(UnderFiveVacDet.this,"Updated database",Toast.LENGTH_SHORT);
     }
 
     @Override

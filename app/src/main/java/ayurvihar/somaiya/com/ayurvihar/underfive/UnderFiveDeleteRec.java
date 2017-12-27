@@ -171,6 +171,7 @@ public class UnderFiveDeleteRec extends AppCompatActivity implements View.OnClic
                     Log.v("val",ds.getKey());
                     ds.getRef().removeValue();
                 }
+                Toast.makeText(UnderFiveDeleteRec.this,"Removed record from database",Toast.LENGTH_SHORT);
             }
 
             @Override
