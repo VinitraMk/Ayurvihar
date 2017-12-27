@@ -1,5 +1,6 @@
 package ayurvihar.somaiya.com.ayurvihar.utility;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.FirebaseDatabase;
 
 /**
@@ -10,6 +11,8 @@ public class PersitentDatabase extends android.app.Application{
     @Override
     public void onCreate() {
         super.onCreate();
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        if(!FirebaseApp.getApps(this).isEmpty())
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        FirebaseDatabase.getInstance().getReference().keepSynced(true);
     }
 }
