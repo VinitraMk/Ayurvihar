@@ -168,37 +168,6 @@ public class VaccineSummary extends AppCompatActivity {
 
             }
         });
-
-        /*databaseChildImm.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(poss.size()!=0)
-                    poss.clear();
-
-                for(DataSnapshot ds:dataSnapshot.getChildren()) {
-                    if(ds.child("childid").equals(cid)) {
-                        UnderFiveImm uim = ds.getValue(UnderFiveImm.class);
-                        HashMap<String,Integer> hp = uim.getMissingVac(uim);
-                        String data = "Missed Vaccines:\n";
-                        if(hp.size()>0) {
-                            for (String sit : hp.keySet())
-                                data += sit + ": " + hp.get(sit) + "\n";
-                        }
-                        else
-                            data+="No Vaccines Missed\n";
-                        data += "Due " + duevac + "\n";
-                        Log.v("due",duevac);
-                        poss.add(data);
-                    }
-                }
-                childlist.setAdapter(new ArrayAdapter<>(VaccineSummary.this,R.layout.child_textview,poss));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
     }
 
 

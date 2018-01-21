@@ -9,17 +9,19 @@ import java.util.HashMap;
 public class UnderFiveIntervals {
 
     public long bcg,dpv0,hbv0,dptopv1,dptopv2,dptopv3,hbv1,hbv2,hbv3,mv1,mmr,dobv2,v3,v4,v5,v6,v7,v8,dv9;
+    public long trbcg,trdpv0,trhbv0,trdptopv1,trdptopv2,trdptopv3,trhbv1,trhbv2,trhbv3,trmv1,trmmr,trdobv2,trv3,trv4,trv5,trv6,trv7,trv8,trdv9;
     public String vacname;
-    public long val;
+    public long val,trval;
 
 
     public UnderFiveIntervals(){
 
     }
 
-    public UnderFiveIntervals(String vacname,long val) {
+    public UnderFiveIntervals(String vacname,long val,long trval) {
         this.vacname=vacname;
         this.val=val;
+        this.trval=trval;
     }
 
 
@@ -100,6 +102,86 @@ public class UnderFiveIntervals {
         return dv9;
     }
 
+    public long getTrbcg() {
+        return trbcg;
+    }
+
+    public long getTrdpv0() {
+        return trdpv0;
+    }
+
+    public long getTrhbv0() {
+        return trhbv0;
+    }
+
+    public long getTrdptopv1() {
+        return trdptopv1;
+    }
+
+    public long getTrdptopv2() {
+        return trdptopv2;
+    }
+
+    public long getTrdptopv3() {
+        return trdptopv3;
+    }
+
+    public long getTrhbv1() {
+        return trhbv1;
+    }
+
+    public long getTrhbv2() {
+        return trhbv2;
+    }
+
+    public long getTrhbv3() {
+        return trhbv3;
+    }
+
+    public long getTrmv1() {
+        return trmv1;
+    }
+
+    public long getTrmmr() {
+        return trmmr;
+    }
+
+    public long getTrdobv2() {
+        return trdobv2;
+    }
+
+    public long getTrv3() {
+        return trv3;
+    }
+
+    public long getTrv4() {
+        return trv4;
+    }
+
+    public long getTrv5() {
+        return trv5;
+    }
+
+    public long getTrv6() {
+        return trv6;
+    }
+
+    public long getTrv7() {
+        return trv7;
+    }
+
+    public long getTrv8() {
+        return trv8;
+    }
+
+    public long getTrdv9() {
+        return trdv9;
+    }
+
+    public long getTrval() {
+        return trval;
+    }
+
     public String getVacname() {
         return vacname;
     }
@@ -107,4 +189,6 @@ public class UnderFiveIntervals {
     public long getVal() {
         return val;
     }
+
+
 }

@@ -42,6 +42,11 @@ public class VaccineDetailAdapter extends ArrayAdapter<UnderFiveIntervals> {
         String tval = ""+(vacs.get(position).getVal());
         given.setText(tval);
 
+        TextView tracking = (TextView) convertView.findViewById(R.id.trval);
+        String trval = ""+(vacs.get(position).getTrval());
+        tracking.setText(trval);
+
+
         return convertView;
 
     }

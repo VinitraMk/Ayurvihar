@@ -29,11 +29,11 @@ import ayurvihar.somaiya.com.ayurvihar.utility.VaccineDetailAdapter;
 
 public class UnderFiveVacDet extends AppCompatActivity {
 
-    Spinner sVac;
+    Spinner sVac,sOpt;
     EditText eVal;
     Button set;
     String vacarr[];
-    String esval="",vacname="";
+    String esval="",vacname="",opt="";
     int intval;
 
     ProgressDialog dialog;
@@ -52,6 +52,7 @@ public class UnderFiveVacDet extends AppCompatActivity {
 
         vacarr=UnderFiveVacDet.this.getResources().getStringArray(R.array.vaccines);
         sVac=(Spinner) findViewById(R.id.vaccine);
+        sOpt=(Spinner) findViewById(R.id.selopt);
         eVal=(EditText) findViewById(R.id.eval);
         set=(Button) findViewById(R.id.setval);
         simpleList=(ListView)findViewById(R.id.vaclist);
@@ -62,6 +63,7 @@ public class UnderFiveVacDet extends AppCompatActivity {
             public void onClick(View v) {
                 esval=eVal.getText().toString().trim();
                 vacname=sVac.getSelectedItem().toString().trim();
+                opt=sOpt.getSelectedItem().toString().trim();
                 if(esval.equals(""))
                     Toast.makeText(UnderFiveVacDet.this,"Enter value of the vaccine",Toast.LENGTH_SHORT);
                 else {
@@ -85,25 +87,25 @@ public class UnderFiveVacDet extends AppCompatActivity {
                     vaclist.clear();
                 Log.v("intervals",""+dataSnapshot.getKey());
                 UnderFiveIntervals tufi = dataSnapshot.getValue(UnderFiveIntervals.class);
-                vaclist.add(new UnderFiveIntervals("bcg",tufi.getBcg()));
-                vaclist.add(new UnderFiveIntervals("dpv0", tufi.getDpv0()));
-                vaclist.add(new UnderFiveIntervals("hbv0", tufi.getHbv0()));
-                vaclist.add(new UnderFiveIntervals("dptopv1", tufi.getDptopv1()));
-                vaclist.add(new UnderFiveIntervals("dptopv2", tufi.getDptopv2()));
-                vaclist.add(new UnderFiveIntervals("dptopv3", tufi.getDptopv3()));
-                vaclist.add(new UnderFiveIntervals("hbv1", tufi.getHbv1()));
-                vaclist.add(new UnderFiveIntervals("hbv2", tufi.getHbv2()));
-                vaclist.add(new UnderFiveIntervals("hbv3", tufi.getHbv3()));
-                vaclist.add(new UnderFiveIntervals("mv1", tufi.getMv1()));
-                vaclist.add(new UnderFiveIntervals("mmr", tufi.getMmr()));
-                vaclist.add(new UnderFiveIntervals("dobv2", tufi.getDobv2()));
-                vaclist.add(new UnderFiveIntervals("v3", tufi.getV3()));
-                vaclist.add(new UnderFiveIntervals("v4", tufi.getV4()));
-                vaclist.add(new UnderFiveIntervals("v5", tufi.getV5()));
-                vaclist.add(new UnderFiveIntervals("v6", tufi.getV6()));
-                vaclist.add(new UnderFiveIntervals("v7", tufi.getV7()));
-                vaclist.add(new UnderFiveIntervals("v8", tufi.getV8()));
-                vaclist.add(new UnderFiveIntervals("dv9", tufi.getDv9()));
+                vaclist.add(new UnderFiveIntervals("bcg",tufi.getBcg(),tufi.getTrbcg()));
+                vaclist.add(new UnderFiveIntervals("dpv0", tufi.getDpv0(),tufi.getTrdpv0()));
+                vaclist.add(new UnderFiveIntervals("hbv0", tufi.getHbv0(),tufi.getTrhbv0()));
+                vaclist.add(new UnderFiveIntervals("dptopv1", tufi.getDptopv1(),tufi.getTrdptopv1()));
+                vaclist.add(new UnderFiveIntervals("dptopv2", tufi.getDptopv2(),tufi.getTrdptopv2()));
+                vaclist.add(new UnderFiveIntervals("dptopv3", tufi.getDptopv3(),tufi.getTrdptopv3()));
+                vaclist.add(new UnderFiveIntervals("hbv1", tufi.getHbv1(),tufi.getTrhbv1()));
+                vaclist.add(new UnderFiveIntervals("hbv2", tufi.getHbv2(),tufi.getTrhbv2()));
+                vaclist.add(new UnderFiveIntervals("hbv3", tufi.getHbv3(),tufi.getTrhbv3()));
+                vaclist.add(new UnderFiveIntervals("mv1", tufi.getMv1(),tufi.getTrmv1()));
+                vaclist.add(new UnderFiveIntervals("mmr", tufi.getMmr(),tufi.getTrmmr()));
+                vaclist.add(new UnderFiveIntervals("dobv2", tufi.getDobv2(),tufi.getTrdobv2()));
+                vaclist.add(new UnderFiveIntervals("v3", tufi.getV3(),tufi.getTrv3()));
+                vaclist.add(new UnderFiveIntervals("v4", tufi.getV4(),tufi.getTrv4()));
+                vaclist.add(new UnderFiveIntervals("v5", tufi.getV5(),tufi.getTrv5()));
+                vaclist.add(new UnderFiveIntervals("v6", tufi.getV6(),tufi.getTrv6()));
+                vaclist.add(new UnderFiveIntervals("v7", tufi.getV7(),tufi.getTrv7()));
+                vaclist.add(new UnderFiveIntervals("v8", tufi.getV8(),tufi.getTrv8()));
+                vaclist.add(new UnderFiveIntervals("dv9", tufi.getDv9(),tufi.getTrdv9()));
 
                 vaccineDetailAdapter = new VaccineDetailAdapter(UnderFiveVacDet.this, R.layout.immint_item, vaclist);
                 simpleList.setAdapter(vaccineDetailAdapter);
@@ -124,7 +126,10 @@ public class UnderFiveVacDet extends AppCompatActivity {
     public void addValue(String vacname,String esval) {
 
         intval = Integer.parseInt(esval);
-        databaseChildInt.child(vacname).getRef().setValue(intval);
+        if(opt.equals("Interval"))
+            databaseChildInt.child(vacname).getRef().setValue(intval);
+        else
+            databaseChildInt.child(("tr"+vacname)).getRef().setValue(intval);
         Toast.makeText(UnderFiveVacDet.this,"Updated database",Toast.LENGTH_SHORT);
     }
 
