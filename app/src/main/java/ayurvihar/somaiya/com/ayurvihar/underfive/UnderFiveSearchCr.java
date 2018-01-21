@@ -72,6 +72,7 @@ public class UnderFiveSearchCr extends AppCompatActivity implements View.OnClick
         set2 = (EditText) findViewById(R.id.set2);
         spinner = (Spinner) findViewById(R.id.filters);
 
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -162,6 +163,34 @@ public class UnderFiveSearchCr extends AppCompatActivity implements View.OnClick
         });
 
         childlist.setEmptyView(findViewById(R.id.empty));
+
+
+        childlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.v("ufu",""+poss.get(i));
+                cid=poss.get(i);
+                int in=cid.indexOf("Child Identifier");
+                int in1=cid.indexOf("Date of Birth");
+                if(in!=-1 && in1!=-1)
+                {
+                    c=0;
+                    in+=17;
+                    in1+=15;
+                    //Log.v("ufup",""+cid.indexOf("Child Identifier")+" "+cid.substring(in,in+15));
+                    dob = cid.substring(in1,in1+10);
+                    Log.v("sdob",dob);
+                    cid=cid.substring(in,in+15);
+
+                    cid=cid.trim();
+                    Log.v("cid",cid);
+                    Intent intent = new Intent(UnderFiveSearchCr.this,UnderfiveScrollview.class);
+                    intent.putExtra("childid",cid);
+                    intent.putExtra("Dob",dob.trim());
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     public void applyFilter(final String selection,final String param1,final String param2) {

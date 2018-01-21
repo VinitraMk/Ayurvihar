@@ -90,17 +90,7 @@ public class UnderFiveSearch1CrOutput extends FragmentActivity implements BackHa
         }
     }
 
-    /*public void onBackPressed(){
-        //Under5_Health_Record_Core.hr.clear();
-        if(getFragmentManager().findFragmentById(R.id.ctabs)!=null)
-        {
-            getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.ctabs)).commit();
-        }
-        finish();
-        Intent i=new Intent(UnderFiveSearch1CrOutput.this,UnderFiveSearch1Cr.class);
-        i.putExtra("date",date);
-        startActivity(i);
-    }*/
+
 
     @Override
     public void onBackPressed() {
