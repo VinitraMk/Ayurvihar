@@ -95,6 +95,7 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
         AddRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 fname=Addn1.getText().toString().trim();
                 ln=Addn2.getText().toString().trim();
                 mn=Addn3.getText().toString().trim();
@@ -117,19 +118,20 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                 weight=Addn11.getText().toString().trim();
                 rem = Addn12.getText().toString().trim();
 
-                tdob = (dob.substring(6,10)+dob.substring(3,5)+dob.substring(0,2));
-                Date date = Calendar.getInstance().getTime();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-                cur = sdf.format(date);
-                Log.v("hello",cur);
-                age = (Integer.parseInt(cur)-Integer.parseInt(tdob)/10000);
-                Double dt = ((Double.parseDouble(weight)/(double)age));
-                String ratio = (new DecimalFormat("#0.000000000").format(dt));
-
                 if(fname.equals("") && ln.equals("") && dob.equals("") && mob.equals("") && height.equals("") && weight.equals(""))
                     Toast.makeText(UnderFiveAddCr.this,"Fill all mandatory fields",Toast.LENGTH_SHORT).show();
                 else {
+                    tdob = (dob.substring(6,10)+dob.substring(3,5)+dob.substring(0,2));
+                    Date date = Calendar.getInstance().getTime();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                    sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+                    cur = sdf.format(date);
+                    Log.v("hello",cur);
+                    age = (Integer.parseInt(cur)-Integer.parseInt(tdob)/10000);
+                    Double dt = ((Double.parseDouble(weight)/(double)age));
+                    String ratio = (new DecimalFormat("#0.000000000").format(dt));
+
+
                     UnderFiveCr ufc=new UnderFiveCr(fname,ln,mn,fn,ci,room,bldg,town,area,ac,mob,dob,nic,gen,track);
                     UnderFiveHc uhc=new UnderFiveHc(0,ci,dob,height,weight,ratio,rem);
                     UnderFiveImm uim=new UnderFiveImm(ci,dob,gen,track,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);

@@ -359,6 +359,51 @@ public class UnderFiveImm {
         return list;
     }
 
+    public HashMap<String,Integer> getMissingVac(UnderFiveImm ufi) {
+        HashMap<String,Integer> hp = new HashMap<>();
+
+        if(ufi.getMbcg()>0)
+            hp.put("bcg",ufi.getMbcg());
+        if(ufi.getMdpv0()>0)
+            hp.put("dpv0",ufi.getMdpv0());
+        if(ufi.getMhbv0()>0)
+            hp.put("hbv0",ufi.getMhbv0());
+        if(ufi.getMdptopv1()>0)
+            hp.put("dptopv1",ufi.getMdptopv1());
+        if(ufi.getMdptopv2()>0)
+            hp.put("dptopv2",ufi.getMdptopv2());
+        if(ufi.getMdptopv3()>0)
+            hp.put("dptopv3",ufi.getMdptopv3());
+        if(ufi.getMhbv1()>0)
+            hp.put("hbv1",ufi.getMhbv1());
+        if(ufi.getMhbv2()>0)
+            hp.put("hbv2",ufi.getMhbv2());
+        if(ufi.getMhbv3()>0)
+            hp.put("hbv3",ufi.getMhbv3());
+        if(ufi.getMmv1()>0)
+            hp.put("mv1",ufi.getMmv1());
+        if(ufi.getMmmr()>0)
+            hp.put("mmr",ufi.getMmmr());
+        if(ufi.getMdobv2()>0)
+            hp.put("dobv2",ufi.getMdobv2());
+        if(ufi.getMv3()>0)
+            hp.put("v3",ufi.getMv3());
+        if(ufi.getMv4()>0)
+            hp.put("v4",ufi.getMv4());
+        if(ufi.getMv5()>0)
+            hp.put("v5",ufi.getMv5());
+        if(ufi.getMv6()>0)
+            hp.put("v6",ufi.getMv6());
+        if(ufi.getMv7()>0)
+            hp.put("v7",ufi.getMv7());
+        if(ufi.getMv8()>0)
+            hp.put("v8",ufi.getMv8());
+        if(ufi.getMdv9()>0)
+            hp.put("dv9",ufi.getMdv9());
+
+        return hp;
+    }
+
     public ArrayList<String> getVal(UnderFiveImm ufi, String date)
     {
         ArrayList<String> list = new ArrayList<>();

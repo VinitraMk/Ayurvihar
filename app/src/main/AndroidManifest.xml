@@ -18,22 +18,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".underfive.UnderFiveHome"
-            android:noHistory="true"/>
-        <activity android:name=".underfive.UnderFiveAddCr"/>
-        <activity android:name=".underfive.UnderFiveUpdateCr"
-            android:noHistory="true"/>
-        <activity android:name=".underfive.UnderfiveScrollview"/>
         <activity
-            android:name=".underfive.UnderFiveHealthRep"/>
-        <activity android:name=".underfive.ProgressGraph"/>
-        <activity android:name=".underfive.UnderFiveSearchCr"
-            android:noHistory="true"/>
-        <activity android:name=".underfive.UnderFiveVacDet"/>
-        <activity android:name=".underfive.UnderFiveDeleteRec"/>
-        <activity android:name=".underfive.UnderFiveSearch1Cr"
-            android:noHistory="true"/>
-        <activity android:name=".underfive.UnderFiveSearch1CrOutput"/>
+            android:name=".underfive.UnderFiveHome"
+            android:noHistory="true" />
+        <activity android:name=".underfive.UnderFiveAddCr" />
+        <activity
+            android:name=".underfive.UnderFiveUpdateCr"
+            android:noHistory="true" />
+        <activity android:name=".underfive.UnderfiveScrollview" />
+        <activity android:name=".underfive.UnderFiveHealthRep" />
+        <activity android:name=".underfive.ProgressGraph" />
+        <activity
+            android:name=".underfive.UnderFiveSearchCr"
+            android:noHistory="true" />
+        <activity android:name=".underfive.UnderFiveVacDet" />
+        <activity android:name=".underfive.UnderFiveDeleteRec" />
+        <activity
+            android:name=".underfive.UnderFiveSearch1Cr"
+            android:noHistory="true" />
+        <activity android:name=".underfive.UnderFiveSearch1CrOutput" />
+        <activity android:name=".underfive.VaccineSummary"></activity>
     </application>
 
 </manifest>

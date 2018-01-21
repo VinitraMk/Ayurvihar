@@ -9,6 +9,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,6 +25,7 @@ import ayurvihar.somaiya.com.ayurvihar.R;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveSearch1Cr;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveSearch1CrOutput;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveUpdateCr;
+import ayurvihar.somaiya.com.ayurvihar.underfive.VaccineSummary;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
 
 /**
@@ -50,7 +52,6 @@ public class CTab1S extends BackHandledFragment {
         vaccList = (ListView) view.findViewById(R.id.vacclist);
         vacclist = new ArrayList<String>();
         return view;
-
     }
 
     @Override
@@ -58,6 +59,26 @@ public class CTab1S extends BackHandledFragment {
     {
         super.onStart();
         date= UnderFiveSearch1CrOutput.date;
+
+        vaccList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String str = vacclist.get(i);
+                Log.v("str",str);
+                int in = str.indexOf("Child id");
+                int in1 = str.indexOf("Vaccines");
+                if(in!=-1 && in1!=-1) {
+                    in+=10;
+                    String cid = str.substring(in,in+15).trim();
+                    Intent intent = new Intent(getContext(), VaccineSummary.class);
+                    intent.putExtra("childid",cid);
+                    str=str.substring(in1,str.length());
+                    Log.v("currdue",str);
+                    intent.putExtra("currdue",str);
+                    startActivity(intent);
+                }
+            }
+        });
 
         databaseChildImm.addValueEventListener(new ValueEventListener() {
             @Override

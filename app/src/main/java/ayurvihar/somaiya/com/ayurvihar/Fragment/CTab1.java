@@ -45,7 +45,7 @@ import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
 public class CTab1 extends Fragment implements View.OnClickListener{
 
     EditText Addn1,Addn2,Addn3,Addn4,Addn5,Addn6,Addn7,Addn8,Addn9;
-    Spinner sGen,sNic,sTown,sAc;
+    Spinner sGen,sNic,sTown,sAc,sTrack;
     TextView childidn;
     Button update;
     DatabaseReference CHILD_DB= MainActivity.DATABASE_ROOT.child("Underfive");
@@ -53,7 +53,8 @@ public class CTab1 extends Fragment implements View.OnClickListener{
     String townarr[],acarr[];
     String genarr[];
     String nicarr[];
-    int townin,acin,genin,nicin;
+    String trackarr[];
+    int townin,acin,genin,nicin,trackin;
     SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
 
@@ -74,6 +75,7 @@ public class CTab1 extends Fragment implements View.OnClickListener{
         acarr=CTab1.this.getResources().getStringArray(R.array.areacode);
         genarr=CTab1.this.getResources().getStringArray(R.array.gender);
         nicarr=CTab1.this.getResources().getStringArray(R.array.nic);
+        trackarr=CTab1.this.getResources().getStringArray(R.array.track);
 
         Addn1 = (EditText) view.findViewById(R.id.Addn1);
         Addn2 = (EditText) view.findViewById(R.id.Addn2);
@@ -89,6 +91,7 @@ public class CTab1 extends Fragment implements View.OnClickListener{
         sNic = (Spinner) view.findViewById(R.id.nic);
         sTown = (Spinner) view.findViewById(R.id.towns);
         sAc = (Spinner) view.findViewById(R.id.areacode);
+        sTrack = (Spinner) view.findViewById(R.id.track);
 
         childidn = (TextView) view.findViewById(R.id.childidn);
         update = (Button) view.findViewById(R.id.Update);
@@ -123,6 +126,7 @@ public class CTab1 extends Fragment implements View.OnClickListener{
                                 ds.child("dob").getRef().setValue(Addn9.getText().toString().trim());
                                 ds.child("gen").getRef().setValue(sGen.getSelectedItem().toString().trim());
                                 ds.child("nic").getRef().setValue(sNic.getSelectedItem().toString().trim());
+                                ds.child("track").getRef().setValue(sTrack.getSelectedItem().toString().trim());
                                 Toast.makeText(getContext(),"Updated the database",Toast.LENGTH_SHORT);
                             }
                         }
@@ -179,7 +183,6 @@ public class CTab1 extends Fragment implements View.OnClickListener{
                         Addn9.setText(tempufc.getDob());
 
                         townin=Arrays.binarySearch(townarr,tempufc.getTown());
-                        Log.v("townin",""+townin);
                         sTown.setSelection(townin);
 
                         genin=Arrays.binarySearch(genarr,tempufc.getGen());
@@ -190,6 +193,9 @@ public class CTab1 extends Fragment implements View.OnClickListener{
 
                         acin= Arrays.binarySearch(acarr,tempufc.getAc());
                         sAc.setSelection(acin);
+
+                        trackin = Arrays.binarySearch(trackarr,tempufc.getTrack());
+                        sTrack.setSelection(trackin);
 
                     }
 

@@ -197,6 +197,21 @@
             android:layout_gravity="center_horizontal"
             android:spinnerMode="dropdown"
             android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tracking Status"
+            android:textSize="15sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
+        <Spinner
+            android:id="@+id/track"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/track"
+            android:layout_gravity="center_horizontal"
+            android:spinnerMode="dropdown"
+            android:layout_marginTop="10dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

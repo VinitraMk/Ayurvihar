@@ -202,25 +202,8 @@ public class UnderFiveDeleteRec extends AppCompatActivity implements View.OnClic
         });
 
         //Remove record from ChkRec
-        databaseChildHcr.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds:dataSnapshot.getChildren()) {
-                    if(ds.child("childid").getValue().equals(childid)) {
-                        //Log.v("cref",ds.getKey());
-                        ds.getRef().removeValue();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-
+        Log.v("vval",""+databaseChildHcr.child(cid).getRef());
+        databaseChildHcr.child(cid).getRef().removeValue();
     }
 
     private void setDateTimeField() {
