@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
@@ -14,10 +15,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
 import ayurvihar.somaiya.com.ayurvihar.underfive.ProgressGraph;
+import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveDeleteRec;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveHealthRep;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderFiveUpdateCr;
 import ayurvihar.somaiya.com.ayurvihar.underfive.UnderfiveScrollview;
@@ -44,7 +48,7 @@ public class CTab3 extends android.support.v4.app.Fragment {
     ArrayList<String> graphList = new ArrayList<>();
     public static SharedPreferences weightForAge;
     public SharedPreferences.Editor editor;
-    String listString="";
+    String listString="",cid;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +69,7 @@ public class CTab3 extends android.support.v4.app.Fragment {
 
         weightForAge = getContext().getSharedPreferences("Weightforage",Context.MODE_PRIVATE);
         editor = weightForAge.edit();
+        cid=UnderfiveScrollview.cid;
 
         addhcr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +102,7 @@ public class CTab3 extends android.support.v4.app.Fragment {
     public void onStart() {
         super.onStart();
 
-        databaseChildHcr.addValueEventListener(new ValueEventListener() {
+        /*databaseChildHcr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(reclist.size()!=0) {
@@ -135,6 +140,85 @@ public class CTab3 extends android.support.v4.app.Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
+        });*/
+
+        databaseChildHcr.child(cid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.v("val",""+dataSnapshot.getValue());
+                if(reclist.size()!=0) {
+                    reclist.clear();
+                }
+                if(graphList.size()!=0)
+                    graphList.clear();
+                for(DataSnapshot ds:dataSnapshot.getChildren()) {
+                    Log.v("val",""+ds.getValue());
+                    UnderFiveHc uhc = ds.getValue(UnderFiveHc.class);
+                    listString="";
+                    String item = "Health Checkup No:"+uhc.gethCheckNo()+"\n"+
+                            "Checkup Date: "+uhc.getCdate()+"\n"+
+                            "Height: "+uhc.getHeight()+" Weight: "+uhc.getWeight()+"\n"+
+                            "Weight for Age Status: "+uhc.getWfar()+"\n"+
+                            "Remarks: "+uhc.getRem()+"\n";
+                    reclist.add(item);
+                    graphList.add(uhc.getWfar());
+                    for(String s: graphList) {
+                        listString += s;
+                        listString += ",";
+                    }
+                    editor.putString("Weightforagelist",listString);
+                    editor.commit();
+
+                }
+
+                if(getActivity()!=null)
+                    recList.setAdapter(new ArrayAdapter<>(CTab3.this.getContext(),R.layout.child_textview,reclist));
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
         });
+
+
+        /*Query query;
+        query = databaseChildHcr.orderByKey().equalTo(cid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.v("val",""+dataSnapshot.getKey());
+                if(reclist.size()!=0) {
+                    reclist.clear();
+                }
+                if(graphList.size()!=0)
+                    graphList.clear();
+                for(DataSnapshot ds:dataSnapshot.getChildren()) {
+                    UnderFiveHc uhc = ds.getValue(UnderFiveHc.class);
+                    Log.v("val",""+ds.getValue());
+                    Log.v("val",""+uhc.getChildid());
+                    String item = "Health Checkup No:"+uhc.gethCheckNo()+"\n"+
+                            "Checkup Date: "+uhc.getCdate()+"\n"+
+                            "Height: "+uhc.getHeight()+" Weight: "+uhc.getWeight()+"\n"+
+                            "Weight for Age Status: "+uhc.getWfar()+"\n"+
+                            "Remarks: "+uhc.getRem()+"\n";
+                    reclist.add(item);
+                    graphList.add(uhc.getWfar());
+
+                    for(String s: graphList) {
+                        listString += s;
+                        listString += ",";
+                    }
+                    editor.putString("Weightforagelist",listString);
+                    editor.commit();
+                }
+                if(getActivity()!=null)
+                    recList.setAdapter(new ArrayAdapter<>(CTab3.this.getContext(),R.layout.child_textview,reclist));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
     }
 }

@@ -12,9 +12,12 @@ import java.util.Map;
  */
 
 public class UnderFiveImm {
-    public String childid,gbcg,dbcg,gdpv0,ddpv0,ghbv0,dhbv0,gdptopv1,ddptopv1,
+    public String childid,dob,gen,track,gbcg,dbcg,gdpv0,ddpv0,ghbv0,dhbv0,gdptopv1,ddptopv1,
     gdptopv2,ddptopv2,gdptopv3,ddptopv3,ghbv1,dhbv1,ghbv2,dhbv2,ghbv3,dhbv3,gmv1,dmv1,gmmr,dmmr,gdobv2,ddobv2,
     gv3,dv3,gv4,dv4,gv5,dv5,gv6,dv6,gv7,dv7,gv8,dv8,gdv9,ddv9;
+
+    public int mbcg,mdpv0,mhbv0,mdptopv1,mdptopv2,mdptopv3,mhbv1,mhbv2,mhbv3,mmv1,mmmr,mdobv2,
+    mv3,mv4,mv5,mv6,mv7,mv8,mdv9;
 
     String name,given,due;
 
@@ -43,8 +46,12 @@ public class UnderFiveImm {
         return due;
     }
 
-    public UnderFiveImm(String childid, String gbcg, String dbcg, String gdpv0, String ddpv0, String ghbv0, String dhbv0, String gdptopv1, String ddptopv1, String gdptopv2, String ddptopv2, String gdptopv3, String ddptopv3, String ghbv1, String dhbv1, String ghbv2, String dhbv2, String ghbv3, String dhbv3, String gmv1, String dmv1, String gmmr, String dmmr, String gdobv2, String ddobv2, String gv3, String dv3, String gv4, String dv4, String gv5, String dv5, String gv6, String dv6, String gv7, String dv7, String gv8, String dv8, String gdv9, String ddv9) {
+
+    public UnderFiveImm(String childid, String dob, String gen, String track, String gbcg, String dbcg, String gdpv0, String ddpv0, String ghbv0, String dhbv0, String gdptopv1, String ddptopv1, String gdptopv2, String ddptopv2, String gdptopv3, String ddptopv3, String ghbv1, String dhbv1, String ghbv2, String dhbv2, String ghbv3, String dhbv3, String gmv1, String dmv1, String gmmr, String dmmr, String gdobv2, String ddobv2, String gv3, String dv3, String gv4, String dv4, String gv5, String dv5, String gv6, String dv6, String gv7, String dv7, String gv8, String dv8, String gdv9, String ddv9, int mbcg, int mdpv0, int mhbv0, int mdptopv1, int mdptopv2, int mdptopv3, int mhbv1, int mhbv2, int mhbv3, int mmv1, int mmmr, int mdobv2, int mv3, int mv4, int mv5, int mv6, int mv7, int mv8, int mdv9) {
         this.childid = childid;
+        this.dob = dob;
+        this.gen = gen;
+        this.track = track;
         this.gbcg = gbcg;
         this.dbcg = dbcg;
         this.gdpv0 = gdpv0;
@@ -83,10 +90,41 @@ public class UnderFiveImm {
         this.dv8 = dv8;
         this.gdv9 = gdv9;
         this.ddv9 = ddv9;
+        this.mbcg = mbcg;
+        this.mdpv0 = mdpv0;
+        this.mhbv0 = mhbv0;
+        this.mdptopv1 = mdptopv1;
+        this.mdptopv2 = mdptopv2;
+        this.mdptopv3 = mdptopv3;
+        this.mhbv1 = mhbv1;
+        this.mhbv2 = mhbv2;
+        this.mhbv3 = mhbv3;
+        this.mmv1 = mmv1;
+        this.mmmr = mmmr;
+        this.mdobv2 = mdobv2;
+        this.mv3 = mv3;
+        this.mv4 = mv4;
+        this.mv5 = mv5;
+        this.mv6 = mv6;
+        this.mv7 = mv7;
+        this.mv8 = mv8;
+        this.mdv9 = mdv9;
     }
 
     public String getChildid() {
         return childid;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public String getGen() {
+        return gen;
+    }
+
+    public String getTrack() {
+        return track;
     }
 
     public String getGbcg() {
@@ -241,7 +279,87 @@ public class UnderFiveImm {
         return ddv9;
     }
 
-    public ArrayList<String> getVal(UnderFiveImm ufi,String date)
+    public int getMbcg() {
+        return mbcg;
+    }
+
+    public int getMdpv0() {
+        return mdpv0;
+    }
+
+    public int getMhbv0() {
+        return mhbv0;
+    }
+
+    public int getMdptopv1() {
+        return mdptopv1;
+    }
+
+    public int getMdptopv2() {
+        return mdptopv2;
+    }
+
+    public int getMdptopv3() {
+        return mdptopv3;
+    }
+
+    public int getMhbv1() {
+        return mhbv1;
+    }
+
+    public int getMhbv2() {
+        return mhbv2;
+    }
+
+    public int getMhbv3() {
+        return mhbv3;
+    }
+
+    public int getMmv1() {
+        return mmv1;
+    }
+
+    public int getMmmr() {
+        return mmmr;
+    }
+
+    public int getMdobv2() {
+        return mdobv2;
+    }
+
+    public int getMv3() {
+        return mv3;
+    }
+
+    public int getMv4() {
+        return mv4;
+    }
+
+    public int getMv5() {
+        return mv5;
+    }
+
+    public int getMv6() {
+        return mv6;
+    }
+
+    public int getMv7() {
+        return mv7;
+    }
+
+    public int getMv8() {
+        return mv8;
+    }
+
+    public int getMdv9() {
+        return mdv9;
+    }
+
+    public static ArrayList<UnderFiveImm> getList() {
+        return list;
+    }
+
+    public ArrayList<String> getVal(UnderFiveImm ufi, String date)
     {
         ArrayList<String> list = new ArrayList<>();
         if(ufi.dbcg.equals(date))

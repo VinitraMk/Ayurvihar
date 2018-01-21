@@ -7,13 +7,13 @@ package ayurvihar.somaiya.com.ayurvihar.utility;
 public class UnderFiveCr {
 
     public String fname="",lname="",moname="",fatname="",childid="",room="",bldg="",town="",area="",ac=""
-            ,mob="",dob="",nic="",gen="";
+            ,mob="",dob="",nic="",gen="",track="";
 
     public UnderFiveCr() {
 
     }
 
-    public UnderFiveCr(String fname, String lname, String moname, String fatname, String childid, String room, String bldg, String town, String area, String ac, String mob, String dob, String nic, String gen) {
+    public UnderFiveCr(String fname, String lname, String moname, String fatname, String childid, String room, String bldg, String town, String area, String ac, String mob, String dob, String nic, String gen,String track) {
         this.fname = fname;
         this.lname = lname;
         this.moname = moname;
@@ -28,6 +28,7 @@ public class UnderFiveCr {
         this.dob = dob;
         this.nic = nic;
         this.gen = gen;
+        this.track = track;
     }
 
     public String getFname() {
@@ -84,6 +85,10 @@ public class UnderFiveCr {
 
     public String getGen() {
         return gen;
+    }
+
+    public String getTrack() {
+        return track;
     }
 
     public void setFname(String fname) {

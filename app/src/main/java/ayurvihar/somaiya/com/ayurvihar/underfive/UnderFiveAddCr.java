@@ -41,9 +41,9 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
 
     EditText Addn1 , Addn2 , Addn3 , Addn4 , Addn5 , Addn6 , Addn7 , Addn8 , Addn9, Addn10, Addn11, Addn12;
     DatePicker DOB;
-    String fname,ln,mn,fn,ci,fi,room,bldg,town,area,ac,mob,dob,nic,gen,height,weight,rem,tdob,cur;
+    String fname,ln,mn,fn,ci,fi,room,bldg,town,area,ac,mob,dob,nic,gen,height,weight,rem,tdob,cur,track;
     int month,day,year,age;
-    Spinner sGen,sNic,sTown,sAc;
+    Spinner sGen,sNic,sTown,sAc,sTrack;
     Button AddRecord,Refresh;
     SimpleDateFormat dateFormatter,ts;
     private DatePickerDialog datePickerDialog;
@@ -82,6 +82,8 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
         sNic = (Spinner) findViewById(R.id.nic);
         sTown = (Spinner) findViewById(R.id.towns);
         sAc = (Spinner) findViewById(R.id.areacode);
+        sTrack = (Spinner) findViewById(R.id.track);
+        sTrack.setSelection(2);
 
         //Execurting spinner list for selecting date
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
@@ -110,6 +112,7 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                 dob=Addn9.getText().toString().trim().trim();
                 gen=sGen.getSelectedItem().toString().trim();
                 nic=sNic.getSelectedItem().toString().trim();
+                track=sTrack.getSelectedItem().toString().trim();
                 height=Addn10.getText().toString().trim();
                 weight=Addn11.getText().toString().trim();
                 rem = Addn12.getText().toString().trim();
@@ -124,19 +127,17 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                 Double dt = ((Double.parseDouble(weight)/(double)age));
                 String ratio = (new DecimalFormat("#0.000000000").format(dt));
 
-                if(!fname.equals("") && !ln.equals("") && !dob.equals("") && !mob.equals("") && !height.equals("") && !weight.equals("")){
-                    UnderFiveCr ufc=new UnderFiveCr(fname,ln,mn,fn,ci,room,bldg,town,area,ac,mob,dob,nic,gen);
+                if(fname.equals("") && ln.equals("") && dob.equals("") && mob.equals("") && height.equals("") && weight.equals(""))
+                    Toast.makeText(UnderFiveAddCr.this,"Fill all mandatory fields",Toast.LENGTH_SHORT).show();
+                else {
+                    UnderFiveCr ufc=new UnderFiveCr(fname,ln,mn,fn,ci,room,bldg,town,area,ac,mob,dob,nic,gen,track);
                     UnderFiveHc uhc=new UnderFiveHc(0,ci,dob,height,weight,ratio,rem);
-                    UnderFiveImm uim=new UnderFiveImm(ci,"","","","","","","","","","","",
-                            "","","","","","","","","","","","","","","","","","","","","","","","","","","");
+                    UnderFiveImm uim=new UnderFiveImm(ci,dob,gen,track,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
                     databaseChildHr.push().setValue(ufc);
-                    databaseChildHcr.push().setValue(uhc);
+                    databaseChildHcr.child(ci).push().setValue(uhc);
                     databaseChildImm.push().setValue(uim);
                     Toast.makeText(UnderFiveAddCr.this,"Successfully added child record",Toast.LENGTH_SHORT).show();
                     AddRecord.setVisibility(View.INVISIBLE);
-                }
-                else{
-                    Toast.makeText(UnderFiveAddCr.this,"Fill all mandatory fields",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -161,6 +162,7 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                 sNic.setSelection(0);
                 sTown.setSelection(0);
                 sAc.setSelection(0);
+                sTrack.setSelection(2);
                 if(AddRecord.getVisibility()==View.INVISIBLE)
                     AddRecord.setVisibility(View.VISIBLE);
             }

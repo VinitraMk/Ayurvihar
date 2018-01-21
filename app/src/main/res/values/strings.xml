@@ -23,6 +23,12 @@
         <item>No</item>
         <item>Yes</item>
     </string-array>
+    <string-array name="track">
+        <item>Not Tracking</item>
+        <item>Tracking Non-Somaiya</item>
+        <item>Tracking Somaiya</item>
+    </string-array>
+
     <string-array name="towns">
         <item>Bhandup</item>
         <item>Diva</item>

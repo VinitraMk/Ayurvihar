@@ -94,7 +94,7 @@ public class UnderFiveHealthRep extends AppCompatActivity implements View.OnClic
                     Double dt = ((double)weight/age);
                     ratio += (new DecimalFormat("#0.000000000").format(dt));
                     UnderFiveHc uhc = new UnderFiveHc(chkn,childid,td,the,twe,ratio,trem);
-                    databaseHcr.push().setValue(uhc);
+                    databaseHcr.child(childid).push().setValue(uhc);
                     finish();
                 }
                 else
