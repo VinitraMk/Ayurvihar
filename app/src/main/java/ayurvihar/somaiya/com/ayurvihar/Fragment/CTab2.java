@@ -57,7 +57,7 @@ public class CTab2 extends Fragment implements View.OnClickListener {
     Button setdate;
     Spinner type,vacname;
     String stype,svacname,fvacname="",dfvacname="",sdate,newsdate;
-    String childid;
+    String childid,t2cid;
     EditText date;
     SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
@@ -116,7 +116,15 @@ public class CTab2 extends Fragment implements View.OnClickListener {
                 }
                 else {
 
-                    databaseChildImm.addValueEventListener(new ValueEventListener() {
+                    databaseChildImm.child(childid).child(fvacname).setValue(sdate.trim());
+                    if (stype.equals("g") && (!dfvacname.equals(""))) {
+                        //ds.child(dfvacname).getRef().setValue(newsdate.trim());
+                        //updateDueDate(sdate.trim(),dfvacname);
+                        databaseChildImm.child(childid).child("mi"+svacname).getRef().setValue(0);
+                        getIntervals(sdate.trim(), dfvacname, svacname);
+                    }
+
+                    /*databaseChildImm.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -138,7 +146,7 @@ public class CTab2 extends Fragment implements View.OnClickListener {
                         public void onCancelled(DatabaseError databaseError) {
 
                         }
-                    });
+                    });*/
                 }
             }
         });
@@ -168,7 +176,26 @@ public class CTab2 extends Fragment implements View.OnClickListener {
 
     public void updateDueDate(final String startDate,final String key,final int amt) {
 
-        databaseChildImm.orderByChild("childid").endAt(childid).addListenerForSingleValueEvent(new ValueEventListener() {
+        //Calculate new date
+        Date dueDate = new Date();
+        String newDateString = "";
+        try {
+            dueDate = df.parse(startDate);
+            Calendar ct = Calendar.getInstance();
+            ct.setTime(dueDate);
+            Log.v("amt",""+amt);
+            ct.add(Calendar.DATE, amt);
+            dueDate = ct.getTime();
+            newDateString = df.format(dueDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Log.v("intref",newDateString);
+
+        //set New Date
+        databaseChildImm.child(childid).child(key).setValue(newDateString);
+
+        /*databaseChildImm.orderByChild("childid").endAt(childid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds:dataSnapshot.getChildren()) {
@@ -200,7 +227,7 @@ public class CTab2 extends Fragment implements View.OnClickListener {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
     }
 
     @Override
