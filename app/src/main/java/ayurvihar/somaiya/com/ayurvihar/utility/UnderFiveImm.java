@@ -27,12 +27,13 @@ public class UnderFiveImm {
 
     }
 
-
     public UnderFiveImm(String name,String given,String due){
         this.name=name;
         this.given=given;
         this.due=due;
     }
+
+
 
     public String getName() {
         return this.name;
@@ -529,5 +530,50 @@ public class UnderFiveImm {
 
         return list;
 
+    }
+
+    public HashMap<String,Integer> init() {
+        HashMap<String,Integer> hp = new HashMap<>();
+
+        hp.put("mbcg",0);
+        hp.put("fbcg",0);
+        hp.put("mhbv0",0);
+        hp.put("fhbv0",0);
+        hp.put("mhbv1",0);
+        hp.put("fhbv1",0);
+        hp.put("mhbv2",0);
+        hp.put("fhbv2",0);
+        hp.put("mhbv3",0);
+        hp.put("fhbv3",0);
+        hp.put("mdpv0",0);
+        hp.put("fdpv0",0);
+        hp.put("mdptopv1",0);
+        hp.put("fdptopv1",0);
+        hp.put("mdptopv2",0);
+        hp.put("fdptopv2",0);
+        hp.put("mdptopv3",0);
+        hp.put("fdptopv3",0);
+        hp.put("mmv1",0);
+        hp.put("fmv1",0);
+        hp.put("mmmr",0);
+        hp.put("fmmr",0);
+        hp.put("mdobv2",0);
+        hp.put("fdobv2",0);
+        hp.put("mv3",0);
+        hp.put("fv3",0);
+        hp.put("mv4",0);
+        hp.put("fv4",0);
+        hp.put("mv5",0);
+        hp.put("fv5",0);
+        hp.put("mv6",0);
+        hp.put("fv6",0);
+        hp.put("mv7",0);
+        hp.put("fv7",0);
+        hp.put("mv8",0);
+        hp.put("fv8",0);
+        hp.put("mdv9",0);
+        hp.put("fdv9",0);
+
+        return hp;
     }
 }

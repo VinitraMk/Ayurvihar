@@ -49,11 +49,12 @@ public class CTab1 extends Fragment implements View.OnClickListener{
     TextView childidn;
     Button update;
     DatabaseReference CHILD_DB= MainActivity.DATABASE_ROOT.child("Underfive");
-    DatabaseReference databaseChildHr;
+    DatabaseReference databaseChildHr,databaseChildImm;
     String townarr[],acarr[];
     String genarr[];
     String nicarr[];
     String trackarr[];
+    String t1cid="";
     int townin,acin,genin,nicin,trackin;
     SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
@@ -71,6 +72,8 @@ public class CTab1 extends Fragment implements View.OnClickListener{
         View view=inflater.inflate(R.layout.ctab1,container,false);
 
         databaseChildHr=CHILD_DB.child("GenRec");
+        databaseChildImm=CHILD_DB.child("ImmRec");
+        t1cid=UnderfiveScrollview.cid.trim();
         townarr=CTab1.this.getResources().getStringArray(R.array.towns);
         acarr=CTab1.this.getResources().getStringArray(R.array.areacode);
         genarr=CTab1.this.getResources().getStringArray(R.array.gender);
@@ -127,9 +130,12 @@ public class CTab1 extends Fragment implements View.OnClickListener{
                                 ds.child("gen").getRef().setValue(sGen.getSelectedItem().toString().trim());
                                 ds.child("nic").getRef().setValue(sNic.getSelectedItem().toString().trim());
                                 ds.child("track").getRef().setValue(sTrack.getSelectedItem().toString().trim());
-                                Toast.makeText(getContext(),"Updated the database",Toast.LENGTH_SHORT);
+                                databaseChildImm.child(t1cid).child("track").setValue(sTrack.getSelectedItem().toString().trim());
+                                databaseChildImm.child(t1cid).child("gen").setValue(sGen.getSelectedItem().toString().trim());
+                                databaseChildImm.child(t1cid).child("dob").setValue(Addn9.getText().toString().trim());
                             }
                         }
+                        Toast.makeText(getContext(),"Updated the database",Toast.LENGTH_SHORT);
                     }
 
                     @Override

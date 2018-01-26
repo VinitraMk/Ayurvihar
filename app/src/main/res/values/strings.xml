@@ -8,6 +8,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Add User</string>
+    <string name="lessthan1"></string>
     <string-array name="departments">
         <item>Under Five</item>
         <item>Family Data</item>
