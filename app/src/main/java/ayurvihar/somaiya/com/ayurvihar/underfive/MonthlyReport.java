@@ -156,7 +156,7 @@ public class MonthlyReport extends AppCompatActivity {
                     String st = s.substring(1,s.length());
                     Log.v("vac",st);
                     if(s.charAt(0)=='m') {
-                        datalist.add(new UnderFiveImm(st,"M: "+hp.get(s)+"\nF: "+hp.get("f"+st),"M: "+hp1.get(s)+"\nF: "+hp1.get("f"+st)));
+                        datalist.add(new UnderFiveImm(st,"M: "+hp.get(s)+"\nF: "+hp.get("f"+st)+"\nT: "+(hp.get(s)+hp.get("f"+st)),"M: "+hp1.get(s)+"\nF: "+hp1.get("f"+st)+"\nT: "+(hp1.get(s)+hp1.get("f"+st))));
                     }
                 }
                 //vaccineAdapter = new VaccineAdapter(getContext(), R.layout.imm_item, vaclist);
