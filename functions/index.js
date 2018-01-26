@@ -92,7 +92,27 @@ exports.collectChildren= functions.database.ref('/Underfive/ImmRec/messages/{mes
             v6:snap.val().v6,
             v7:snap.val().v7,
             v8:snap.val().v8,
-            dv9:snap.val().dv9
+            dv9:snap.val().dv9,
+			trbcg:snap.val().trbcg,
+            trdpv0:snap.val().trdpv0,
+            trhbv0:snap.val().trhbv0,
+            trdptopv1:snap.val().trdptopv1,
+            trdptopv2:snap.val().trdptopv2,
+            trdptopv3:snap.val().trdptopv3,
+            trhbv1:snap.val().trhbv1,
+            trhbv2:snap.val().trhbv2,
+            trhbv3:snap.val().trhbv3,
+            trmv1:snap.val().trmv1,
+            trmmr:snap.val().trmmr,
+            trdobv2:snap.val().trdobv2,
+            trv3:snap.val().trv3,
+            trv4:snap.val().trv4,
+            trv5:snap.val().trv5,
+            trv6:snap.val().trv6,
+            trv7:snap.val().trv7,
+            trv8:snap.val().trv8,
+            trdv9:snap.val().trdv9
+            
         };
         snap.forEach(childSnap => {
             if(childSnap.key=='messages') 
@@ -109,13 +129,16 @@ exports.collectChildren= functions.database.ref('/Underfive/ImmRec/messages/{mes
                 if(childSnap.key!='messages') {
                     var f=0;
                     var idkey = childSnap.val().childid;
+                    const list=[];
                     childSnap.forEach(grandChildSnap => {
                         const item=grandChildSnap.val();
                         var ch = grandChildSnap.key;
-                        //Checking for daily updates
-                        if(item!=idkey && ch[0]=='d' && item!="") {
+                        var vname = ch.substring(1,ch.length);
 
-                            var vname = ch.substring(1,ch.length);
+                        //Checking for daily updates
+                        if(item!=idkey && ch[0]=='d' && item!="" && ch!="dob") {
+
+                            //var vname = ch.substring(1,ch.length);
                             var split = item.split('-');
                             console.log('item',item,split.join());
                             var dd = parseInt(split[0]);
@@ -126,6 +149,7 @@ exports.collectChildren= functions.database.ref('/Underfive/ImmRec/messages/{mes
 
                             console.log('comparedates: '+diff);
                             if(diff<0) {
+
                                 //Building date object
                                 //var nd = new Date(dd,mm-1,yy);
                                 console.log('date',d1);
@@ -151,6 +175,7 @@ exports.collectChildren= functions.database.ref('/Underfive/ImmRec/messages/{mes
                                 console.log('newdate',nds);
 
                                 childRef.child('/'+childSnap.key+'/'+ch).set(nds);
+                                childRef.child('/'+childSnap.key+'/'+('mi'+vname)).set(1);
                             }
                         }
                         if(item==tomorrow) {

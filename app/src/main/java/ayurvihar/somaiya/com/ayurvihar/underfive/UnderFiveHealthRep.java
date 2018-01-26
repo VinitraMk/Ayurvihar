@@ -40,7 +40,8 @@ public class UnderFiveHealthRep extends AppCompatActivity implements View.OnClic
     String childid,dob,cur,ratio="";
     SimpleDateFormat dateFormatter,ts;
     private DatePickerDialog datePickerDialog;
-    int chkn,age,weight;
+    int chkn,age;
+    float weight;
     DatabaseReference databaseHcr = MainActivity.DATABASE_ROOT.child("Underfive").child("ChkRec");
 
     @Override
@@ -90,10 +91,10 @@ public class UnderFiveHealthRep extends AppCompatActivity implements View.OnClic
 
                 if(!td.equals("") && !the.equals("") && !twe.equals(""))
                 {
-                    weight = Integer.parseInt(Addn3.getText().toString().trim());
-                    Double dt = ((double)weight/age);
-                    ratio += (new DecimalFormat("#0.000000000").format(dt));
-                    UnderFiveHc uhc = new UnderFiveHc(chkn,childid,td,the,twe,ratio,trem);
+                    weight = Float.parseFloat(Addn3.getText().toString().trim());
+                    //Double dt = ((double)weight/age);
+                    //ratio += (new DecimalFormat("#0.000000000").format(dt));
+                    UnderFiveHc uhc = new UnderFiveHc(chkn,childid,td,the,twe,trem);
                     databaseHcr.child(childid).push().setValue(uhc);
                     finish();
                 }

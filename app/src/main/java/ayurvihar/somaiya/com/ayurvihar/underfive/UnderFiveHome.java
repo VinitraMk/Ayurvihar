@@ -27,6 +27,8 @@ public class UnderFiveHome extends AppCompatActivity {
         ImageButton hlthrep=(ImageButton) findViewById(R.id.hlthrep);
         ImageButton vacdet = (ImageButton) findViewById(R.id.vacdet);
         ImageButton delete = (ImageButton) findViewById(R.id.delete);
+        ImageButton monthrep = (ImageButton) findViewById(R.id.monthrep);
+        ImageButton trackrec = (ImageButton) findViewById(R.id.trackrec);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +74,22 @@ public class UnderFiveHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(),UnderFiveDeleteRec.class);
+                startActivity(i);
+            }
+        });
+
+        trackrec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),TrackingRecords.class);
+                startActivity(i);
+            }
+        });
+
+        monthrep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),MonthlyReport.class);
                 startActivity(i);
             }
         });

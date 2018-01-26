@@ -37,7 +37,9 @@
             android:name=".underfive.UnderFiveSearch1Cr"
             android:noHistory="true" />
         <activity android:name=".underfive.UnderFiveSearch1CrOutput" />
-        <activity android:name=".underfive.VaccineSummary"></activity>
+        <activity android:name=".underfive.VaccineSummary" />
+        <activity android:name=".underfive.MonthlyReport" />
+        <activity android:name=".underfive.TrackingRecords"></activity>
     </application>
 
 </manifest>

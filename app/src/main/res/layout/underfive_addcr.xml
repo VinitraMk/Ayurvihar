@@ -171,7 +171,7 @@
                 android:textSize="27sp"
                 android:hint="Height*"
                 android:focusable="true"
-                android:inputType="number"/>
+                android:inputType="numberDecimal"/>
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -179,7 +179,7 @@
                 android:id="@+id/Addn11"
                 android:textSize="27sp"
                 android:hint="Weight*"
-                android:inputType="number"/>
+                android:inputType="numberDecimal"/>
         </LinearLayout>
         <EditText
             android:layout_width="250dp"

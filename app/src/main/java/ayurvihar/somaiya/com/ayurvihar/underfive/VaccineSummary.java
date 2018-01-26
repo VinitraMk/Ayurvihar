@@ -35,6 +35,7 @@ import java.util.Map;
 import ayurvihar.somaiya.com.ayurvihar.Fragment.CTab1;
 import ayurvihar.somaiya.com.ayurvihar.MainActivity;
 import ayurvihar.somaiya.com.ayurvihar.R;
+import ayurvihar.somaiya.com.ayurvihar.utility.ListViewDisplay;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveCr;
 import ayurvihar.somaiya.com.ayurvihar.utility.UnderFiveImm;
 
@@ -42,14 +43,16 @@ public class VaccineSummary extends AppCompatActivity {
 
     TextView tfname,tlname,tmoname,tfatname,troom,tline,ttown,tac,tacno,tmob,tdob,tgen,tnic,ttrack;
     TextView childidn;
-    ListView childlist;
+    ListView childlist,duelist;
     DatabaseReference CHILD_DB= MainActivity.DATABASE_ROOT.child("Underfive");
     DatabaseReference databaseChildImm,databaseChildCr;
     String townarr[],acarr[];
     String genarr[];
     String nicarr[];
+    String duevacarr[];
     int townin,acin,genin,nicin;
     ArrayList<String> poss=new ArrayList<>();
+    ArrayList<String> dues = new ArrayList<>();
     String addr="",sfn,sln,smn,sftn,sroom,sline,stown,sac,sacno,smob,sdob,sgen,snc,strk,cid,duevac;
 
 
@@ -85,11 +88,13 @@ public class VaccineSummary extends AppCompatActivity {
         ttrack = (TextView)findViewById(R.id.ttrack);
 
         childlist = (ListView)findViewById(R.id.childlist);
+        duelist = (ListView) findViewById(R.id.duelist);
 
         dialog = new ProgressDialog(VaccineSummary.this);
 
         cid = getIntent().getStringExtra("childid").trim();
         duevac = getIntent().getStringExtra("currdue").trim();
+        duevacarr = duevac.split("\n");
 
         getAllData();
     }
@@ -147,19 +152,28 @@ public class VaccineSummary extends AppCompatActivity {
 
                 for(DataSnapshot ds:dataSnapshot.getChildren()) {
                     UnderFiveImm uim = ds.getValue(UnderFiveImm.class);
+                    Log.v("vali",""+ds.getValue());
                     HashMap<String,Integer> hp = uim.getMissingVac(uim);
-                    String data = "Missed Vaccines:\n";
+                    String data = "";
+                    Log.v("vali",""+hp.size());
                     if(hp.size()>0) {
                         for (String sit : hp.keySet())
-                            data += sit + ": " + hp.get(sit) + "\n";
+                            poss.add(sit);
                     }
-                    else
-                        data+="No Vaccines Missed\n";
-                    data += "Due " + duevac + "\n";
-                    Log.v("duevac",duevac);
-                    poss.add(data);
+                    else {
+                        data += "No Vaccines Missed\n";
+                        poss.add(data);
+                    }
+                    for(String sit:duevacarr) {
+                        if(!sit.equals("Vaccines: "))
+                            dues.add(sit);
+                        Log.v("valis", sit);
+                    }
                 }
                 childlist.setAdapter(new ArrayAdapter<>(VaccineSummary.this,R.layout.child_textview,poss));
+                ListViewDisplay.setListViewHeightBasedOnChildren(childlist);
+                duelist.setAdapter(new ArrayAdapter<>(VaccineSummary.this,R.layout.child_textview,dues));
+                ListViewDisplay.setListViewHeightBasedOnChildren(duelist);
 
             }
 

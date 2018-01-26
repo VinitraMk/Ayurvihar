@@ -122,22 +122,13 @@ public class UnderFiveAddCr extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(UnderFiveAddCr.this,"Fill all mandatory fields",Toast.LENGTH_SHORT).show();
                 else {
                     tdob = (dob.substring(6,10)+dob.substring(3,5)+dob.substring(0,2));
-                    Date date = Calendar.getInstance().getTime();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                    sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-                    cur = sdf.format(date);
-                    Log.v("hello",cur);
-                    age = (Integer.parseInt(cur)-Integer.parseInt(tdob)/10000);
-                    Double dt = ((Double.parseDouble(weight)/(double)age));
-                    String ratio = (new DecimalFormat("#0.000000000").format(dt));
-
 
                     UnderFiveCr ufc=new UnderFiveCr(fname,ln,mn,fn,ci,room,bldg,town,area,ac,mob,dob,nic,gen,track);
-                    UnderFiveHc uhc=new UnderFiveHc(0,ci,dob,height,weight,ratio,rem);
-                    UnderFiveImm uim=new UnderFiveImm(ci,dob,gen,track,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+                    UnderFiveHc uhc=new UnderFiveHc(0,ci,dob,height,weight,rem);
+                    UnderFiveImm tufi = new UnderFiveImm(ci,dob,gen,track,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
                     databaseChildHr.push().setValue(ufc);
                     databaseChildHcr.child(ci).push().setValue(uhc);
-                    databaseChildImm.push().setValue(uim);
+                    databaseChildImm.child(ci).setValue(tufi);
                     Toast.makeText(UnderFiveAddCr.this,"Successfully added child record",Toast.LENGTH_SHORT).show();
                     AddRecord.setVisibility(View.INVISIBLE);
                 }

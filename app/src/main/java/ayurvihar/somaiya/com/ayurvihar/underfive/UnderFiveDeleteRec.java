@@ -1,7 +1,9 @@
 package ayurvihar.somaiya.com.ayurvihar.underfive;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -87,22 +89,42 @@ public class UnderFiveDeleteRec extends AppCompatActivity implements View.OnClic
 
         childlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.v("ufu",""+poss.get(position));
-                cid=poss.get(position);
-                int in=cid.indexOf("Child Identifier");
-                if(in!=-1)
-                {
-                    c=0;
-                    in+=17;
-                    Log.v("ufup",""+cid.indexOf("Child Identifier")+" "+cid.substring(in,in+15));
-                    cid=cid.substring(in,in+15);
-                    cid = cid.trim();
-                    deleteRecord(cid);
-                    if(dialog.isShowing()) {
-                        dialog.dismiss();
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (!isFinishing()){
+                            new AlertDialog.Builder(UnderFiveDeleteRec.this)
+                                    .setTitle("Confirm Delete")
+                                    .setMessage("Are you sure that you want to delete this record?")
+                                    .setCancelable(true)
+                                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Log.v("ufu",""+poss.get(position));
+                                            cid=poss.get(position);
+                                            int in=cid.indexOf("Child Identifier");
+                                            if(in!=-1)
+                                            {
+                                                c=0;
+                                                in+=17;
+                                                Log.v("ufup",""+cid.indexOf("Child Identifier")+" "+cid.substring(in,in+15));
+                                                cid=cid.substring(in,in+15);
+                                                cid = cid.trim();
+                                                deleteRecord(cid);
+                                                /*if(dialog.isShowing()) {
+                                                    dialog.dismiss();
+                                                }*/
+                                            }
+                                        }
+                                    }).show();
+                        }
                     }
-                }
+                });
+
+
             }
         });
 

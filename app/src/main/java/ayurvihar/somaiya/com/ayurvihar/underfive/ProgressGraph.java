@@ -32,7 +32,9 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -56,9 +58,11 @@ public class ProgressGraph extends AppCompatActivity {
     ProgressDialog dialog;
     DatabaseReference databaseChildHc= MainActivity.DATABASE_ROOT.child("Underfive").child("ChkRec");
     String childid;
-    SharedPreferences weightForAge = CTab3.weightForAge;
-    SharedPreferences.Editor editor;
-    String graphList="";
+    SharedPreferences weight = CTab3.weight;
+    SharedPreferences time = CTab3.time;
+    SharedPreferences.Editor editorw, editorm;
+    String graphWeightList="";
+    String graphMonthList="";
     ArrayList<LineDataSet> lineDataSets = new ArrayList<>();
     ArrayList<String> xaxis = new ArrayList<>();
 
@@ -74,11 +78,14 @@ public class ProgressGraph extends AppCompatActivity {
         LineChart lineChart = (LineChart)findViewById(R.id.chart);
 
 
-        graphList = weightForAge.getString("Weightforagelist","");
-        Log.v("progress","hello: "+graphList);
-        String[] arr = graphList.split(",");
-        lineDataSets = getDataSet(arr);
-        xaxis = getXAxisValues(arr);
+        graphWeightList = weight.getString("WeightList","");
+        graphMonthList = time.getString("MonthList","");
+        Log.v("progress","hello: "+graphWeightList);
+        Log.v("progress","hello: "+graphMonthList);
+        String[] arrm = graphMonthList.split(",");
+        String[] arrw = graphWeightList.split(",");
+        lineDataSets = getDataSet(arrw);
+        xaxis= new ArrayList<>(Arrays.asList(arrm));
 
         LineData lineData = new LineData(xaxis,lineDataSets);
         lineChart.setData(lineData);
@@ -87,7 +94,7 @@ public class ProgressGraph extends AppCompatActivity {
 
     }
 
-    private ArrayList<String> getXAxisValues(String arr[]) {
+    /*private ArrayList<String> getXAxisValues(String arr[]) {
         ArrayList<String> list = new ArrayList<>();
         int l = arr.length;
         int c=0;
@@ -98,7 +105,7 @@ public class ProgressGraph extends AppCompatActivity {
 
         return list;
 
-    }
+    }*/
 
     private ArrayList<LineDataSet> getDataSet(String arr[]) {
         ArrayList<LineDataSet> dataset = new ArrayList<>();

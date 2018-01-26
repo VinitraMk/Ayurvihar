@@ -16,8 +16,8 @@ public class UnderFiveImm {
     gdptopv2,ddptopv2,gdptopv3,ddptopv3,ghbv1,dhbv1,ghbv2,dhbv2,ghbv3,dhbv3,gmv1,dmv1,gmmr,dmmr,gdobv2,ddobv2,
     gv3,dv3,gv4,dv4,gv5,dv5,gv6,dv6,gv7,dv7,gv8,dv8,gdv9,ddv9;
 
-    public int mbcg,mdpv0,mhbv0,mdptopv1,mdptopv2,mdptopv3,mhbv1,mhbv2,mhbv3,mmv1,mmmr,mdobv2,
-    mv3,mv4,mv5,mv6,mv7,mv8,mdv9;
+    public int mibcg,midpv0,mihbv0,midptopv1,midptopv2,midptopv3,mihbv1,mihbv2,mihbv3,mimv1,mimmr,midobv2,
+    miv3,miv4,miv5,miv6,miv7,miv8,midv9;
 
     String name,given,due;
 
@@ -47,7 +47,7 @@ public class UnderFiveImm {
     }
 
 
-    public UnderFiveImm(String childid, String dob, String gen, String track, String gbcg, String dbcg, String gdpv0, String ddpv0, String ghbv0, String dhbv0, String gdptopv1, String ddptopv1, String gdptopv2, String ddptopv2, String gdptopv3, String ddptopv3, String ghbv1, String dhbv1, String ghbv2, String dhbv2, String ghbv3, String dhbv3, String gmv1, String dmv1, String gmmr, String dmmr, String gdobv2, String ddobv2, String gv3, String dv3, String gv4, String dv4, String gv5, String dv5, String gv6, String dv6, String gv7, String dv7, String gv8, String dv8, String gdv9, String ddv9, int mbcg, int mdpv0, int mhbv0, int mdptopv1, int mdptopv2, int mdptopv3, int mhbv1, int mhbv2, int mhbv3, int mmv1, int mmmr, int mdobv2, int mv3, int mv4, int mv5, int mv6, int mv7, int mv8, int mdv9) {
+    public UnderFiveImm(String childid, String dob, String gen, String track, String gbcg, String dbcg, String gdpv0, String ddpv0, String ghbv0, String dhbv0, String gdptopv1, String ddptopv1, String gdptopv2, String ddptopv2, String gdptopv3, String ddptopv3, String ghbv1, String dhbv1, String ghbv2, String dhbv2, String ghbv3, String dhbv3, String gmv1, String dmv1, String gmmr, String dmmr, String gdobv2, String ddobv2, String gv3, String dv3, String gv4, String dv4, String gv5, String dv5, String gv6, String dv6, String gv7, String dv7, String gv8, String dv8, String gdv9, String ddv9, int mibcg, int midpv0, int mihbv0, int midptopv1, int midptopv2, int midptopv3, int mihbv1, int mihbv2, int mihbv3, int mimv1, int mimmr, int midobv2, int miv3, int miv4, int miv5, int miv6, int miv7, int miv8, int midv9) {
         this.childid = childid;
         this.dob = dob;
         this.gen = gen;
@@ -90,25 +90,25 @@ public class UnderFiveImm {
         this.dv8 = dv8;
         this.gdv9 = gdv9;
         this.ddv9 = ddv9;
-        this.mbcg = mbcg;
-        this.mdpv0 = mdpv0;
-        this.mhbv0 = mhbv0;
-        this.mdptopv1 = mdptopv1;
-        this.mdptopv2 = mdptopv2;
-        this.mdptopv3 = mdptopv3;
-        this.mhbv1 = mhbv1;
-        this.mhbv2 = mhbv2;
-        this.mhbv3 = mhbv3;
-        this.mmv1 = mmv1;
-        this.mmmr = mmmr;
-        this.mdobv2 = mdobv2;
-        this.mv3 = mv3;
-        this.mv4 = mv4;
-        this.mv5 = mv5;
-        this.mv6 = mv6;
-        this.mv7 = mv7;
-        this.mv8 = mv8;
-        this.mdv9 = mdv9;
+        this.mibcg = mibcg;
+        this.midpv0 = midpv0;
+        this.mihbv0 = mihbv0;
+        this.midptopv1 = midptopv1;
+        this.midptopv2 = midptopv2;
+        this.midptopv3 = midptopv3;
+        this.mihbv1 = mihbv1;
+        this.mihbv2 = mihbv2;
+        this.mihbv3 = mihbv3;
+        this.mimv1 = mimv1;
+        this.mimmr = mimmr;
+        this.midobv2 = midobv2;
+        this.miv3 = miv3;
+        this.miv4 = miv4;
+        this.miv5 = miv5;
+        this.miv6 = miv6;
+        this.miv7 = miv7;
+        this.miv8 = miv8;
+        this.midv9 = midv9;
     }
 
     public String getChildid() {
@@ -279,80 +279,80 @@ public class UnderFiveImm {
         return ddv9;
     }
 
-    public int getMbcg() {
-        return mbcg;
+    public int getMibcg() {
+        return mibcg;
     }
 
-    public int getMdpv0() {
-        return mdpv0;
+    public int getMidpv0() {
+        return midpv0;
     }
 
-    public int getMhbv0() {
-        return mhbv0;
+    public int getMihbv0() {
+        return mihbv0;
     }
 
-    public int getMdptopv1() {
-        return mdptopv1;
+    public int getMidptopv1() {
+        return midptopv1;
     }
 
-    public int getMdptopv2() {
-        return mdptopv2;
+    public int getMidptopv2() {
+        return midptopv2;
     }
 
-    public int getMdptopv3() {
-        return mdptopv3;
+    public int getMidptopv3() {
+        return midptopv3;
     }
 
-    public int getMhbv1() {
-        return mhbv1;
+    public int getMihbv1() {
+        return mihbv1;
     }
 
-    public int getMhbv2() {
-        return mhbv2;
+    public int getMihbv2() {
+        return mihbv2;
     }
 
-    public int getMhbv3() {
-        return mhbv3;
+    public int getMihbv3() {
+        return mihbv3;
     }
 
-    public int getMmv1() {
-        return mmv1;
+    public int getMimv1() {
+        return mimv1;
     }
 
-    public int getMmmr() {
-        return mmmr;
+    public int getMimmr() {
+        return mimmr;
     }
 
-    public int getMdobv2() {
-        return mdobv2;
+    public int getMidobv2() {
+        return midobv2;
     }
 
-    public int getMv3() {
-        return mv3;
+    public int getMiv3() {
+        return miv3;
     }
 
-    public int getMv4() {
-        return mv4;
+    public int getMiv4() {
+        return miv4;
     }
 
-    public int getMv5() {
-        return mv5;
+    public int getMiv5() {
+        return miv5;
     }
 
-    public int getMv6() {
-        return mv6;
+    public int getMiv6() {
+        return miv6;
     }
 
-    public int getMv7() {
-        return mv7;
+    public int getMiv7() {
+        return miv7;
     }
 
-    public int getMv8() {
-        return mv8;
+    public int getMiv8() {
+        return miv8;
     }
 
-    public int getMdv9() {
-        return mdv9;
+    public int getMidv9() {
+        return midv9;
     }
 
     public static ArrayList<UnderFiveImm> getList() {
@@ -362,44 +362,44 @@ public class UnderFiveImm {
     public HashMap<String,Integer> getMissingVac(UnderFiveImm ufi) {
         HashMap<String,Integer> hp = new HashMap<>();
 
-        if(ufi.getMbcg()>0)
-            hp.put("bcg",ufi.getMbcg());
-        if(ufi.getMdpv0()>0)
-            hp.put("dpv0",ufi.getMdpv0());
-        if(ufi.getMhbv0()>0)
-            hp.put("hbv0",ufi.getMhbv0());
-        if(ufi.getMdptopv1()>0)
-            hp.put("dptopv1",ufi.getMdptopv1());
-        if(ufi.getMdptopv2()>0)
-            hp.put("dptopv2",ufi.getMdptopv2());
-        if(ufi.getMdptopv3()>0)
-            hp.put("dptopv3",ufi.getMdptopv3());
-        if(ufi.getMhbv1()>0)
-            hp.put("hbv1",ufi.getMhbv1());
-        if(ufi.getMhbv2()>0)
-            hp.put("hbv2",ufi.getMhbv2());
-        if(ufi.getMhbv3()>0)
-            hp.put("hbv3",ufi.getMhbv3());
-        if(ufi.getMmv1()>0)
-            hp.put("mv1",ufi.getMmv1());
-        if(ufi.getMmmr()>0)
-            hp.put("mmr",ufi.getMmmr());
-        if(ufi.getMdobv2()>0)
-            hp.put("dobv2",ufi.getMdobv2());
-        if(ufi.getMv3()>0)
-            hp.put("v3",ufi.getMv3());
-        if(ufi.getMv4()>0)
-            hp.put("v4",ufi.getMv4());
-        if(ufi.getMv5()>0)
-            hp.put("v5",ufi.getMv5());
-        if(ufi.getMv6()>0)
-            hp.put("v6",ufi.getMv6());
-        if(ufi.getMv7()>0)
-            hp.put("v7",ufi.getMv7());
-        if(ufi.getMv8()>0)
-            hp.put("v8",ufi.getMv8());
-        if(ufi.getMdv9()>0)
-            hp.put("dv9",ufi.getMdv9());
+        if(ufi.getMibcg()>0)
+            hp.put("bcg",ufi.getMibcg());
+        if(ufi.getMidpv0()>0)
+            hp.put("dpv0",ufi.getMidpv0());
+        if(ufi.getMihbv0()>0)
+            hp.put("hbv0",ufi.getMihbv0());
+        if(ufi.getMidptopv1()>0)
+            hp.put("dptopv1",ufi.getMidptopv1());
+        if(ufi.getMidptopv2()>0)
+            hp.put("dptopv2",ufi.getMidptopv2());
+        if(ufi.getMidptopv3()>0)
+            hp.put("dptopv3",ufi.getMidptopv3());
+        if(ufi.getMihbv1()>0)
+            hp.put("hbv1",ufi.getMihbv1());
+        if(ufi.getMihbv2()>0)
+            hp.put("hbv2",ufi.getMihbv2());
+        if(ufi.getMihbv3()>0)
+            hp.put("hbv3",ufi.getMihbv3());
+        if(ufi.getMimv1()>0)
+            hp.put("mv1",ufi.getMimv1());
+        if(ufi.getMimmr()>0)
+            hp.put("mmr",ufi.getMimmr());
+        if(ufi.getMidobv2()>0)
+            hp.put("dobv2",ufi.getMidobv2());
+        if(ufi.getMiv3()>0)
+            hp.put("v3",ufi.getMiv3());
+        if(ufi.getMiv4()>0)
+            hp.put("v4",ufi.getMiv4());
+        if(ufi.getMiv5()>0)
+            hp.put("v5",ufi.getMiv5());
+        if(ufi.getMiv6()>0)
+            hp.put("v6",ufi.getMiv6());
+        if(ufi.getMiv7()>0)
+            hp.put("v7",ufi.getMiv7());
+        if(ufi.getMiv8()>0)
+            hp.put("v8",ufi.getMiv8());
+        if(ufi.getMidv9()>0)
+            hp.put("dv9",ufi.getMidv9());
 
         return hp;
     }

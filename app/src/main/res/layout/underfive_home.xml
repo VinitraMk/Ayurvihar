@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
-    android:weightSum="3">
+    android:weightSum="4">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -179,6 +179,67 @@
         </LinearLayout>
 
 
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:layout_margin="5dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="2"
+            >
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@mipmap/monthrep"
+                android:id="@+id/monthrep"
+                android:background="#00000000"
+                android:layout_margin="2dp"
+                android:layout_weight="2"
+                android:padding="2dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:text="Montly Reports" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="2">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@mipmap/trackrec"
+                android:id="@+id/trackrec"
+                android:background="#00000000"
+                android:layout_margin="2dp"
+                android:layout_weight="2"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:text="Tracking Records"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

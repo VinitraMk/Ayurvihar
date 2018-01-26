@@ -45,10 +45,14 @@ public class CTab3 extends android.support.v4.app.Fragment {
     ArrayList<String> reclist = new ArrayList<>();
     ListView recList;
     PopupWindow pw;
-    ArrayList<String> graphList = new ArrayList<>();
-    public static SharedPreferences weightForAge;
-    public SharedPreferences.Editor editor;
-    String listString="",cid;
+    ArrayList<String> graphWeightList = new ArrayList<>();
+    ArrayList<String> graphMonthList   = new ArrayList<>();
+    public static SharedPreferences weight,time;
+    public SharedPreferences.Editor editorw, editort;
+    String listWeightString="",listMonthString="",cid;
+    String dob;
+    String[] dobv;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,9 +71,15 @@ public class CTab3 extends android.support.v4.app.Fragment {
         recList = (ListView) view.findViewById(R.id.reclist);
         graph = (FloatingActionButton)view.findViewById(R.id.graph);
 
-        weightForAge = getContext().getSharedPreferences("Weightforage",Context.MODE_PRIVATE);
-        editor = weightForAge.edit();
+        weight = getContext().getSharedPreferences("Weight",Context.MODE_PRIVATE);
+        time = getContext().getSharedPreferences("Weight",Context.MODE_PRIVATE);
+        editorw = weight.edit();
+        editort = time.edit();
         cid=UnderfiveScrollview.cid;
+        dob= UnderfiveScrollview.dob;
+
+        Log.v("null",""+dob);
+        dobv = dob.split("-");
 
         addhcr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,46 +112,6 @@ public class CTab3 extends android.support.v4.app.Fragment {
     public void onStart() {
         super.onStart();
 
-        /*databaseChildHcr.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(reclist.size()!=0) {
-                    reclist.clear();
-                }
-                if(graphList.size()!=0)
-                    graphList.clear();
-                for(DataSnapshot ds:dataSnapshot.getChildren())
-                {
-                    UnderFiveHc uhc=ds.getValue(UnderFiveHc.class);
-                    listString="";
-                    if(uhc.getChildid().trim().equals(UnderfiveScrollview.cid.trim()))
-                    {
-                        String item = "Health Checkup No:"+uhc.gethCheckNo()+"\n"+
-                                "Checkup Date: "+uhc.getCdate()+"\n"+
-                                "Height: "+uhc.getHeight()+" Weight: "+uhc.getWeight()+"\n"+
-                                "Weight for Age Status: "+uhc.getWfar()+"\n"+
-                                "Remarks: "+uhc.getRem()+"\n";
-                        reclist.add(item);
-                        graphList.add(uhc.getWfar());
-                    }
-                    for(String s: graphList) {
-                        listString += s;
-                        listString += ",";
-                    }
-                    editor.putString("Weightforagelist",listString);
-                    editor.commit();
-                }
-                if(getActivity()!=null)
-                    recList.setAdapter(new ArrayAdapter<>(CTab3.this.getContext(),R.layout.child_textview,reclist));
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
         databaseChildHcr.child(cid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -149,25 +119,33 @@ public class CTab3 extends android.support.v4.app.Fragment {
                 if(reclist.size()!=0) {
                     reclist.clear();
                 }
-                if(graphList.size()!=0)
-                    graphList.clear();
+                if(graphWeightList.size()!=0)
+                    graphWeightList.clear();
                 for(DataSnapshot ds:dataSnapshot.getChildren()) {
                     Log.v("val",""+ds.getValue());
                     UnderFiveHc uhc = ds.getValue(UnderFiveHc.class);
-                    listString="";
+                    listMonthString="";
+                    listWeightString="";
                     String item = "Health Checkup No:"+uhc.gethCheckNo()+"\n"+
                             "Checkup Date: "+uhc.getCdate()+"\n"+
                             "Height: "+uhc.getHeight()+" Weight: "+uhc.getWeight()+"\n"+
-                            "Weight for Age Status: "+uhc.getWfar()+"\n"+
+                            //"Weight for Age Status: "+uhc.getWfar()+"\n"+
                             "Remarks: "+uhc.getRem()+"\n";
                     reclist.add(item);
-                    graphList.add(uhc.getWfar());
-                    for(String s: graphList) {
-                        listString += s;
-                        listString += ",";
+                    graphWeightList.add(uhc.getWeight());
+                    for(String s: graphWeightList) {
+                        listWeightString += s;
+                        listWeightString += ",";
                     }
-                    editor.putString("Weightforagelist",listString);
-                    editor.commit();
+                    graphMonthList.add(monthCalc(uhc.getCdate()));
+                    for(String s: graphMonthList) {
+                        listMonthString += s;
+                        listMonthString += ",";
+                    }
+                    editorw.putString("WeightList",listWeightString);
+                    editort.putString("MonthList",listMonthString);
+                    editorw.commit();
+                    editort.commit();
 
                 }
 
@@ -179,46 +157,30 @@ public class CTab3 extends android.support.v4.app.Fragment {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
 
+    public String monthCalc(String date)
+    {
+        String [] datev = date.split("-");
+        int years=0, months=0, days=0;
+        years = Integer.parseInt(datev[2]) - Integer.parseInt(dobv[2]);
 
-        /*Query query;
-        query = databaseChildHcr.orderByKey().equalTo(cid);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.v("val",""+dataSnapshot.getKey());
-                if(reclist.size()!=0) {
-                    reclist.clear();
-                }
-                if(graphList.size()!=0)
-                    graphList.clear();
-                for(DataSnapshot ds:dataSnapshot.getChildren()) {
-                    UnderFiveHc uhc = ds.getValue(UnderFiveHc.class);
-                    Log.v("val",""+ds.getValue());
-                    Log.v("val",""+uhc.getChildid());
-                    String item = "Health Checkup No:"+uhc.gethCheckNo()+"\n"+
-                            "Checkup Date: "+uhc.getCdate()+"\n"+
-                            "Height: "+uhc.getHeight()+" Weight: "+uhc.getWeight()+"\n"+
-                            "Weight for Age Status: "+uhc.getWfar()+"\n"+
-                            "Remarks: "+uhc.getRem()+"\n";
-                    reclist.add(item);
-                    graphList.add(uhc.getWfar());
+        months = Integer.parseInt(datev[1]) - Integer.parseInt(dobv[1]);
 
-                    for(String s: graphList) {
-                        listString += s;
-                        listString += ",";
-                    }
-                    editor.putString("Weightforagelist",listString);
-                    editor.commit();
-                }
-                if(getActivity()!=null)
-                    recList.setAdapter(new ArrayAdapter<>(CTab3.this.getContext(),R.layout.child_textview,reclist));
-            }
+        days = Integer.parseInt(datev[0]) - Integer.parseInt(dobv[0]);
+        if(days<0)
+        {
+            months--;
+            days += 30;
+        }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+        float month = years*12 + months;
+        if(days<25 && days>10)
+            month += 0.5;
+        if(days>25)
+            month++;
 
-            }
-        });*/
+        return Float.toString(month);
+
     }
 }
